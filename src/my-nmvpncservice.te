@@ -1,0 +1,14 @@
+
+module my-nmvpncservice 1.0;
+
+require {
+	type consolehelper_exec_t;
+	type NetworkManager_t;
+	class file { execute open read };
+}
+
+#============= NetworkManager_t ==============
+
+#!!!! This avc is allowed in the current policy
+allow NetworkManager_t consolehelper_exec_t:file execute;
+allow NetworkManager_t consolehelper_exec_t:file { open read };

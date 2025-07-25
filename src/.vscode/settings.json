@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "sched.h": "c",
+        "tracepoint.h": "c",
+        "version.h": "c",
+        "rhashtable.h": "c",
+        "spinlock.h": "c",
+        "perf_event.h": "c"
+    }
+}
