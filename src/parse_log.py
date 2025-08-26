@@ -23,6 +23,7 @@ def parse_monitor_file(path: str | Path):
 
     pid_re = re.compile(
         r'^pid=(\d+)\s+'
+        r'energy=(\d+)\s+'
         r'alive=(\d+)\s+'
         r'kernel=(\d+)\s+'
         r'cpu_ns=(\d+)\s+'
@@ -61,10 +62,11 @@ def parse_monitor_file(path: str | Path):
 
             pid_match = pid_re.match(line)                # per‑PID metrics
             if pid_match:
-                (pid, alive, kernel, cpu_ns, mem, instructions, wakeups,
+                (pid, energy, alive, kernel, cpu_ns, mem, instructions, wakeups,
                  diski, disko, rx, tx, comm) = pid_match.groups()
                 current['values'][int(pid)] = {
                     'alive':        bool(int(alive)),
+                    'energy':       int(energy),
                     'kernel':       bool(int(kernel)),
                     'cpu_ns':       int(cpu_ns),
                     'mem':          int(mem),
@@ -87,7 +89,7 @@ def remove_samples(samples, what, tf):
             pid: values for pid, values in sample['values'].items()
             if values[what] == tf
         }
-    
+
 def compute_deltas(samples):
     if len(samples) < 2:
         return
@@ -120,7 +122,7 @@ def main():
     # We do this with a pointer as the data might become large
     remove_samples(samples, 'alive', True)
     remove_samples(samples, 'kernel', False)
-    
+
     if args.deltas:
         compute_deltas(samples)
 

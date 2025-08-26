@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: AGPL-3
 /*
 * energy_proc - per-PID runtime/PMU stats + Intel-RAPL (MSR) energy
 *
@@ -27,7 +26,7 @@
 #include <linux/kprobes.h>
 #include <linux/seq_buf.h>
 #include <linux/workqueue.h>
-#include <linux/math64.h> 
+#include <linux/math64.h>
 #include <linux/stdarg.h>
 #include <linux/printk.h>
 #include <asm/msr.h>
@@ -36,7 +35,13 @@
 #include <linux/cgroup.h>
 #include <linux/proc_fs.h>
 #include <linux/uaccess.h>
-
+#include <linux/kernel_stat.h>
+#include <linux/sched/cputime.h>
+#include <trace/events/block.h>
+#include <trace/events/sched.h>
+#include <linux/netdevice.h>
+#include <linux/blkdev.h>
+#include <linux/mmzone.h>
 
 #define DRV_NAME    "energy_proc"
 #define PM_LINE_MAX 256
@@ -46,7 +51,7 @@
 #endif
 
 // The kernel does not have floats so we need to build one ourself. We use a fixed point representation
-#define ENERGY_SCALE 1000ULL 
+//#define ENERGY_SCALE 1000ULL
 
 /* ───────────────── Module parameters ─────────────────────────────────── */
 
@@ -54,9 +59,14 @@ static unsigned long long sample_ns = 100ULL * NSEC_PER_MSEC;
 module_param(sample_ns, ullong, 0644);
 MODULE_PARM_DESC(sample_ns, "Sampling period in nanoseconds (default: 100 ms)");
 
+static unsigned long long window_ns = NSEC_PER_SEC;
+module_param(window_ns, ullong, 0644);
+MODULE_PARM_DESC(window_ns, "The window for calculting the values in nanoseconds (default: 1s)");
+
+
 static u64 w_cpu_ns           = 5;
 static u64 w_mem_bytes        = 0;
-static u64 w_instructions     = 5; 
+static u64 w_instructions     = 5;
 static u64 w_wakeups          = 0;
 static u64 w_disk_read_bytes  = 0;
 static u64 w_disk_write_bytes = 0;
@@ -81,12 +91,20 @@ ENERGY_PARAM(w_net_tx_packets)
 
 /* ───────────────── Globals ────────────────────────────────── */
 
-static bool pmu_supported;
-static struct workqueue_struct *pm_wq;
-static struct delayed_work     sample_work;
+static bool pmu_supported; // instructions via PMU
 
+// The workqueue for sampling
+static struct workqueue_struct *pm_wq;
+static struct delayed_work     collect_work;
+
+// The workqueue for windowing
+static struct workqueue_struct *win_wq;
+static struct delayed_work     win_work;
+
+// Atomic counter for the number of iterations
 static atomic64_t iterations;
 
+// Procfs entries
 static struct proc_dir_entry *energy_dir;
 static struct proc_dir_entry *cgroup_proc_file;
 static struct proc_dir_entry *all_proc_file;
@@ -96,23 +114,36 @@ static struct proc_dir_entry *all_proc_file;
 
 struct pid_metrics {
     u32  pid;
-    int  alive;
-    u64  cpu_ns;
-    u64  instructions;
-    u64  wakeups;
-    atomic64_t net_rx_packets;
-    atomic64_t net_tx_packets;
-    u64  disk_read_bytes;
-    u64  disk_write_bytes;
-    u64  mem_bytes;
-    bool is_kernel;
     char comm[TASK_COMM_LEN];
+    bool is_kernel;
+    int  alive;
+
+    u64             cpu_ns;
+    u64             instructions;
+    u64             wakeups;
+    atomic64_t      net_rx_packets;
+    atomic64_t      net_tx_packets;
+    u64             disk_read_bytes;
+    u64             disk_write_bytes;
+    u64             mem_bytes;
+
+
+    u64 window_cpu_ns;
+    u64 window_instructions;
+    u64 window_wakeups;
+    u64 window_net_rx_packets;
+    u64 window_net_tx_packets;
+    u64 window_disk_read_bytes;
+    u64 window_disk_write_bytes;
+    u64 window_mem_bytes;
+    u64 window_energy_uj;
+    u64 window_timestamp_ns;
 
     /* internals */
-    struct rhash_head node;
-    unsigned long last_seen;
-    struct perf_event *insn_evt;
-    struct rcu_head   rcu;
+    struct rhash_head   node;
+    unsigned long       last_seen;
+    struct perf_event   *insn_evt;
+    struct rcu_head     rcu;
 };
 
 static const struct rhashtable_params ht_params = {
@@ -125,6 +156,20 @@ static const struct rhashtable_params ht_params = {
 
 static struct rhashtable pid_ht;
 static struct kmem_cache *pm_cache;
+
+/* ─────────────── System-wide metrics (independent source) ───────────── */
+
+static struct pid_metrics sys_metrics;
+static struct perf_event *insn_cpu_evt[NR_CPUS];
+
+static atomic64_t sys_wakeups;
+static atomic64_t sys_disk_read_bytes_atomic;
+static atomic64_t sys_disk_write_bytes_atomic;
+
+static struct tracepoint *tp_blk_complete;
+static struct tracepoint *tp_sched_wakeup;
+static struct tracepoint *tp_sched_wakeup_new;
+static struct tracepoint *tp_tx;
 
 /* ───────────────── RAPL via MSR (core / psys) ────────────────────────── */
 
@@ -208,13 +253,119 @@ static void rapl_compute_delta(struct rapl_domain *d)
     d->delta_uj = rapl_energy_inv_uj
         ? (raw_delta * rapl_energy_inv_uj) >> 16
         : raw_delta;   /* fallback: raw count */
-    
+
     d->sum += d->delta_uj;
 }
 
-/* ───────────────── Net TX/RX instrumentation ─────────────────────────── */
+/* ─────────────────System wide collector functions ─────────────────────────── */
 
-static struct tracepoint *tp_tx;
+
+static u64 sys_cpu_busy_ns(void)
+{
+    u64 ns = 0;
+    int cpu;
+    for_each_online_cpu(cpu) {
+        struct kernel_cpustat *kcs = &kcpustat_cpu(cpu);
+        ns += kcs->cpustat[CPUTIME_USER]     +
+              kcs->cpustat[CPUTIME_NICE]     +
+              kcs->cpustat[CPUTIME_SYSTEM]   +
+              kcs->cpustat[CPUTIME_IRQ]      +
+              kcs->cpustat[CPUTIME_SOFTIRQ]  +
+              kcs->cpustat[CPUTIME_STEAL];
+    }
+
+    return ns;
+}
+
+static u64 sys_instructions_read(void)
+{
+    if (!pmu_supported) return 0;
+
+    u64 tot = 0; int cpu;
+    for_each_online_cpu(cpu) {
+        if (insn_cpu_evt[cpu]) {
+            u64 en = 0, run = 0;
+            tot += perf_event_read_value(insn_cpu_evt[cpu], &en, &run);
+        }
+    }
+    return tot;
+}
+
+static u64 sys_wakeups_read(void)
+{
+    return (u64)atomic64_read(&sys_wakeups);
+}
+
+static void sys_net_packets_read(u64 *rx, u64 *tx)
+{
+    struct net_device *dev;
+    struct rtnl_link_stats64 tmp, *st;
+    *rx = *tx = 0;
+
+    rcu_read_lock();
+    for_each_netdev_rcu(&init_net, dev) {
+        st = dev_get_stats(dev, &tmp);
+        if (st) {
+            *rx += st->rx_packets;
+            *tx += st->tx_packets;
+        }
+    }
+    rcu_read_unlock();
+}
+
+static u64 sys_mapped_mem_bytes_read(void)
+{
+    unsigned long anon  = global_node_page_state(NR_ANON_MAPPED);
+    unsigned long filem = global_node_page_state(NR_FILE_MAPPED);
+    unsigned long shmem = global_node_page_state(NR_SHMEM);
+    return ((u64)anon + (u64)filem + (u64)shmem) << PAGE_SHIFT;
+}
+
+
+static int sys_pmu_init(void)
+{
+    int cpu;
+
+    if (!pmu_supported)
+        return 0;
+
+    struct perf_event_attr attr = {
+        .type       = PERF_TYPE_HARDWARE,
+        .config     = PERF_COUNT_HW_INSTRUCTIONS,
+        .size       = sizeof(attr),
+        .disabled   = 1,
+        .exclude_hv = 1,
+        .inherit    = 0,  /* CPU-wide, not per-task */
+    };
+
+    for_each_online_cpu(cpu) {
+        insn_cpu_evt[cpu] = perf_event_create_kernel_counter(
+            &attr, cpu, NULL, NULL, NULL);
+        if (!IS_ERR(insn_cpu_evt[cpu])) {
+            perf_event_enable(insn_cpu_evt[cpu]);
+        } else {
+            insn_cpu_evt[cpu] = NULL;
+            pr_warn(DRV_NAME ": CPU%u: system PMU setup failed\n", cpu);
+        }
+    }
+    return 0;
+}
+
+static void sys_pmu_exit(void)
+{
+    int cpu;
+    for_each_possible_cpu(cpu) {
+        if (insn_cpu_evt[cpu]) {
+            perf_event_release_kernel(insn_cpu_evt[cpu]);
+            insn_cpu_evt[cpu] = NULL;
+        }
+    }
+}
+
+
+
+/* ───────────────── Tracepint ─────────────────────────── */
+
 static struct kretprobe   kr_sock_recvmsg;
 
 /* This needs to be in a h file */
@@ -223,21 +374,72 @@ static int  kp_sock_recvmsg_entry(struct kretprobe_instance *, struct pt_regs *)
 static int  kp_sock_recvmsg_ret(struct kretprobe_instance *, struct pt_regs *);
 static int cnt_show(struct seq_file *m, void *v);
 
-static void find_net_dev_queue_tp(struct tracepoint *tp, void *priv)
+
+static void tp_block_rq_complete_cb(void *ignore,
+    struct request *rq, blk_status_t error, unsigned int nr_bytes)
 {
-    if (!strcmp(tp->name, "net_dev_queue"))
-        *(struct tracepoint **)priv = tp;
+    if (!rq) return;
+    if (op_is_write(req_op(rq)))
+        atomic64_add(nr_bytes, &sys_disk_write_bytes_atomic);
+    else
+        atomic64_add(nr_bytes, &sys_disk_read_bytes_atomic);
 }
+
+static void find_tp_named(struct tracepoint *tp, void *priv)
+{
+    const char *name = priv;
+    if (!strcmp(tp->name, name)) {
+        if (!strcmp(name, "net_dev_queue"))          tp_tx = tp;
+        else if (!strcmp(name, "sched_wakeup"))      tp_sched_wakeup = tp;
+        else if (!strcmp(name, "sched_wakeup_new"))  tp_sched_wakeup_new = tp;
+        else if (!strcmp(name, "block_rq_complete"))  tp_blk_complete = tp;
+
+    }
+}
+
+static void tp_sched_wakeup_cb(void *data, struct task_struct *p)
+{
+    atomic64_inc(&sys_wakeups);
+}
+
 
 static int pm_register_tracepoints(void)
 {
     int err;
 
-    for_each_kernel_tracepoint(find_net_dev_queue_tp, &tp_tx);
-    if (!tp_tx)
+    /* find needed tracepoints */
+    for_each_kernel_tracepoint(find_tp_named, "net_dev_queue");
+    for_each_kernel_tracepoint(find_tp_named, "sched_wakeup");
+    for_each_kernel_tracepoint(find_tp_named, "sched_wakeup_new");
+    for_each_kernel_tracepoint(find_tp_named, "block_rq_complete");
+
+    if (!tp_tx || !tp_sched_wakeup || !tp_sched_wakeup_new || !tp_blk_complete)
         return -ENOENT;
 
-    tracepoint_probe_register(tp_tx, pm_tp_tx, NULL);
+    err = tracepoint_probe_register(tp_tx, pm_tp_tx, NULL);
+    if (err)
+        return err;
+
+    err = tracepoint_probe_register(tp_blk_complete, tp_block_rq_complete_cb, NULL);
+    if (err){
+        tracepoint_probe_unregister(tp_tx, pm_tp_tx, NULL);
+        return err;
+    }
+
+    err = tracepoint_probe_register(tp_sched_wakeup,     tp_sched_wakeup_cb, NULL);
+    if (err){
+        tracepoint_probe_unregister(tp_tx, pm_tp_tx, NULL);
+        tracepoint_probe_unregister(tp_blk_complete, tp_block_rq_complete_cb, NULL);
+        return err;
+    }
+
+    err = tracepoint_probe_register(tp_sched_wakeup_new, tp_sched_wakeup_cb, NULL);
+    if (err){
+        tracepoint_probe_unregister(tp_tx, pm_tp_tx, NULL);
+        tracepoint_probe_unregister(tp_blk_complete, tp_block_rq_complete_cb, NULL);
+        tracepoint_probe_unregister(tp_sched_wakeup, tp_sched_wakeup_cb, NULL);
+        return err;
+    }
 
     kr_sock_recvmsg.kp.symbol_name = "sock_recvmsg";
     kr_sock_recvmsg.entry_handler  = kp_sock_recvmsg_entry;
@@ -247,20 +449,27 @@ static int pm_register_tracepoints(void)
     err = register_kretprobe(&kr_sock_recvmsg);
     if (err) {
         tracepoint_probe_unregister(tp_tx, pm_tp_tx, NULL);
+        tracepoint_probe_unregister(tp_blk_complete, tp_block_rq_complete_cb, NULL);
+        tracepoint_probe_unregister(tp_sched_wakeup, tp_sched_wakeup_cb, NULL);
+        tracepoint_probe_unregister(tp_sched_wakeup_new, tp_sched_wakeup_cb, NULL);
         return err;
     }
     return 0;
 }
 
+
 static void pm_unregister_tracepoints(void)
 {
     unregister_kretprobe(&kr_sock_recvmsg);
 
-    if (tp_tx)
-        tracepoint_probe_unregister(tp_tx, pm_tp_tx, NULL);
+    if (tp_tx)                 tracepoint_probe_unregister(tp_tx, pm_tp_tx, NULL);
+    if (tp_blk_complete)       tracepoint_probe_unregister(tp_blk_complete, tp_block_rq_complete_cb, NULL);
+    if (tp_sched_wakeup)       tracepoint_probe_unregister(tp_sched_wakeup, tp_sched_wakeup_cb, NULL);
+    if (tp_sched_wakeup_new)   tracepoint_probe_unregister(tp_sched_wakeup_new, tp_sched_wakeup_cb, NULL);
 
     tracepoint_synchronize_unregister();
 }
+
 
 /* TX tracepoint */
 static void pm_tp_tx(void *data, struct sk_buff *skb)
@@ -312,8 +521,8 @@ static u64 energy_model(const struct pid_metrics *e)
     score += e->wakeups                           * w_wakeups;
     score += e->disk_read_bytes                   * w_disk_read_bytes;
     score += e->disk_write_bytes                  * w_disk_write_bytes;
-    score += atomic64_read(&e->net_rx_packets)    * w_net_rx_packets;
-    score += atomic64_read(&e->net_tx_packets)    * w_net_tx_packets;
+    score += (u64)atomic64_read(&e->net_rx_packets)    * w_net_rx_packets;
+    score += (u64)atomic64_read(&e->net_tx_packets)    * w_net_tx_packets;
 
     return score;
 }
@@ -333,22 +542,23 @@ static bool pid_still_alive(u32 pid)
     return alive;
 }
 
-static void seq_print_fixed(struct seq_file *m, u64 scaled)
-{
-    u64 int_part  = div_u64(scaled, ENERGY_SCALE);
-    u64 frac_part = scaled % ENERGY_SCALE;
+// We keep this if we want to revert to fixed point representation
+// static void seq_print_fixed(struct seq_file *m, u64 scaled)
+// {
+//     u64 int_part  = div_u64(scaled, ENERGY_SCALE);
+//     u64 frac_part = scaled % ENERGY_SCALE;
 
-    seq_printf(m, "%llu.%03llu", int_part, frac_part);
-}
+//     seq_printf(m, "%llu.%03llu", int_part, frac_part);
+//}
 
 
 static void print_pm(struct seq_file *m, struct pid_metrics *e){
     seq_printf(m, "pid=%u ", e->pid);
 
     u64 e_score = energy_model(e);
-    seq_printf(m, "energy=");
-    seq_print_fixed(m, e_score);
-    seq_puts(m, " ");
+    seq_printf(m, "energy=%llu ", e_score);
+    //seq_print_fixed(m, e_score);
+    //seq_puts(m, " ");
 
     seq_printf(m,
     "alive=%d kernel=%d cpu_ns=%llu mem=%llu ",
@@ -360,12 +570,35 @@ static void print_pm(struct seq_file *m, struct pid_metrics *e){
         seq_printf(m, "instructions=%llu ", e->instructions);
 
     seq_printf(m,
-        "wakeups=%llu diski=%llu disko=%llu rx=%lld tx=%lld comm=%s\n",
+        "wakeups=%llu diski=%llu disko=%llu rx=%llu tx=%llu comm=%s\n",
         e->wakeups,
         e->disk_read_bytes,
         e->disk_write_bytes,
-        atomic64_read(&e->net_rx_packets),
-        atomic64_read(&e->net_tx_packets),
+        (u64)atomic64_read(&e->net_rx_packets),
+        (u64)atomic64_read(&e->net_tx_packets),
+        e->comm);
+}
+
+static void print_pm_window(struct seq_file *m, struct pid_metrics *e){
+    seq_printf(m, "pid=%u ", e->pid);
+    seq_printf(m, "energy=%llu ", e->window_energy_uj);
+    seq_printf(m,
+    "alive=%d kernel=%d cpu_ns=%llu mem=%llu ",
+    e->alive, e->is_kernel,
+    e->window_cpu_ns, e->window_mem_bytes);
+
+
+    if (pmu_supported)
+        seq_printf(m, "instructions=%llu ", e->window_instructions);
+
+    seq_printf(m,
+        "wakeups=%llu diski=%llu disko=%llu rx=%llu tx=%llu window_time=%llu comm=%s\n",
+        e->window_wakeups,
+        e->window_disk_read_bytes,
+        e->window_disk_write_bytes,
+        e->window_net_rx_packets,
+        e->window_net_tx_packets,
+        e->window_timestamp_ns,
         e->comm);
 }
 
@@ -405,7 +638,7 @@ static void rapl_sample_once(void)
     }
 }
 
-static void sample_workfn(struct work_struct *wk)
+static void collect_values(struct work_struct *wk)
 {
     atomic64_inc(&iterations);
 
@@ -414,14 +647,34 @@ static void sample_workfn(struct work_struct *wk)
 
     rapl_sample_once();
 
+
+    { // This is the system-wide entry
+        u64 rx = 0, tx = 0;
+
+        sys_metrics.pid       = 0;
+        strscpy(sys_metrics.comm, "*system*", sizeof(sys_metrics.comm));
+        sys_metrics.is_kernel = 1;
+        sys_metrics.alive     = 1;
+
+        sys_metrics.cpu_ns           = sys_cpu_busy_ns();
+        sys_metrics.instructions     = sys_instructions_read();
+        sys_metrics.wakeups          = sys_wakeups_read();
+        sys_net_packets_read(&rx, &tx);
+        atomic64_set(&sys_metrics.net_rx_packets, rx);
+        atomic64_set(&sys_metrics.net_tx_packets, tx);
+        sys_metrics.disk_read_bytes  = (u64)atomic64_read(&sys_disk_read_bytes_atomic);
+        sys_metrics.disk_write_bytes = (u64)atomic64_read(&sys_disk_write_bytes_atomic);
+        sys_metrics.mem_bytes        = sys_mapped_mem_bytes_read();
+    }
+
     /* iterate tasks */
     for_each_process(p) {
+
+        rcu_read_lock();
         u32 pid = task_pid_nr(p);
         struct pid_metrics *pm;
 
-        rcu_read_lock();
         pm = rhashtable_lookup_fast(&pid_ht, &pid, ht_params);
-        rcu_read_unlock();
 
         if (!pm) {
             pm = kmem_cache_zalloc(pm_cache, GFP_KERNEL);
@@ -456,13 +709,25 @@ static void sample_workfn(struct work_struct *wk)
             }
             pm->is_kernel = (p->flags & PF_KTHREAD) || !p->mm;
         }
-        
+
+
         /* collect metrics */
-        rcu_read_lock();
         pm->alive            = pid_alive(p);
         pm->last_seen        = jiffies;
         pm->cpu_ns           = p->se.sum_exec_runtime;
-        pm->mem_bytes        = p->mm ? (get_mm_rss(p->mm) << PAGE_SHIFT) : 0;
+        rcu_read_unlock();
+
+        struct mm_struct *mm = get_task_mm(p);
+        if (mm) {
+            pm->mem_bytes = (u64)get_mm_rss(mm) << PAGE_SHIFT;
+            mmput(mm);
+        } else {
+            pm->mem_bytes = 0;
+        }
+
+        //pm->mem_bytes        = p->mm ? (get_mm_rss(p->mm) << PAGE_SHIFT) : 0;
+
+        rcu_read_lock();
 
         #ifdef CONFIG_SCHEDSTATS
             pm->wakeups          = p->stats.nr_wakeups;
@@ -488,7 +753,6 @@ static void sample_workfn(struct work_struct *wk)
 
     }
 
-    
 
     /* lazy eviction */
     struct rhashtable_iter iter;
@@ -496,13 +760,62 @@ static void sample_workfn(struct work_struct *wk)
 
     rhashtable_walk_enter(&pid_ht, &iter);
     rhashtable_walk_start(&iter);
-    while ((it = rhashtable_walk_next(&iter)) && !IS_ERR(it))
-        if (!pid_still_alive(it->pid))
+    while ((it = rhashtable_walk_next(&iter))) {
+        if (IS_ERR(it)) {
+            if (PTR_ERR(it) == -EAGAIN)
+                continue;
+            break;
+        }
+        if (it && !pid_still_alive(it->pid)){
             it->alive = 0;
+        }
+    }
     rhashtable_walk_stop(&iter);
     rhashtable_walk_exit(&iter);
 
     queue_delayed_work(pm_wq, dw, nsecs_to_jiffies(sample_ns));
+}
+
+static void calculate_window(struct work_struct *wk)
+{
+    struct delayed_work *dw = to_delayed_work(wk);
+
+    struct rhashtable_iter iter;
+    struct pid_metrics *it;
+
+    rhashtable_walk_enter(&pid_ht, &iter);
+    rhashtable_walk_start(&iter);
+    while ((it = rhashtable_walk_next(&iter)) && !IS_ERR(it)){
+        if (it->alive == 1){
+            it->window_cpu_ns          = it->cpu_ns;
+            it->window_instructions    = it->instructions;
+            it->window_wakeups         = it->wakeups;
+            it->window_mem_bytes       = it->mem_bytes;
+            it->window_disk_read_bytes = it->disk_read_bytes;
+            it->window_disk_write_bytes= it->disk_write_bytes;
+            it->window_net_rx_packets  = (u64)atomic64_read(&it->net_rx_packets);
+            it->window_net_tx_packets  = (u64)atomic64_read(&it->net_tx_packets);
+
+            it->window_energy_uj       = energy_model(it);
+            it->window_timestamp_ns    = ktime_get_ns();
+        }
+    }
+    rhashtable_walk_stop(&iter);
+    rhashtable_walk_exit(&iter);
+
+
+    sys_metrics.window_cpu_ns           = sys_metrics.cpu_ns;
+    sys_metrics.window_instructions     = sys_metrics.instructions;
+    sys_metrics.window_wakeups          = sys_metrics.wakeups;
+    sys_metrics.window_mem_bytes        = sys_metrics.mem_bytes;
+    sys_metrics.window_disk_read_bytes  = sys_metrics.disk_read_bytes;
+    sys_metrics.window_disk_write_bytes = sys_metrics.disk_write_bytes;
+    sys_metrics.window_net_rx_packets   = (u64)atomic64_read(&sys_metrics.net_rx_packets);
+    sys_metrics.window_net_tx_packets   = (u64)atomic64_read(&sys_metrics.net_tx_packets);
+    sys_metrics.window_energy_uj        = energy_model(&sys_metrics);
+    sys_metrics.window_timestamp_ns     = ktime_get_ns();
+
+    queue_delayed_work(win_wq, dw, nsecs_to_jiffies(window_ns));
 }
 
 /* ───────────────── /energy/switch debugfs file ──────────────────────── */
@@ -515,9 +828,10 @@ static int cnt_show(struct seq_file *m, void *v)
     rhashtable_walk_enter(&pid_ht, &iter);
     rhashtable_walk_start(&iter);
 
-    seq_printf(m, "timestamp=%llu\n", ktime_get_ns());
-    seq_printf(m, "iterations=%llu\n", atomic64_read(&iterations));
+    seq_printf(m, "timestamp=%llu\n", ktime_get_ns()); // This always needs to be first for parsing
+    seq_printf(m, "iterations=%llu\n", (u64)atomic64_read(&iterations));
     seq_printf(m, "sample_ns=%llu\n", sample_ns);
+    seq_printf(m, "window_ns=%llu\n", window_ns);
 
     if (rapl_core_supported){
         //seq_printf(m, "rapl_core_uj=%llu\n", rapl_core.delta_uj);
@@ -528,6 +842,8 @@ static int cnt_show(struct seq_file *m, void *v)
         //seq_printf(m, "rapl_psys_uj=%llu\n", rapl_psys.delta_uj);
         seq_printf(m, "rapl_psys_sum_uj=%llu\n", rapl_psys.sum);
     }
+
+    print_pm(m, &sys_metrics);
 
     while ((e = rhashtable_walk_next(&iter))) {
         if (IS_ERR(e)) {
@@ -584,16 +900,17 @@ static int cgroup_energy_show(struct seq_file *m, void *v){
     //seq_printf(m, "cgroup: %s\n", cgname);
 
     struct task_struct *p, *t;
+
+    rcu_read_lock();
     for_each_process_thread(p, t) {
         if (task_dfl_cgroup(t) == cgrp){
-            rcu_read_lock();
             struct pid_metrics *pm = rhashtable_lookup_fast(&pid_ht, &t->pid, ht_params);
             if (pm && READ_ONCE(pm->alive)){
-                print_pm(m, pm);
+                print_pm_window(m, pm);
             }
-            rcu_read_unlock();
         }
     }
+    rcu_read_unlock();
 
     return 0;
 }
@@ -634,11 +951,24 @@ static int __init pidmetrics_init(void)
     detect_pmu();
     detect_rapl();
 
+    if ((ret = sys_pmu_init()))
+        pr_warn(DRV_NAME ": system PMU init returned %d\n", ret);
+
+    /* initialize globals */
+    memset(&sys_metrics, 0, sizeof(sys_metrics));
+    sys_metrics.pid = 0;
+    strscpy(sys_metrics.comm, "*system*", sizeof(sys_metrics.comm));
+    sys_metrics.is_kernel = 1;
+    sys_metrics.alive = 1;
+    atomic64_set(&sys_wakeups, 0);
+    atomic64_set(&iterations, 0);
+
     pm_cache = KMEM_CACHE(pid_metrics, SLAB_HWCACHE_ALIGN | SLAB_PANIC);
 
     ret = rhashtable_init(&pid_ht, &ht_params);
     if (ret)
         goto err_cache;
+
     ret = pm_register_tracepoints();
     if (ret)
         goto err_ht;
@@ -673,21 +1003,30 @@ static int __init pidmetrics_init(void)
     pr_info(DRV_NAME ": created /proc/energy/cgroup\n");
 
     all_proc_file = proc_create("all", 0400, energy_dir, &all_energy_proc_ops);
-    if (!cgroup_proc_file) {
+    if (!all_proc_file) {
         ret = -ENOMEM;
         goto err_remove_proc;
     }
 
     pr_info(DRV_NAME ": created /proc/energy/all\n");
 
-
-    INIT_DELAYED_WORK(&sample_work, sample_workfn);
+    // The collection workqueue
+    INIT_DELAYED_WORK(&collect_work, collect_values);
     pm_wq = alloc_workqueue("energy_proc_wq", WQ_UNBOUND | WQ_MEM_RECLAIM, 1);
     if (!pm_wq) {
         ret = -ENOMEM;
-        goto err_debugfs;
+        goto err_remove_proc;
     }
-    queue_delayed_work(pm_wq, &sample_work, 0);
+    queue_delayed_work(pm_wq, &collect_work, 0);
+
+
+    INIT_DELAYED_WORK(&win_work, calculate_window);
+    win_wq = alloc_workqueue("energy_proc_window_wq", WQ_UNBOUND | WQ_MEM_RECLAIM, 1);
+    if (!win_wq) {
+        ret = -ENOMEM;
+        goto err_wq;
+    }
+    queue_delayed_work(win_wq, &win_work, nsecs_to_jiffies(window_ns));
 
     pr_info(DRV_NAME ": sampling every %llu ms "
         "(PMU %s / RAPL core=%d psys=%d)\n",
@@ -697,6 +1036,10 @@ static int __init pidmetrics_init(void)
         rapl_psys_supported);
 
     return 0;
+
+err_wq:
+    if (pm_wq)
+        destroy_workqueue(pm_wq);
 err_remove_proc:
     if (cgroup_proc_file)
         proc_remove(cgroup_proc_file);
@@ -715,22 +1058,36 @@ err_cache:
     return ret;
 }
 
+static void free_pm(void *ptr, void *arg)
+{
+    struct pid_metrics *pm = ptr;
+    if (pm->insn_evt)
+        perf_event_release_kernel(pm->insn_evt);
+    kmem_cache_free(pm_cache, pm);
+}
+
 static void __exit pidmetrics_exit(void)
 {
-    cancel_delayed_work_sync(&sample_work);
+    cancel_delayed_work_sync(&collect_work);
+    cancel_delayed_work_sync(&win_work);
 
     if (pm_wq)
         destroy_workqueue(pm_wq);
 
+    if (win_wq)
+        destroy_workqueue(win_wq);
+
     pm_unregister_tracepoints();
+
+    sys_pmu_exit();
 
     debugfs_remove_recursive(dir);
 
     proc_remove(cgroup_proc_file);
+    proc_remove(all_proc_file);
     proc_remove(energy_dir);
 
-    rhashtable_free_and_destroy(&pid_ht, NULL, NULL);
-    kmem_cache_destroy(pm_cache);
+    rhashtable_free_and_destroy(&pid_ht, free_pm, NULL);
     pr_info(DRV_NAME ": unloaded. Bye!\n");
 }
 
