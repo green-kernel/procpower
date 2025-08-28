@@ -268,10 +268,10 @@ static u64 sys_cpu_busy_ns(void)
         struct kernel_cpustat *kcs = &kcpustat_cpu(cpu);
         ns += kcs->cpustat[CPUTIME_USER]     +
               kcs->cpustat[CPUTIME_NICE]     +
-              kcs->cpustat[CPUTIME_SYSTEM]   +
-              kcs->cpustat[CPUTIME_IRQ]      +
-              kcs->cpustat[CPUTIME_SOFTIRQ]  +
-              kcs->cpustat[CPUTIME_STEAL];
+              kcs->cpustat[CPUTIME_SYSTEM];
+            //   kcs->cpustat[CPUTIME_IRQ]      +
+            //   kcs->cpustat[CPUTIME_SOFTIRQ]  +
+            //   kcs->cpustat[CPUTIME_STEAL];
     }
 
     return ns;
@@ -474,11 +474,11 @@ static void pm_unregister_tracepoints(void)
 /* TX tracepoint */
 static void pm_tp_tx(void *data, struct sk_buff *skb)
 {
-    u32 pid = task_pid_nr(current);
+    u32 tgid = task_tgid_nr(current);
 
     rcu_read_lock();
     struct pid_metrics *pm =
-        rhashtable_lookup_fast(&pid_ht, &pid, ht_params);
+        rhashtable_lookup_fast(&pid_ht, &tgid, ht_params);
     if (pm && pm->alive)
         atomic64_inc(&pm->net_tx_packets);
     rcu_read_unlock();
@@ -498,11 +498,11 @@ static int kp_sock_recvmsg_ret(struct kretprobe_instance *ri,
     if (ret <= 0)
         return 0;
 
-    u32 pid = task_pid_nr(current);
+    u32 tgid = task_tgid_nr(current);
 
     rcu_read_lock();
     struct pid_metrics *pm =
-        rhashtable_lookup_fast(&pid_ht, &pid, ht_params);
+        rhashtable_lookup_fast(&pid_ht, &tgid, ht_params);
     if (pm)
         atomic64_inc(&pm->net_rx_packets);
     rcu_read_unlock();
@@ -643,7 +643,7 @@ static void collect_values(struct work_struct *wk)
     atomic64_inc(&iterations);
 
     struct delayed_work *dw = to_delayed_work(wk);
-    struct task_struct *p;
+    struct task_struct *p, *t;
 
     rapl_sample_once();
 
@@ -668,20 +668,20 @@ static void collect_values(struct work_struct *wk)
     }
 
     /* iterate tasks */
-    for_each_process(p) {
+    for_each_process_thread(p, t) {
 
         rcu_read_lock();
-        u32 pid = task_pid_nr(p);
+        u32 tgid = task_tgid_nr(t);
         struct pid_metrics *pm;
 
-        pm = rhashtable_lookup_fast(&pid_ht, &pid, ht_params);
+        pm = rhashtable_lookup_fast(&pid_ht, &tgid, ht_params);
 
         if (!pm) {
             pm = kmem_cache_zalloc(pm_cache, GFP_KERNEL);
             if (!pm)
                 continue;
 
-            pm->pid = pid;
+            pm->pid = tgid;
             get_task_comm(pm->comm, p);
 
             if (rhashtable_insert_fast(&pid_ht, &pm->node, ht_params)) {
@@ -712,51 +712,64 @@ static void collect_values(struct work_struct *wk)
 
 
         /* collect metrics */
-        pm->alive            = pid_alive(p);
+        pm->alive            = 1;
         pm->last_seen        = jiffies;
-        pm->cpu_ns           = p->se.sum_exec_runtime;
-        rcu_read_unlock();
-
-        struct mm_struct *mm = get_task_mm(p);
-        if (mm) {
-            pm->mem_bytes = (u64)get_mm_rss(mm) << PAGE_SHIFT;
-            mmput(mm);
-        } else {
-            pm->mem_bytes = 0;
-        }
-
-        //pm->mem_bytes        = p->mm ? (get_mm_rss(p->mm) << PAGE_SHIFT) : 0;
-
-        rcu_read_lock();
+        pm->cpu_ns           += t->se.sum_exec_runtime;
 
         #ifdef CONFIG_SCHEDSTATS
-            pm->wakeups          = p->stats.nr_wakeups;
+            pm->wakeups          += t->stats.nr_wakeups;
         #else
             pm->wakeups          = 0;
         #endif
 
         #ifdef CONFIG_TASK_IO_ACCOUNTING
-            pm->disk_read_bytes  = p->ioac.read_bytes;
-            pm->disk_write_bytes = p->ioac.write_bytes;
+            pm->disk_read_bytes  += t->ioac.read_bytes;
+            pm->disk_write_bytes += t->ioac.write_bytes;
         #else
             pm->disk_read_bytes  = 0;
             pm->disk_write_bytes = 0;
         #endif
 
         rcu_read_unlock();
-
-        // This can not be in a rcu lock
-        if (pmu_supported && pm->insn_evt) {
-            u64 en = 0, run = 0;
-            pm->instructions = perf_event_read_value(pm->insn_evt, &en, &run);
-        }
-
     }
 
+
+    for_each_process(p) {
+        u32 tgid = task_tgid_nr(p);
+        struct pid_metrics *pm;
+        rcu_read_lock();
+        pm = rhashtable_lookup_fast(&pid_ht, &tgid, ht_params);
+        rcu_read_unlock();
+        if (!pm) continue;
+
+        struct mm_struct *mm = get_task_mm(p);
+        if (mm) { pm->mem_bytes = (u64)get_mm_rss(mm) << PAGE_SHIFT; mmput(mm); }
+        else     pm->mem_bytes = 0;
+    }
 
     /* lazy eviction */
     struct rhashtable_iter iter;
     struct pid_metrics *it;
+
+
+    /* Instructions: read once from the process’ perf event */
+    rhashtable_walk_enter(&pid_ht, &iter);
+    rhashtable_walk_start(&iter);
+    while ((it = rhashtable_walk_next(&iter))) {
+        if (IS_ERR(it)) {
+            if (PTR_ERR(it) == -EAGAIN)
+                continue;
+            break;
+        }
+
+        if (it->insn_evt && pmu_supported) {
+            u64 en=0, run=0;
+            it->instructions = perf_event_read_value(it->insn_evt, &en, &run);
+        }
+    }
+    rhashtable_walk_stop(&iter);
+    rhashtable_walk_exit(&iter);
+
 
     rhashtable_walk_enter(&pid_ht, &iter);
     rhashtable_walk_start(&iter);
