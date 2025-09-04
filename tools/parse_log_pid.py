@@ -83,12 +83,10 @@ def parse_monitor_file(path: str | Path):
         samples.append(current)
     return samples
 
-def remove_samples(samples, what, tf):
+def filter_samples(samples, field, condition):
     for sample in samples:
-        sample['values'] = {
-            pid: values for pid, values in sample['values'].items()
-            if values[what] == tf
-        }
+        sample['values'] = { pid: values for pid, values in sample['values'].items() if values[field] == condition }
+
 
 def compute_deltas(samples):
     if len(samples) < 2:
@@ -120,13 +118,13 @@ def main():
     samples = parse_monitor_file(args.logfile)
 
     # We do this with a pointer as the data might become large
-    remove_samples(samples, 'alive', True)
-    remove_samples(samples, 'kernel', False)
+    filter_samples(samples, 'alive', True)
+    filter_samples(samples, 'kernel', False)
 
     if args.deltas:
         compute_deltas(samples)
 
-    print(samples)
+    pprint(samples)
     #print(remove_dead_samples(samples)
     #pprint(samples, width=120)
     # for i in samples:
