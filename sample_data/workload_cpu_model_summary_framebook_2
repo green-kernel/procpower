@@ -1,0 +1,36 @@
+- Capture was run at 100 ms
+
+OLS Regression Results
+==============================================================================
+Dep. Variable:       rapl_psys_sum_uj   R-squared:                       0.992
+Model:                            OLS   Adj. R-squared:                  0.990
+Method:                 Least Squares   F-statistic:                     524.1
+Date:                Tue, 09 Sep 2025   Prob (F-statistic):           1.46e-29
+Time:                        19:16:51   Log-Likelihood:                -581.88
+No. Observations:                  38   AIC:                             1180.
+Df Residuals:                      30   BIC:                             1193.
+Df Model:                           7
+Covariance Type:            nonrobust
+================================================================================
+                   coef    std err          t      P>|t|      [0.025      0.975]
+--------------------------------------------------------------------------------
+Intercept     9.914e+06   7.89e+05     12.571      0.000     8.3e+06    1.15e+07
+cpu_ns          -0.0065      0.000    -13.628      0.000      -0.007      -0.006
+mem              0.0086      0.048      0.179      0.859      -0.090       0.107
+instructions     0.0021      0.000     21.034      0.000       0.002       0.002
+wakeups        950.6464   2460.968      0.386      0.702   -4075.322    5976.614
+diski        -7.151e-08   5.69e-09    -12.563      0.000   -8.31e-08   -5.99e-08
+disko            0.3275      1.257      0.261      0.796      -2.239       2.894
+rx           -1.502e+05   8.48e+04     -1.771      0.087   -3.23e+05     2.3e+04
+tx            2.399e+05   1.59e+05      1.509      0.142   -8.48e+04    5.65e+05
+==============================================================================
+Omnibus:                       18.256   Durbin-Watson:                   1.472
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               31.420
+Skew:                          -1.200   Prob(JB):                     1.50e-07
+Kurtosis:                       6.753   Cond. No.                     4.44e+25
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The smallest eigenvalue is 1.64e-29. This might indicate that there are
+strong multicollinearity problems or that the design matrix is singular.
