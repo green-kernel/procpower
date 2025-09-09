@@ -148,6 +148,13 @@ Field               | Meaning
 `rx`, `tx`          | Network packets received / transmitted
 `comm`              | Task name (`TASK_COMM_LEN`)
 
+## Test
+
+There is a test script you can run that you need to run on a host that will build the kernel extension and then see if everythig works out. Just run
+```
+sudo ./test.sh
+```
+
 
 ## Data Collection Helper
 The repository ships with **`energy-logger.sh`** which periodically dumps `/proc/energy/all` to disk for offline analysis (e.g. weight regression).
@@ -163,32 +170,56 @@ The repository ships with **`energy-logger.sh`** which periodically dumps `/proc
 
 ## Model
 
-We use a linear model to calculate the energy score for each process. You should train this model yourself by
+To get energy values per process we use a ML Model to estimate weights for the respective hardware component metrics.
 
-1) `src`
-1) running the data collection helper
-```
-echo 100000000 > /sys/module/energy_proc/parameters/sample_ns
-sudo ./energy-logger.sh
-```
-1) `python3 -m venv venv`
-1) `source venv/bin/activate`
-1) `pip install -r requirements.txt`
-1) `python3 model.py tmp/energy-XXXX.log`
+This model is fitted on the machine power and the machine metrics of the system and then mapped on the processes via their individual hardware component metrics.
 
-You can then add the weights to your kernel module by 
+### Install requirements
+
+1) `$ cd tools`
+2) `$ python3 -m venv venv`
+3) `$ source venv/bin/activate`
+4) `$ pip install -r requirements.txt`
+5) `$ sudo apt install stress-ng` - Or equivalent for your distribution
+
+### Capture energy data while running a workload
+
+```bash
+# optionally set sampling before
+echo 100000000 | sudo tee /sys/module/energy_proc/parameters/sample_ns # - @didi ... why?
+
+## run workload sandwiched between energy logger and start and end
+sudo pkill -f energy-logger.sh
+sudo ./energy-logger.sh & # will output the file it will write to
+python3 run-workload.py mixed
+sudo pkill -f energy-logger.sh
+```
+
+By default it will run the *mixed* workload. Check `$ python3 run-workload.py -h` for alternative implemented workloads.
+
+### Estimating the weights
+
+This estimation will give you an estimate to how your system is currently behaving.
+This means it will produce very matching weights for idle workloads if your system is idle.
+But these will not be very fit for compute workloads. So effectively you need to run different workloads and create a mash-up model.
+The mixed model is already an approach in this direction, but the more you know your future workloads, the better the predicitions will be.
+
+Run: `$ python model.py LOG_FILE_NAME --fit OLS`
+
+*OLS* is the default model for now.
+
+TODO: Complete documentation here.
+
+
+### Adding estimated weights to kernel module
+
+For each weight you can just send it to the kernel module file endpoint via:
 ```bash
 echo 1231232 > /sys/module/energy_proc/parameters/PARAM   # 100 ms
 ```
 
 Please remember that you can not add floats. We use fix decimal values with 3 decimal points. 
 
-## Test
-
-There is a test script you can run that you need to run on a host that will build the kernel extension and then see if everythig works out. Just run
-```
-sudo ./test.sh
-```
 
 ## Troubleshooting
 | Symptom                                     | Fix |

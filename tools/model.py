@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
-from pathlib import Path
+import re
+import os
+import sys
 import argparse
+import subprocess
+import psutil
 import numpy as np
 import pandas as pd
+from time import sleep
+from pathlib import Path
 from sklearn.linear_model import LinearRegression, Ridge
 from sklearn.metrics import (
     r2_score,
@@ -13,135 +19,122 @@ from sklearn.metrics import (
 from sklearn.model_selection import train_test_split, KFold, cross_validate
 from sklearn.metrics import mean_squared_error
 
-# ---- reuse helper functions you already have -----------------------------
-from parse_log import (
-    parse_monitor_file,
-    remove_samples,
-    compute_deltas,
-)
-# --------------------------------------------------------------------------
+import statsmodels.formula.api as smf
 
-FEATURES = [
-    "cpu_ns",
-    "mem",
-    "instructions",
-    "wakeups",
-    "diski",
-    "disko",
-    "rx",
-    "tx",
-]
+def parse_monitor_file(path: str | Path):
+    """Return a list of 'samples', one per timestamp block."""
+    samples = []
+    current = None
 
-def aggregate_sample(sample: dict, use_rate: bool) -> dict:
-    """Collapse one timestamp block into a single feature row."""
-    row = {f: 0.0 for f in FEATURES}
-    for metrics in sample["values"].values():
-        for f in FEATURES:
-            row[f] += metrics[f]
+    # We do this with a regex to avoid splitting on whitespace which will break if we change the kernel module output format
+    key_val_re = re.compile(r'^([a-zA-Z_]+)=(.+)$')
 
-    if use_rate and sample.get("sample_ns"):
-        secs = sample["sample_ns"] / 1e9
-        for f in FEATURES:
-            row[f] /= secs
+    pid_re = re.compile(
+        r'^pid=(\d+)\s+'
+        r'energy=(\d+)\s+'
+        r'alive=(\d+)\s+'
+        r'kernel=(\d+)\s+'
+        r'cpu_ns=(\d+)\s+'
+        r'mem=(\d+)\s+'
+        r'instructions=(\d+)\s+'
+        r'wakeups=(\d+)\s+'
+        r'diski=(\d+)\s+'
+        r'disko=(\d+)\s+'
+        r'rx=(\d+)\s+'
+        r'tx=(\d+)\s+'
+        r'comm=(.+)$'
+    )
 
-    row["target"] = sample["rapl_psys_sum_uj"]
-    return row
+    with open(path, encoding='utf-8') as f:
+        data = f.read()
 
-def load_dataframe(paths: list[Path], deltas: bool, rate: bool) -> pd.DataFrame:
+    blocks = [block.strip() for block in data.split("-------") if block.strip()]
+
     rows = []
-    for path in paths:
-        samples = parse_monitor_file(path)
-        remove_samples(samples, "alive", True)
-        #remove_samples(samples, "kernel", False)
-        if deltas:
-            compute_deltas(samples)
-        rows.extend(aggregate_sample(s, rate) for s in samples)
-    return pd.DataFrame(rows)
+    for block in blocks:
+        rapl_match = re.search(r"rapl_psys_sum_uj=(\d+)", block)
+        pid0_match = re.search(r"pid=0.*?cpu_ns=(\d+)\s+mem=(\d+)\s+instructions=(\d+)\s+wakeups=(\d+)\s+diski=(\d+)\s+disko=(\d+)\s+rx=(\d+)\s+tx=(\d+)", block)
 
-# --------------------------------------------------------------------------
+        if rapl_match and pid0_match:
+            rows.append({
+                "rapl_psys_sum_uj": int(rapl_match.group(1)),
+                "cpu_ns": int(pid0_match.group(1)),
+                "mem": int(pid0_match.group(2)),
+                "instructions": int(pid0_match.group(3)),
+                "wakeups": int(pid0_match.group(4)),
+                "diski": int(pid0_match.group(5)),
+                "disko": int(pid0_match.group(6)),
+                "rx": int(pid0_match.group(7)),
+                "tx": int(pid0_match.group(8)),
+            })
 
-def print_metrics(y_true, y_pred, label="test"):
-    rmse = np.sqrt(mean_squared_error(y_true, y_pred))
-    mae  = mean_absolute_error(y_true, y_pred)
-    mape = mean_absolute_percentage_error(y_true, y_pred)
-    r2   = r2_score(y_true, y_pred)
+    return pd.DataFrame(rows, columns=["rapl_psys_sum_uj", "cpu_ns", "mem", "instructions", "wakeups", "diski", "disko", "rx", "tx"])
 
-    print(f"\n# --- {label} metrics ---")
-    print(f"R²     : {r2:7.4f}")
-    print(f"RMSE   : {rmse:10.2f}  μJ")
-    print(f"MAE    : {mae:10.2f}  μJ")
-    print(f"MAPE   : {mape*100:7.2f}  %")
+def fit_model(fit, no_validate=False):
+    if fit == 'OLS':
+       return smf.ols(formula="rapl_psys_sum_uj ~ cpu_ns + mem + instructions + wakeups + diski + disko + rx + tx", data=df, missing='raise').fit()
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("logfiles", nargs="+", type=Path)
-    ap.add_argument("--deltas", action="store_true",
-                    help="Use per-PID deltas (subtract previous sample)")
-    ap.add_argument("--rate", action="store_true",
-                    help="Convert counters to per-second rates")
-    ap.add_argument("--ridge", action="store_true",
-                    help="Use Ridge (L2) instead of plain OLS")
-    ap.add_argument("--alpha", type=float, default=1.0,
-                    help="Ridge regularisation strength (ignored without --ridge)")
-    ap.add_argument("--test-frac", type=float, default=0.25,
-                    help="Fraction of data reserved for the hold-out test set")
-    ap.add_argument("--cv", type=int, default=0,
-                    help="If >0, run k-fold cross-validation instead of single split")
-    args = ap.parse_args()
+    elif fit == 'OLS-idle':
+       return smf.ols(formula="rapl_psys_sum_uj ~ wakeups", data=df, missing='raise').fit()
 
-    # ----- data ------------------------------------------------------------
-    df = load_dataframe(args.logfiles, args.deltas, args.rate).dropna()
-    X = df[FEATURES].values.astype(np.float64)
-    y = df["target"].values.astype(np.float64)
+    elif fit == 'OLS-compute':
+        # Transformation if instructions and time to ISP
+        df['ips'] = (df['instructions'] / df['cpu_ns']).astype('int64')
 
-    # ----- choose model ----------------------------------------------------
-    if args.ridge:
+        return smf.ols(formula="rapl_psys_sum_uj ~ instructions", data=df, missing='raise').fit()
+
+
+    elif fit == 'OLS-polynomial':
+        print('Warning: Current implemented Polynomial transformation is non-sensical. Is just an example how to do it! Needs context aware implementation.')
+        return smf.ols(formula="rapl_psys_sum_uj ~ cpu_ns + I(cpu_ns**2) + mem + instructions + wakeups + diski + disko + rx + tx", data=df, missing='raise').fit()
+
+    elif fit == 'ridge':
+        raise NotImplementedError('Ridge is not yet implemented, as it uses SKLearn.')
         model = Ridge(alpha=args.alpha, fit_intercept=True)
-    else:
-        model = LinearRegression(fit_intercept=True)
 
-    # ======= option 1: k-fold CV ===========================================
-    if args.cv > 1:
-        cv = KFold(n_splits=args.cv, shuffle=True, random_state=42)
-        cv_results = cross_validate(
-            model,
-            X,
-            y,
-            cv=cv,
-            scoring={
-                "r2": "r2",
-                "neg_rmse": "neg_root_mean_squared_error",
-                "neg_mae": "neg_mean_absolute_error",
-                "neg_mape": "neg_mean_absolute_percentage_error",
-            },
-            return_train_score=False,
-        )
-        print("\n# === cross-validation (k = %d) ===" % args.cv)
-        for metric, vals in cv_results.items():
-            if metric.startswith("test_"):
-                name = metric[5:].lstrip("neg_")
-                scores = -vals if metric.startswith("test_neg") else vals
-                print(f"{name.upper():5s}: {scores.mean():.4f} ± {scores.std():.4f}")
-        # Fit on full data so we can output coefficients below
-        model.fit(X, y)
+def predict(df):
+    raise NotImplementedError()
 
-    # ======= option 2: single train/test split =============================
-    else:
-        X_tr, X_te, y_tr, y_te = train_test_split(
-            X, y, test_size=args.test_frac, random_state=42, shuffle=True
-        )
-        model.fit(X_tr, y_tr)
-        y_pred = model.predict(X_te)
-        print_metrics(y_te, y_pred)
+    X_tr, X_te, y_tr, y_te = train_test_split(
+        X, y, test_size=0.8, random_state=42,
+        shuffle=False # shuffle must be false, as we do not have i.i.d. data
+    )
 
-    # ----- coefficients ----------------------------------------------------
-    weights = dict(zip(FEATURES, model.coef_))
-    bias    = float(model.intercept_)
+    model.fit(X_tr, y_tr)
+    y_pred = model.predict(X_te)
 
-    print("\n# --- coefficients ---")
-    for k, v in weights.items():
-        print(f"{k:14s} = {v}")
-    print(f"bias          = {bias:.6e}")
+    res.predict(exog=dict(x1=x1n))
+
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description='Fit model and estimate weights on data from energy‑logger.sh')
+    parser.add_argument('logfile', help='Logfile of energy-logger to use')
+    parser.add_argument('--dump-only', action='store_true', help='Dump only the parsed data',)
+
+    parser.add_argument("--fit",
+        choices=['OLS', 'OLS-compute', 'OLS-idle', 'OLS-polynomial', 'ridge'],
+        help='Select model to use for fitting',
+        default='OLS'
+    )
+    parser.add_argument('--no-validate', action='store_true', help='Do not validate statistical assumptions for model (Should only be used for testing as invalid assumptions can lead to false interpretations)')
+    parser.add_argument('--no-predict', action='store_true', help='Do not check predictive power of the model')
+
+
+
+    args = parser.parse_args()
+
+    df = parse_monitor_file(args.logfile)
+
+    # computing deltas is mandatory. Otherwise we carry huge bias with us that contains always different amounts of energy
+    df = df.diff()
+    df = df.drop(index=0)
+
+    if args.dump_only:
+        print(df)
+        sys.exit(0)
+
+
+    model = fit_model(args.fit, args.no_validate)
+
+    print(model.summary())
+
