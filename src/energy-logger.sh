@@ -16,7 +16,9 @@ last_report=$(date +%s)
 # 3) Infinite sampling loop
 while : ; do
     # append reading
-    sudo cat /sys/kernel/debug/energy/all >> "$LOGFILE"
+    # sudo cat /sys/kernel/debug/energy/all >> "$LOGFILE"
+    sudo cat /sys/kernel/debug/energy/sys >> "$LOGFILE"
+
     echo '-------'                    >> "$LOGFILE"
 
     sleep 0.1                         # ≈100 Hz sample rate

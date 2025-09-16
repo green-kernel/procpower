@@ -11,6 +11,7 @@ This work has been made possible by the [Prototype Fund](https://www.prototypefu
 1. [Quick Start](#quick-start)
 1. [Running Inside Virtual Machines](#running-inside-virtualmachines)
 1. [Sampling Interval & Weighting](#sampling-interval--weighting)
+1. [Windowing (decoupled sampling vs reporting)](#windowing-decoupled-sampling-vs-reporting)
 1. [Reading the Metrics](#reading-the-metrics)
 1. [Data Collection Helper](#data-collection-helper)
 1. [Model](#model)
@@ -25,7 +26,7 @@ This work has been made possible by the [Prototype Fund](https://www.prototypefu
 * **Weight‑based energy model**: Each metric has a tunable weight (`w_cpu_ns`, `w_mem_bytes`, …); the weighted sum is exported as `energy=<fixed‑point‑milliJ>` in each record.
 * **Container aware**: `/proc/energy/cgroup` only shows processes in the caller’s default cgroup; `/proc/energy/all` and `debugfs/.../all` are root‑only.
 * **Low overhead**: Uses RCU look‑ups, rhashtable and per‑CPU workqueue.  Sampling at 100 ms costs <0.3 % CPU on a 16‑core host.
-* **VM**: Works in VMs but accuracy will drop. 
+* **VM**: Works in VMs but accuracy will drop.
 
 ## Requirements
 |             | Minimum | Notes |
@@ -124,10 +125,25 @@ sudo insmod energy_proc.ko w_net_rx_packets=2
 ```
 > Each weight is multiplied by its metric and the sum is exposed as `energy=INT.FRAC` where FRAC has three decimal places (kilo‑scaling).
 
+## Windowing (decoupled sampling vs reporting)
+
+The module runs two independent loops:
+
+- **Sampler** (`sample_ns`): collects and accumulates per-PID metrics at a high frequency.
+- **Window publisher** (`window_ns`): periodically **snapshots** the current accumulated values into `window_*` fields and timestamps them. These snapshots are what `/proc/energy/cgroup` exposes.
+
+This design lets you keep very fast internal sampling while publishing at a slower, steadier secure value to userspace.
+
+### Change window interval **at load time**
+```bash
+sudo insmod energy_proc.ko window_ns=1000000000   # 1 s
+```
+
 ## Reading the Metrics
 * **`/proc/energy/cgroup`** – Metrics for tasks in the caller’s default cgroup (read‑able by unprivileged users).
-* **`/proc/energy/all`** – Same as above but **global**; requires `CAP_SYS_ADMIN` (root) to prevent container escapes.
+* **`/proc/energy/all`** – Prints out all the processes; requires `CAP_SYS_ADMIN` (root) to prevent container escapes.
 * **`/sys/kernel/debug/energy/all`** – Debugfs variant with extra module state; root only.
+* **`/sys/kernel/debug/energy/sys`** – Only the whole system for faster output (only needed for model training)
 
 A single line looks like:
 ```text
@@ -148,6 +164,7 @@ Field               | Meaning
 `rx`, `tx`          | Network packets received / transmitted
 `comm`              | Task name (`TASK_COMM_LEN`)
 
+It is imporant to not that we use pid 0 as the whole system and not the idle process.
 
 ## Data Collection Helper
 The repository ships with **`energy-logger.sh`** which periodically dumps `/proc/energy/all` to disk for offline analysis (e.g. weight regression).
@@ -176,12 +193,12 @@ sudo ./energy-logger.sh
 1) `pip install -r requirements.txt`
 1) `python3 model.py tmp/energy-XXXX.log`
 
-You can then add the weights to your kernel module by 
+You can then add the weights to your kernel module by
 ```bash
 echo 1231232 > /sys/module/energy_proc/parameters/PARAM   # 100 ms
 ```
 
-Please remember that you can not add floats. We use fix decimal values with 3 decimal points. 
+Please remember that you can not add floats. We use fix decimal values with 3 decimal points.
 
 ## Test
 
@@ -199,7 +216,7 @@ sudo ./test.sh
 | Null lines or zeros in `/proc/energy/*`      | Sampling interval set too high?  Confirm `iterations` increases in debugfs. |
 
 ## Contributing
-Patches and 🍻 are welcome! 
+Patches and 🍻 are welcome!
 
 You can either contribute here on GitHub or drop me a message under didi@ribalba.de
 
