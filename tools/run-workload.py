@@ -11,10 +11,17 @@ def run_workload(workload):
     if workload == 'mixed':
         print('Running Workload: Mixed')
         sleep(40)
+        subprocess.check_output(['stress-ng', '-c', '1', '-t', '10'])
+        subprocess.check_output(['stress-ng', '-c', '2', '-t', '10'])
+        subprocess.check_output(['stress-ng', '-c', '5', '-t', '10'])
+        subprocess.check_output(['stress-ng', '-c', '10', '-t', '10'])
+        sleep(10)
         subprocess.check_output(['stress-ng', '--syscall', '1', '-t', '10'])
         subprocess.check_output(['stress-ng', '--syscall', '2', '-t', '10'])
         subprocess.check_output(['stress-ng', '--syscall', '5', '-t', '10'])
         subprocess.check_output(['stress-ng', '--syscall', '10', '-t', '10'])
+        sleep(10)
+
     elif workload == 'idle':
         print('Running Workload: Idle')
         sleep(40)

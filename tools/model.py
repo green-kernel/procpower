@@ -18,6 +18,7 @@ from sklearn.metrics import (
 )
 from sklearn.model_selection import train_test_split, KFold, cross_validate
 from sklearn.metrics import mean_squared_error
+import numpy as np
 
 import statsmodels.formula.api as smf
 
@@ -70,19 +71,31 @@ def parse_monitor_file(path: str | Path):
 
     return pd.DataFrame(rows, columns=["rapl_psys_sum_uj", "cpu_ns", "mem", "instructions", "wakeups", "diski", "disko", "rx", "tx"])
 
-def fit_model(fit, no_validate=False):
+def numerical_stabilization(df, logarithm=False):
+    # computing deltas is mandatory. Otherwise we carry huge bias with us that contains always different amounts of energy
+    df = df.diff()
+    df = df.drop(index=0)
+
+    df['ips'] = (df['instructions'] / df['cpu_ns']).astype('int64') # maybe of use?
+
+
+    if logarithm: # This transformations alters the interpretation as coeffcients are now multiplicative
+        df = df.applymap(lambda x: np.log1p(x) if np.issubdtype(type(x), np.number) else x)
+    else:
+        df = df / 1e3 # helps making OLS cond. a more reliable indicator. Since we only linear transform this change does not influence the results and also does not change the predictors. Just easier to parse and understand the output of summary()
+        # has the problem though of producting singularities ... :/
+
+    return df
+
+def fit_model(df, fit, no_validate=False):
     if fit == 'OLS':
-       return smf.ols(formula="rapl_psys_sum_uj ~ cpu_ns + mem + instructions + wakeups + diski + disko + rx + tx", data=df, missing='raise').fit()
+       return smf.ols(formula="rapl_psys_sum_uj ~ instructions + ips + wakeups + rx + tx", data=df, missing='raise').fit()
 
     elif fit == 'OLS-idle':
        return smf.ols(formula="rapl_psys_sum_uj ~ wakeups", data=df, missing='raise').fit()
 
     elif fit == 'OLS-compute':
-        # Transformation if instructions and time to ISP
-        df['ips'] = (df['instructions'] / df['cpu_ns']).astype('int64')
-
         return smf.ols(formula="rapl_psys_sum_uj ~ instructions", data=df, missing='raise').fit()
-
 
     elif fit == 'OLS-polynomial':
         print('Warning: Current implemented Polynomial transformation is non-sensical. Is just an example how to do it! Needs context aware implementation.')
@@ -91,20 +104,6 @@ def fit_model(fit, no_validate=False):
     elif fit == 'ridge':
         raise NotImplementedError('Ridge is not yet implemented, as it uses SKLearn.')
         model = Ridge(alpha=args.alpha, fit_intercept=True)
-
-def predict(df):
-    raise NotImplementedError()
-
-    X_tr, X_te, y_tr, y_te = train_test_split(
-        X, y, test_size=0.8, random_state=42,
-        shuffle=False # shuffle must be false, as we do not have i.i.d. data
-    )
-
-    model.fit(X_tr, y_tr)
-    y_pred = model.predict(X_te)
-
-    res.predict(exog=dict(x1=x1n))
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Fit model and estimate weights on data from energy‑logger.sh')
@@ -117,7 +116,8 @@ if __name__ == "__main__":
         default='OLS'
     )
     parser.add_argument('--no-validate', action='store_true', help='Do not validate statistical assumptions for model (Should only be used for testing as invalid assumptions can lead to false interpretations)')
-    parser.add_argument('--no-predict', action='store_true', help='Do not check predictive power of the model')
+    parser.add_argument('--predict', help='Supply a logifle to parse to make predictions on')
+    parser.add_argument('--log', action='store_true',  help='Numerically stability the dataframe through logarthmic transformation')
 
 
 
@@ -125,16 +125,43 @@ if __name__ == "__main__":
 
     df = parse_monitor_file(args.logfile)
 
-    # computing deltas is mandatory. Otherwise we carry huge bias with us that contains always different amounts of energy
-    df = df.diff()
-    df = df.drop(index=0)
+    df = numerical_stabilization(df, args.log)
 
     if args.dump_only:
         print(df)
         sys.exit(0)
 
 
-    model = fit_model(args.fit, args.no_validate)
+    model = fit_model(df, args.fit, args.no_validate)
+
+    if not args.no_validate:
+        raise NotImplementedError()
 
     print(model.summary())
 
+    if args.predict:
+        df2 = parse_monitor_file(args.predict)
+
+        df2 = numerical_stabilization(df2, args.log)
+
+        predictions = model.predict(df2)
+
+        # Calculate MAE
+        mae = mean_absolute_error(df2['rapl_psys_sum_uj'], predictions)
+        mape = mean_absolute_percentage_error(df2['rapl_psys_sum_uj'], predictions)
+        r2 = r2_score(df2['rapl_psys_sum_uj'], predictions)
+
+
+        print("MAE:", mae)
+        print("MAPE:", mape)
+        print("R²:", r2)
+
+#        import plotext as plt
+
+#        plt.scatter(df2['rapl_psys_sum_uj'], predictions)
+#        plt.title("Predicted vs Actual")
+#        plt.show()
+
+        errors = abs(df2['rapl_psys_sum_uj'] - predictions)
+        top_errors = df2.iloc[errors.nlargest(10).index]
+        print(top_errors)
