@@ -22,7 +22,7 @@ while : ; do
     sudo cat /sys/kernel/debug/energy/all >> "$LOGFILE"
     echo '-------'                    >> "$LOGFILE"
 
-    sleep 1                         # ≈100 Hz sample rate
+    sleep 0.1                         # ≈100 Hz sample rate
     ((iterations++))
 
     # every 10 s print how many iterations have run so far
