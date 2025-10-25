@@ -651,11 +651,6 @@ static void collect_values(struct work_struct *wk)
     { // This is the system-wide entry
         u64 rx = 0, tx = 0;
 
-        sys_metrics.pid       = 0;
-        strscpy(sys_metrics.comm, "*system*", sizeof(sys_metrics.comm));
-        sys_metrics.is_kernel = 1;
-        sys_metrics.alive     = 1;
-
         sys_metrics.cpu_ns           = sys_cpu_busy_ns();
         sys_metrics.instructions     = sys_instructions_read();
         sys_metrics.wakeups          = sys_wakeups_read();
@@ -833,6 +828,40 @@ static void calculate_window(struct work_struct *wk)
 
 /* ───────────────── /energy/switch debugfs file ──────────────────────── */
 
+static int sys_only_show(struct seq_file *m, void *v)
+{
+    seq_printf(m, "timestamp=%llu\n", ktime_get_ns());
+    seq_printf(m, "iterations=%llu\n", (u64)atomic64_read(&iterations));
+    seq_printf(m, "sample_ns=%llu\n", sample_ns);
+    seq_printf(m, "window_ns=%llu\n", window_ns);
+
+    if (rapl_core_supported)
+        seq_printf(m, "rapl_core_sum_uj=%llu\n", rapl_core.sum);
+    if (rapl_psys_supported)
+        seq_printf(m, "rapl_psys_sum_uj=%llu\n", rapl_psys.sum);
+
+    print_pm(m, &sys_metrics);
+
+    return 0;
+}
+
+static int sys_only_open(struct inode *inode, struct file *file)
+{
+    if (!capable(CAP_SYS_ADMIN)){
+        pr_info(DRV_NAME ": sys-only debug endpoint requires CAP_SYS_ADMIN\n");
+        return -EACCES;
+    }
+    return single_open(file, sys_only_show, NULL);
+}
+
+static const struct file_operations sys_only_fops = {
+    .owner   = THIS_MODULE,
+    .open    = sys_only_open,
+    .read    = seq_read,
+    .llseek  = seq_lseek,
+    .release = single_release,
+};
+
 static int cnt_show(struct seq_file *m, void *v)
 {
     struct rhashtable_iter iter;
@@ -999,6 +1028,13 @@ static int __init pidmetrics_init(void)
     }
 
     pr_info(DRV_NAME ": created /sys/kernel/debug/energy/all\n");
+
+    if (!debugfs_create_file("sys", 0444, dir, NULL, &sys_only_fops)) {
+        ret = -ENOMEM;
+        goto err_debugfs;
+    }
+
+    pr_info(DRV_NAME ": created /sys/kernel/debug/energy/sys\n");
 
     // Procfs setup
     energy_dir = proc_mkdir("energy", NULL);
