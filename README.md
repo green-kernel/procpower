@@ -203,7 +203,7 @@ This model is fitted on the machine power and the machine metrics of the system 
 
 ```bash
 # optionally set sampling before
-echo 100000000 | sudo tee /sys/module/energy_proc/parameters/sample_ns # - @didi ... why?
+echo 99000000 | sudo tee /sys/module/energy_proc/parameters/sample_ns
 
 ## run workload sandwiched between energy logger and start and end
 sudo pkill -f energy-logger.sh
