@@ -80,7 +80,7 @@ def numerical_stabilization(df, logarithm=False):
 
 
     if logarithm: # This transformations alters the interpretation as coeffcients are now multiplicative
-        df = df.applymap(lambda x: np.log1p(x) if np.issubdtype(type(x), np.number) else x)
+        df = df.applymap(lambda x: np.log1p(x) if np.issubdtype(np.array(x).dtype, np.number) else x)
     else:
         df = df / 1e3 # helps making OLS cond. a more reliable indicator. Since we only linear transform this change does not influence the results and also does not change the predictors. Just easier to parse and understand the output of summary()
         # has the problem though of producting singularities ... :/
