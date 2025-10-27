@@ -135,33 +135,39 @@ if __name__ == "__main__":
     model = fit_model(df, args.fit, args.no_validate)
 
     if not args.no_validate:
-        raise NotImplementedError()
+        raise NotImplementedError('Validation of OLS model assumptions currently not implemented. Apply --no-validate for now ...')
 
     print(model.summary())
 
     if args.predict:
         df2 = parse_monitor_file(args.predict)
 
+        # Save the original absolute values for error calculation
+        original_values = df2['rapl_psys_sum_uj'].copy()
+
+        # Apply the same numerical stabilization as training
         df2 = numerical_stabilization(df2, args.log)
 
+        # Predict (these are in delta/log-delta space)
         predictions = model.predict(df2)
 
-        # Calculate MAE
-        mae = mean_absolute_error(df2['rapl_psys_sum_uj'], predictions)
-        mape = mean_absolute_percentage_error(df2['rapl_psys_sum_uj'], predictions)
-        r2 = r2_score(df2['rapl_psys_sum_uj'], predictions)
+        # Reverse log transform if applied
+        if args.log:
+            predictions = np.expm1(predictions)
 
+        # Also diff and Align lengths (diff drops the first row)
+        original_values_diff = original_values.diff().drop(index=0)
+
+        # Calculate MAE, MAPE, R² on absolute energy
+        mae = mean_absolute_error(original_values_diff, predictions)
+        mape = mean_absolute_percentage_error(original_values_diff, predictions)
+        r2 = r2_score(original_values_diff, predictions)
 
         print("MAE:", mae)
         print("MAPE:", mape)
         print("R²:", r2)
 
-#        import plotext as plt
-
-#        plt.scatter(df2['rapl_psys_sum_uj'], predictions)
-#        plt.title("Predicted vs Actual")
-#        plt.show()
-
-        errors = abs(df2['rapl_psys_sum_uj'] - predictions)
+        # Show top errors
+        errors = abs(original_values_diff - predictions)
         top_errors = df2.iloc[errors.nlargest(10).index]
         print(top_errors)
