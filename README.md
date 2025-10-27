@@ -223,9 +223,21 @@ The mixed model is already an approach in this direction, but the more you know 
 
 Run: `$ python model.py LOG_FILE_NAME --fit OLS`
 
+Example on sample data: `python3 model.py --fit OLS ../sample_data/energy_logs/mixed_workload.log --no-validate`
+
 *OLS* is the default model for now.
 
-TODO: Complete documentation here.
+Also you have multiple switches that help with transformation to achieve better numerical stability. Try
+altering the model to use transformed input variables (`--fit OLS-IPS` for instructions per second) or
+try transforming the data as a whole to a new space (`--log` to transform to log space).
+
+### Validating the weights through a prediction
+
+Run: `$ python model.py LOG_FILE_NAME --fit OLS --predict LOG_FILE_NAME_2`
+
+Example on sample data: `python3 model.py --fit OLS ../sample_data/energy_logs/mixed_workload.log --no-validate --predict ../sample_data/energy_logs/mixed_workload_2.log --log`
+
+Here you will get descriptive values like the *R2*, *MAE* and *MAPE* to evalute the goodness of the fit for your machine.
 
 
 ### Adding estimated weights to kernel module
