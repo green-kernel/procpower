@@ -1,173 +1,209 @@
 #!/usr/bin/env python3
 import re
-import os
 import sys
 import argparse
-import subprocess
-import psutil
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
-from time import sleep
-from pathlib import Path
-from sklearn.linear_model import LinearRegression, Ridge
-from sklearn.metrics import (
-    r2_score,
-    mean_squared_error,
-    mean_absolute_error,
-    mean_absolute_percentage_error,
-)
-from sklearn.model_selection import train_test_split, KFold, cross_validate
-from sklearn.metrics import mean_squared_error
-import numpy as np
 
-import statsmodels.formula.api as smf
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score, mean_absolute_error, mean_absolute_percentage_error
+
+import statsmodels.api as sm
 
 def parse_monitor_file(path: str | Path):
-    """Return a list of 'samples', one per timestamp block."""
-    samples = []
-    current = None
+    """Parse logfile into a DataFrame of relevant metrics."""
+    rows = []
 
-    # We do this with a regex to avoid splitting on whitespace which will break if we change the kernel module output format
-    key_val_re = re.compile(r'^([a-zA-Z_]+)=(.+)$')
-
-    pid_re = re.compile(
-        r'^pid=(\d+)\s+'
-        r'energy=(\d+)\s+'
-        r'alive=(\d+)\s+'
-        r'kernel=(\d+)\s+'
-        r'cpu_ns=(\d+)\s+'
-        r'mem=(\d+)\s+'
-        r'instructions=(\d+)\s+'
-        r'wakeups=(\d+)\s+'
-        r'diski=(\d+)\s+'
-        r'disko=(\d+)\s+'
-        r'rx=(\d+)\s+'
-        r'tx=(\d+)\s+'
-        r'comm=(.+)$'
+    pid0_re = re.compile(
+        r"pid=0.*?"
+        r"cpu_ns=(\d+)\s+mem=(\d+)\s+instructions=(\d+)\s+wakeups=(\d+)\s+"
+        r"diski=(\d+)\s+disko=(\d+)\s+rx=(\d+)\s+tx=(\d+)"
     )
 
-    with open(path, encoding='utf-8') as f:
-        data = f.read()
+    with open(path, encoding="utf-8") as f:
+        blocks = [b.strip() for b in f.read().split("-------") if b.strip()]
 
-    blocks = [block.strip() for block in data.split("-------") if block.strip()]
-
-    rows = []
     for block in blocks:
-        rapl_match = re.search(r"rapl_psys_sum_uj=(\d+)", block)
-        pid0_match = re.search(r"pid=0.*?cpu_ns=(\d+)\s+mem=(\d+)\s+instructions=(\d+)\s+wakeups=(\d+)\s+diski=(\d+)\s+disko=(\d+)\s+rx=(\d+)\s+tx=(\d+)", block)
+        rapl = re.search(r"rapl_psys_sum_uj=(\d+)", block)
+        pid0 = pid0_re.search(block)
 
-        if rapl_match and pid0_match:
+        if rapl and pid0:
             rows.append({
-                "rapl_psys_sum_uj": int(rapl_match.group(1)),
-                "cpu_ns": int(pid0_match.group(1)),
-                "mem": int(pid0_match.group(2)),
-                "instructions": int(pid0_match.group(3)),
-                "wakeups": int(pid0_match.group(4)),
-                "diski": int(pid0_match.group(5)),
-                "disko": int(pid0_match.group(6)),
-                "rx": int(pid0_match.group(7)),
-                "tx": int(pid0_match.group(8)),
+                "rapl_psys_sum_uj": int(rapl.group(1)),
+                "cpu_ns": int(pid0.group(1)),
+                "mem": int(pid0.group(2)),
+                "instructions": int(pid0.group(3)),
+                "wakeups": int(pid0.group(4)),
+                "diski": int(pid0.group(5)),
+                "disko": int(pid0.group(6)),
+                "rx": int(pid0.group(7)),
+                "tx": int(pid0.group(8)),
             })
 
-    return pd.DataFrame(rows, columns=["rapl_psys_sum_uj", "cpu_ns", "mem", "instructions", "wakeups", "diski", "disko", "rx", "tx"])
-
-def numerical_stabilization(df, logarithm=False):
-    # computing deltas is mandatory. Otherwise we carry huge bias with us that contains always different amounts of energy
-    df = df.diff()
-    df = df.drop(index=0)
-
-    df['ips'] = (df['instructions'] / df['cpu_ns']).astype('int64') # maybe of use?
+    return pd.DataFrame(rows)
 
 
-    if logarithm: # This transformations alters the interpretation as coeffcients are now multiplicative
-        df = df.applymap(lambda x: np.log1p(x) if np.issubdtype(np.array(x).dtype, np.number) else x)
+
+def fit_statsmodels_ols(X, y, FEATURES, intercept, scaler=None):
+    """Return a statsmodels OLS model for summary purposes."""
+    X_df = pd.DataFrame(X, columns=FEATURES)
+    if intercept:
+        X_df = sm.add_constant(X_df)  # adds intercept as 'const'
+    model = sm.OLS(y, X_df).fit()
+
+    if scaler is not None:
+        beta_scaled = model.params[1:].values  # skip const
+        sigma = scaler.scale_
+        mu = scaler.mean_
+        beta_original = beta_scaled / sigma
+        intercept_original = model.params[0] - np.sum(beta_scaled * mu / sigma)
+
+        params_rescaled = pd.Series([intercept_original, *beta_original], index=model.params.index)
+        model.params_rescaled = params_rescaled
     else:
-        df = df / 1e3 # helps making OLS cond. a more reliable indicator. Since we only linear transform this change does not influence the results and also does not change the predictors. Just easier to parse and understand the output of summary()
-        # has the problem though of producting singularities ... :/
+        model.params_rescaled = model.params.copy()
 
-    return df
 
-def fit_model(df, fit, no_validate=False):
-    if fit == 'OLS':
-       return smf.ols(formula="rapl_psys_sum_uj ~ instructions + ips + wakeups + rx + tx", data=df, missing='raise').fit()
+    return model
 
+
+def fit_sklearn_model(X, y, intercept):
+    """Return sklearn LinearRegression fitted on scaled data."""
+    model = LinearRegression(fit_intercept=intercept)
+    model.fit(X, y)
+    return model
+
+
+def calculate_metrics(y_true, y_pred):
+    mae = mean_absolute_error(y_true, y_pred)
+    mape = mean_absolute_percentage_error(y_true, y_pred)
+    r2 = r2_score(y_true, y_pred)
+    return mae, mape, r2
+
+def select_fit_and_features(df_inner, fit):
+    # add extra features
+    df_inner['ips'] = (df_inner['instructions'] / df_inner['cpu_ns'])
+
+    if fit == 'ridge':
+        raise NotImplementedError('Ridge is not yet implemented, as it uses SKLearn.')
+        #return Ridge(alpha=args.alpha, fit_intercept=True).fit()
+    elif fit == 'OLS':
+        FEATURES = ['instructions', 'wakeups', 'rx', 'tx']
+    elif fit == 'OLS-extra':
+        FEATURES = ['instructions', 'ips', 'wakeups', 'rx', 'tx']
     elif fit == 'OLS-idle':
-       return smf.ols(formula="rapl_psys_sum_uj ~ wakeups", data=df, missing='raise').fit()
-
+        FEATURES = ['wakeups']
     elif fit == 'OLS-compute':
-        return smf.ols(formula="rapl_psys_sum_uj ~ instructions", data=df, missing='raise').fit()
-
+        FEATURES = ['instructions']
     elif fit == 'OLS-polynomial':
         print('Warning: Current implemented Polynomial transformation is non-sensical. Is just an example how to do it! Needs context aware implementation.')
-        return smf.ols(formula="rapl_psys_sum_uj ~ cpu_ns + I(cpu_ns**2) + mem + instructions + wakeups + diski + disko + rx + tx", data=df, missing='raise').fit()
+        df_inner['cpu_ns_squared'] = (df_inner['cpu_ns']**2).astype('int64')
+        FEATURES = ['cpu_ns', 'cpu_ns_squared', 'ips', 'mem', 'instructions', 'wakeups', 'diski', 'disko', 'rx', 'tx']
 
-    elif fit == 'ridge':
-        raise NotImplementedError('Ridge is not yet implemented, as it uses SKLearn.')
-        model = Ridge(alpha=args.alpha, fit_intercept=True)
+    return df_inner, FEATURES
+
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Fit model and estimate weights on data from energy‑logger.sh')
-    parser.add_argument('logfile', help='Logfile of energy-logger to use')
-    parser.add_argument('--dump-only', action='store_true', help='Dump only the parsed data',)
-
+    parser = argparse.ArgumentParser(description="Fit model and estimate weights on energy-logger data")
+    parser.add_argument("logfile", help="Logfile of energy-logger to use")
+    parser.add_argument("--predict", help="Logfile to parse for prediction")
     parser.add_argument("--fit",
-        choices=['OLS', 'OLS-compute', 'OLS-idle', 'OLS-polynomial', 'ridge'],
+        choices=['OLS', 'OLS-extra', 'OLS-compute', 'OLS-idle', 'OLS-polynomial', 'ridge'],
         help='Select model to use for fitting',
         default='OLS'
     )
-    parser.add_argument('--no-validate', action='store_true', help='Do not validate statistical assumptions for model (Should only be used for testing as invalid assumptions can lead to false interpretations)')
-    parser.add_argument('--predict', help='Supply a logifle to parse to make predictions on')
-    parser.add_argument('--log', action='store_true',  help='Numerically stability the dataframe through logarthmic transformation')
-
-
-
+    parser.add_argument("--log", action="store_true", help="Apply log transform. Can improve stability. Will prohibt interpretation of coefficients.")
+    parser.add_argument("--scale", action="store_true", help="Apply standard scaling. Can improve stability.")
+    parser.add_argument("--add-intercept", action="store_true", default=False, help="Use an intercept for the OLS model")
+    parser.add_argument("--dump-raw", action="store_true", help="Dump parsed data")
+    parser.add_argument("--dump-diff", action="store_true", help="Dump parsed and diffed data")
+    parser.add_argument("--dump-predictions", action="store_true", help="Dump predictions")
+    parser.add_argument("--dump-top-errors", action="store_true", help="Dump top errors")
+    parser.add_argument("--no-summary", action="store_true", help="Do not print statsmodels OLS summary")
     args = parser.parse_args()
+
 
     df = parse_monitor_file(args.logfile)
 
-    df = numerical_stabilization(df, args.log)
-
-    if args.dump_only:
+    if args.dump_raw:
         print(df)
-        sys.exit(0)
+
+    df = df.diff().drop(index=0).reset_index(drop=True)
+
+    df, FEATURES = select_fit_and_features(df, args.fit)
+
+    TARGET = 'rapl_psys_sum_uj'
+
+    if args.dump_diff:
+        print(df)
 
 
-    model = fit_model(df, args.fit, args.no_validate)
+    if args.log:
+        df = df.applymap(lambda x: np.log1p(x) if np.issubdtype(type(x), np.number) else x)
 
-    if not args.no_validate:
-        raise NotImplementedError('Validation of OLS model assumptions currently not implemented. Apply --no-validate for now ...')
+    X = df[FEATURES]
+    y = df[TARGET]
 
-    print(model.summary())
+    if X.isna().any().any() or y.isna().any():
+        raise ValueError('NA Values in df found!')
+
+    scaler = None
+    if args.scale:
+        scaler = StandardScaler()
+        X = scaler.fit_transform(X)
+
+    sk_model = fit_sklearn_model(X, y, args.add_intercept)
+
+    # Fit statsmodels OLS only for summary
+
+    sm_model = fit_statsmodels_ols(X, y, FEATURES, args.add_intercept, scaler)
+
+    if not args.no_summary:
+        print(sm_model.summary())
+        print('Rescaled params:\n', sm_model.params_rescaled)
 
     if args.predict:
         df2 = parse_monitor_file(args.predict)
 
-        # Save the original absolute values for error calculation
-        original_values = df2['rapl_psys_sum_uj'].copy()
+        df2 = df2.diff().drop(index=0).reset_index(drop=True)
 
-        # Apply the same numerical stabilization as training
-        df2 = numerical_stabilization(df2, args.log)
+        if args.log:
+            df2 = df2.applymap(lambda x: np.log1p(x) if np.issubdtype(type(x), np.number) else x)
 
-        # Predict (these are in delta/log-delta space)
-        predictions = model.predict(df2)
+        df2, FEATURES = select_fit_and_features(df2, args.fit)
 
-        # Reverse log transform if applied
+        X2 = df2[FEATURES]
+        y2_true = df2[TARGET]
+
+        if X2.isna().any().any() or y2_true.isna().any():
+            raise ValueError('NA Values in Prediction df found!')
+
+        if args.scale:
+            X2 = scaler.transform(df2[FEATURES])
+
+
+        predictions = sk_model.predict(X2)
+
         if args.log:
             predictions = np.expm1(predictions)
 
-        # Also diff and Align lengths (diff drops the first row)
-        original_values_diff = original_values.diff().drop(index=0)
+        if args.dump_predictions:
+            X2_df = pd.DataFrame(X2, columns=FEATURES)
+            y2_df = pd.Series(predictions, name=TARGET)
+            X2_df.insert(0, y2_df.name, y2_df)
 
-        # Calculate MAE, MAPE, R² on absolute energy
-        mae = mean_absolute_error(original_values_diff, predictions)
-        mape = mean_absolute_percentage_error(original_values_diff, predictions)
-        r2 = r2_score(original_values_diff, predictions)
+            print(X2_df)
 
-        print("MAE:", mae)
-        print("MAPE:", mape)
-        print("R²:", r2)
+
+        print("MAE:", mean_absolute_error(y2_true, predictions))
+        print("MAPE:", mean_absolute_percentage_error(y2_true, predictions))
+        print("R²:", r2_score(y2_true, predictions))
 
         # Show top errors
-        errors = abs(original_values_diff - predictions)
-        top_errors = df2.iloc[errors.nlargest(10).index]
-        print(top_errors)
+        if args.dump_top_errors:
+            errors = abs(y2_true - predictions)
+            top_errors = df2.iloc[errors.nlargest(10).index]
+            print(top_errors)
