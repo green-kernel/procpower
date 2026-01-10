@@ -221,9 +221,9 @@ This means it will produce very matching weights for idle workloads if your syst
 But these will not be very fit for compute workloads. So effectively you need to run different workloads and create a mash-up model.
 The mixed model is already an approach in this direction, but the more you know your future workloads, the better the predicitions will be.
 
-Run: `$ python model.py LOG_FILE_NAME --fit OLS`
+Run: `$ python model.py LOG_FILE_NAME --model ols --no-validate`
 
-Example on sample data: `python3 model.py --fit OLS ../sample_data/energy_logs/mixed_workload.log --no-validate`
+Example on sample data: `python3 model.py --model ols ../sample_data/energy_logs/mixed_workload.log --no-validate`
 
 *OLS* is the default model for now.
 
@@ -233,9 +233,9 @@ try transforming the data as a whole to a new space (`--log` to transform to log
 
 ### Validating the weights through a prediction
 
-Run: `$ python model.py LOG_FILE_NAME --fit OLS --predict LOG_FILE_NAME_2`
+Run: `$ python model.py LOG_FILE_NAME --no-validate --model ols --predict LOG_FILE_NAME_2`
 
-Example on sample data: `python3 model.py --fit OLS ../sample_data/energy_logs/mixed_workload.log --no-validate --predict ../sample_data/energy_logs/mixed_workload_2.log --log`
+Example on sample data: `python3 model.py ../sample_data/energy_logs/mixed_workload.log --model ols --no-validate --predict ../sample_data/energy_logs/mixed_workload_2.log --scale`
 
 Here you will get descriptive values like the *R2*, *MAE* and *MAPE* to evalute the goodness of the fit for your machine.
 

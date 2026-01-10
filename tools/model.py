@@ -8,9 +8,10 @@ import numpy as np
 import pandas as pd
 
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, Ridge, HuberRegressor
 from sklearn.metrics import r2_score, mean_absolute_error, mean_absolute_percentage_error
 
+from xgboost import XGBRegressor
 import statsmodels.api as sm
 
 def parse_monitor_file(path: str | Path):
@@ -55,13 +56,26 @@ def fit_statsmodels_ols(X, y, FEATURES, intercept, scaler=None):
     model = sm.OLS(y, X_df).fit()
 
     if scaler is not None:
-        beta_scaled = model.params[1:].values  # skip const
-        sigma = scaler.scale_
-        mu = scaler.mean_
-        beta_original = beta_scaled / sigma
-        intercept_original = model.params[0] - np.sum(beta_scaled * mu / sigma)
+        if intercept:
+            beta_scaled = model.params[1:].values
+            beta_index = model.params.index[1:]
+            intercept_value = model.params.iloc[0]
 
-        params_rescaled = pd.Series([intercept_original, *beta_original], index=model.params.index)
+            sigma = scaler.scale_
+            mu = scaler.mean_
+
+            beta_original = beta_scaled / sigma
+            intercept_uncentered = intercept_value - np.sum(beta_scaled * mu / sigma)
+
+            params_rescaled = pd.Series([intercept_uncentered, *beta_original], index=model.params.index)
+        else:
+            beta_scaled = model.params.values
+            beta_index = model.params.index
+
+            sigma = scaler.scale_
+            beta_original = beta_scaled / sigma
+
+            params_rescaled = pd.Series(beta_original, index=beta_index)
         model.params_rescaled = params_rescaled
     else:
         model.params_rescaled = model.params.copy()
@@ -70,10 +84,30 @@ def fit_statsmodels_ols(X, y, FEATURES, intercept, scaler=None):
     return model
 
 
-def fit_sklearn_model(X, y, intercept):
+def fit_sklearn_model(model_name, X, y, intercept):
     """Return sklearn LinearRegression fitted on scaled data."""
-    model = LinearRegression(fit_intercept=intercept)
+    if model_name == 'ols':
+        model = LinearRegression(fit_intercept=intercept)
+    elif model_name == 'ridge':
+        model = Ridge(alpha=1e6, fit_intercept=intercept)
+    elif model_name == 'huber':
+        # HuberRegressor uses epsilon for outlier sensitivity (default 1.35)
+        model = HuberRegressor(epsilon=1.35, alpha=1e6, fit_intercept=intercept, max_iter=1000)
+    elif model_name == 'xgboost':
+        # XGBRegressor doesn't need fit_intercept; it handles internally
+        model = XGBRegressor(
+            n_estimators=500,
+            learning_rate=0.05,
+            max_depth=3,
+            objective='reg:squarederror',
+            random_state=42,
+            verbosity=0
+        )
+    else:
+        raise ValueError(f"Unknown model supplied: {model}")
+
     model.fit(X, y)
+
     return model
 
 
@@ -83,38 +117,41 @@ def calculate_metrics(y_true, y_pred):
     r2 = r2_score(y_true, y_pred)
     return mae, mape, r2
 
-def select_fit_and_features(df_inner, fit):
+def select_fit_and_features(df_inner, features):
     # add extra features
     df_inner['ips'] = (df_inner['instructions'] / df_inner['cpu_ns'])
 
-    if fit == 'ridge':
-        raise NotImplementedError('Ridge is not yet implemented, as it uses SKLearn.')
-        #return Ridge(alpha=args.alpha, fit_intercept=True).fit()
-    elif fit == 'OLS':
-        FEATURES = ['instructions', 'wakeups', 'rx', 'tx']
-    elif fit == 'OLS-extra':
-        FEATURES = ['instructions', 'ips', 'wakeups', 'rx', 'tx']
-    elif fit == 'OLS-idle':
-        FEATURES = ['wakeups']
-    elif fit == 'OLS-compute':
-        FEATURES = ['instructions']
-    elif fit == 'OLS-polynomial':
+    if features == 'normal':
+        feature_list = ['instructions', 'wakeups', 'rx', 'tx']
+    elif features == 'extra':
+        feature_list = ['instructions', 'ips', 'wakeups', 'rx', 'tx']
+    elif features == 'idle':
+        feature_list = ['wakeups']
+    elif features == 'compute':
+        feature_list = ['instructions']
+    elif features == 'polynomial':
         print('Warning: Current implemented Polynomial transformation is non-sensical. Is just an example how to do it! Needs context aware implementation.')
         df_inner['cpu_ns_squared'] = (df_inner['cpu_ns']**2).astype('int64')
-        FEATURES = ['cpu_ns', 'cpu_ns_squared', 'ips', 'mem', 'instructions', 'wakeups', 'diski', 'disko', 'rx', 'tx']
+        feature_list = ['cpu_ns', 'cpu_ns_squared', 'ips', 'mem', 'instructions', 'wakeups', 'diski', 'disko', 'rx', 'tx']
 
-    return df_inner, FEATURES
+    return df_inner, feature_list
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Fit model and estimate weights on energy-logger data")
     parser.add_argument("logfile", help="Logfile of energy-logger to use")
     parser.add_argument("--predict", help="Logfile to parse for prediction")
-    parser.add_argument("--fit",
-        choices=['OLS', 'OLS-extra', 'OLS-compute', 'OLS-idle', 'OLS-polynomial', 'ridge'],
-        help='Select model to use for fitting',
-        default='OLS'
+    parser.add_argument("--features",
+        choices=['normal', 'extra', 'compute', 'idle', 'polynomial'],
+        help='Select feature set to include for fitting',
+        default='normal'
     )
+    parser.add_argument("--model",
+        choices=['ols', 'xgboost', 'ridge', 'huber', 'xgboost'],
+        help='Select model to use for fitting',
+        default='ols'
+    )
+
     parser.add_argument("--log", action="store_true", help="Apply log transform. Can improve stability. Will prohibt interpretation of coefficients.")
     parser.add_argument("--scale", action="store_true", help="Apply standard scaling. Can improve stability.")
     parser.add_argument("--add-intercept", action="store_true", default=False, help="Use an intercept for the OLS model")
@@ -123,6 +160,7 @@ if __name__ == "__main__":
     parser.add_argument("--dump-predictions", action="store_true", help="Dump predictions")
     parser.add_argument("--dump-top-errors", action="store_true", help="Dump top errors")
     parser.add_argument("--no-summary", action="store_true", help="Do not print statsmodels OLS summary")
+    parser.add_argument("--no-validate", action="store_true", help="Do not validate OLS model assumptions")
     args = parser.parse_args()
 
 
@@ -133,7 +171,7 @@ if __name__ == "__main__":
 
     df = df.diff().drop(index=0).reset_index(drop=True)
 
-    df, FEATURES = select_fit_and_features(df, args.fit)
+    df, FEATURES = select_fit_and_features(df, args.features)
 
     TARGET = 'rapl_psys_sum_uj'
 
@@ -155,15 +193,18 @@ if __name__ == "__main__":
         scaler = StandardScaler()
         X = scaler.fit_transform(X)
 
-    sk_model = fit_sklearn_model(X, y, args.add_intercept)
+    sk_model = fit_sklearn_model(args.model, X, y, args.add_intercept)
 
     # Fit statsmodels OLS only for summary
+    if args.model == 'ols':
+        if not args.no_validate:
+            raise NotImplementedError('Validation is not implented yet. Please use --no-validate for now ...')
 
-    sm_model = fit_statsmodels_ols(X, y, FEATURES, args.add_intercept, scaler)
+        sm_model = fit_statsmodels_ols(X, y, FEATURES, args.add_intercept, scaler)
 
-    if not args.no_summary:
-        print(sm_model.summary())
-        print('Rescaled params:\n', sm_model.params_rescaled)
+        if not args.no_summary:
+            print(sm_model.summary())
+            print('Rescaled params:\n', sm_model.params_rescaled)
 
     if args.predict:
         df2 = parse_monitor_file(args.predict)
@@ -173,7 +214,7 @@ if __name__ == "__main__":
         if args.log:
             df2 = df2.applymap(lambda x: np.log1p(x) if np.issubdtype(type(x), np.number) else x)
 
-        df2, FEATURES = select_fit_and_features(df2, args.fit)
+        df2, FEATURES = select_fit_and_features(df2, args.features)
 
         X2 = df2[FEATURES]
         y2_true = df2[TARGET]
@@ -194,7 +235,6 @@ if __name__ == "__main__":
             X2_df = pd.DataFrame(X2, columns=FEATURES)
             y2_df = pd.Series(predictions, name=TARGET)
             X2_df.insert(0, y2_df.name, y2_df)
-
             print(X2_df)
 
 
