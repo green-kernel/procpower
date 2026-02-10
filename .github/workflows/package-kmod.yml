@@ -1,0 +1,139 @@
+name: Package Kernel Module
+
+on:
+  push:
+
+jobs:
+  ubuntu-deb:
+    name: Build .deb (Ubuntu)
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          set -eux
+          sudo apt-get update
+          sudo apt-get install -y build-essential fakeroot linux-headers-$(uname -r)
+
+      - name: Build kernel module
+        run: |
+          set -eux
+          make -C src
+
+      - name: Build Debian package
+        run: |
+          set -eux
+          VERSION="0.1.${GITHUB_RUN_NUMBER}"
+          ARCH="$(dpkg --print-architecture)"
+          KERNEL_RELEASE="$(uname -r)"
+          PKGROOT="${RUNNER_TEMP}/deb/energy-proc"
+          OUTFILE="${RUNNER_TEMP}/energy-proc_${VERSION}_${ARCH}.deb"
+
+          mkdir -p "${PKGROOT}/DEBIAN" "${PKGROOT}/lib/modules/${KERNEL_RELEASE}/extra"
+          install -m 0644 src/energy_proc.ko "${PKGROOT}/lib/modules/${KERNEL_RELEASE}/extra/energy_proc.ko"
+
+          cat > "${PKGROOT}/DEBIAN/control" <<EOF
+          Package: energy-proc
+          Version: ${VERSION}
+          Section: kernel
+          Priority: optional
+          Architecture: ${ARCH}
+          Maintainer: Didi Hoffmann <didi@ribalba.de>
+          Description: procpower energy_proc kernel module
+          EOF
+
+          cat > "${PKGROOT}/DEBIAN/postinst" <<EOF
+          #!/bin/sh
+          set -e
+          depmod -a ${KERNEL_RELEASE} || true
+          EOF
+
+          cat > "${PKGROOT}/DEBIAN/postrm" <<EOF
+          #!/bin/sh
+          set -e
+          depmod -a ${KERNEL_RELEASE} || true
+          EOF
+
+          chmod 0755 "${PKGROOT}/DEBIAN/postinst" "${PKGROOT}/DEBIAN/postrm"
+          fakeroot dpkg-deb --build "${PKGROOT}" "${OUTFILE}"
+          mkdir -p dist
+          cp "${OUTFILE}" dist/
+
+      - name: Upload Debian artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ubuntu-deb
+          path: dist/*.deb
+          if-no-files-found: error
+
+  fedora-rpm:
+    name: Build .rpm (Fedora)
+    runs-on: ubuntu-24.04
+    container:
+      image: fedora:42
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          set -eux
+          dnf -y update
+          dnf -y install gcc make kernel-devel rpm-build
+
+      - name: Build kernel module against Fedora kernel-devel
+        run: |
+          set -eux
+          KDIR="$(ls -d /usr/src/kernels/* | head -n1)"
+          make -C src KDIR="${KDIR}"
+
+      - name: Build RPM package
+        run: |
+          set -eux
+          VERSION="0.1.${GITHUB_RUN_NUMBER}"
+          RELEASE="1"
+          TOPDIR="${HOME}/rpmbuild"
+          KDIR="$(ls -d /usr/src/kernels/* | head -n1)"
+          KERNEL_RELEASE="$(basename "${KDIR}")"
+
+          mkdir -p "${TOPDIR}/"{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
+          cp src/energy_proc.ko "${TOPDIR}/SOURCES/energy_proc.ko"
+
+          cat > "${TOPDIR}/SPECS/energy-proc.spec" <<EOF
+          Name:           energy-proc
+          Version:        ${VERSION}
+          Release:        ${RELEASE}%{?dist}
+          Summary:        procpower energy_proc kernel module
+          License:        AGPL-3.0-or-later
+          BuildArch:      x86_64
+          Source0:        energy_proc.ko
+
+          %description
+          energy_proc kernel module package.
+
+          %prep
+
+          %build
+
+          %install
+          mkdir -p %{buildroot}/lib/modules/${KERNEL_RELEASE}/extra
+          install -m 0644 %{SOURCE0} %{buildroot}/lib/modules/${KERNEL_RELEASE}/extra/energy_proc.ko
+
+          %files
+          /lib/modules/${KERNEL_RELEASE}/extra/energy_proc.ko
+          EOF
+
+          rpmbuild -bb "${TOPDIR}/SPECS/energy-proc.spec" --define "_topdir ${TOPDIR}"
+          mkdir -p dist
+          find "${TOPDIR}/RPMS" -name '*.rpm' -exec cp {} dist/ \;
+
+      - name: Upload RPM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fedora-rpm
+          path: dist/*.rpm
+          if-no-files-found: error
