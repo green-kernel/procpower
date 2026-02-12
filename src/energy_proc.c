@@ -12,6 +12,7 @@
 #include <net/sock.h>
 #include <linux/init.h>
 #include <linux/sched.h>
+#include <linux/sched/signal.h>
 #include <linux/ktime.h>
 #include <linux/rhashtable.h>
 #include <linux/slab.h>
@@ -144,6 +145,16 @@ struct pid_metrics {
     unsigned long       last_seen;
     struct perf_event   *insn_evt;
     struct rcu_head     rcu;
+};
+
+struct missing_pid {
+    u32 tgid;
+    struct list_head node;
+};
+
+struct stale_pid {
+    struct pid_metrics *pm;
+    struct list_head node;
 };
 
 static const struct rhashtable_params ht_params = {
@@ -530,16 +541,71 @@ static u64 energy_model(const struct pid_metrics *e)
 
 /* ───────────────── Misc helpers ─────────────────────────────────────── */
 
-static bool pid_still_alive(u32 pid)
+static struct task_struct *get_task_by_tgid(u32 tgid)
 {
-    bool alive;
+    struct task_struct *task;
 
     rcu_read_lock();
-    struct task_struct *p = pid_task(find_vpid(pid), PIDTYPE_PID);
-    alive = p && pid_alive(p);
+    task = pid_task(find_vpid(tgid), PIDTYPE_TGID);
+    if (task)
+        get_task_struct(task);
     rcu_read_unlock();
 
-    return alive;
+    return task;
+}
+
+static int ensure_pid_entry(u32 tgid)
+{
+    struct pid_metrics *pm;
+    struct task_struct *task;
+
+    rcu_read_lock();
+    pm = rhashtable_lookup_fast(&pid_ht, &tgid, ht_params);
+    rcu_read_unlock();
+    if (pm)
+        return 0;
+
+    task = get_task_by_tgid(tgid);
+    if (!task)
+        return -ESRCH;
+
+    pm = kmem_cache_zalloc(pm_cache, GFP_KERNEL);
+    if (!pm) {
+        put_task_struct(task);
+        return -ENOMEM;
+    }
+
+    pm->pid = tgid;
+    get_task_comm(pm->comm, task);
+    pm->is_kernel = (task->flags & PF_KTHREAD) || !task->mm;
+    pm->alive = 1;
+    pm->last_seen = jiffies;
+
+    if (rhashtable_insert_fast(&pid_ht, &pm->node, ht_params)) {
+        kmem_cache_free(pm_cache, pm);
+        put_task_struct(task);
+        return -EEXIST;
+    }
+
+    if (pmu_supported) {
+        struct perf_event_attr attr = {
+            .type       = PERF_TYPE_HARDWARE,
+            .config     = PERF_COUNT_HW_INSTRUCTIONS,
+            .size       = sizeof(attr),
+            .disabled   = 1,
+            .exclude_hv = 1,
+            .inherit    = 1,
+        };
+
+        pm->insn_evt = perf_event_create_kernel_counter(&attr, -1, task, NULL, NULL);
+        if (!IS_ERR(pm->insn_evt))
+            perf_event_enable(pm->insn_evt);
+        else
+            pm->insn_evt = NULL;
+    }
+
+    put_task_struct(task);
+    return 0;
 }
 
 // We keep this if we want to revert to fixed point representation
@@ -644,6 +710,13 @@ static void collect_values(struct work_struct *wk)
 
     struct delayed_work *dw = to_delayed_work(wk);
     struct task_struct *p, *t;
+    struct rhashtable_iter iter;
+    struct pid_metrics *it;
+    struct missing_pid *missing, *missing_tmp;
+    struct stale_pid *stale, *stale_tmp;
+    LIST_HEAD(missing_pids);
+    LIST_HEAD(stale_pids);
+    LIST_HEAD(removed_pids);
 
     rapl_sample_once();
 
@@ -662,54 +735,65 @@ static void collect_values(struct work_struct *wk)
         sys_metrics.mem_bytes        = sys_mapped_mem_bytes_read();
     }
 
-    /* iterate tasks */
-    for_each_process_thread(p, t) {
+    /* discover tasks that do not have a pid entry yet */
+    rcu_read_lock();
+    for_each_process(p) {
+        u32 tgid = task_tgid_nr(p);
+        struct pid_metrics *pm;
 
-        rcu_read_lock();
+        pm = rhashtable_lookup_fast(&pid_ht, &tgid, ht_params);
+        if (pm)
+            continue;
+
+        missing = kmalloc(sizeof(*missing), GFP_ATOMIC);
+        if (!missing)
+            continue;
+
+        missing->tgid = tgid;
+        list_add_tail(&missing->node, &missing_pids);
+    }
+    rcu_read_unlock();
+
+    list_for_each_entry_safe(missing, missing_tmp, &missing_pids, node) {
+        ensure_pid_entry(missing->tgid);
+        list_del(&missing->node);
+        kfree(missing);
+    }
+
+    /* reset snapshot fields before rebuilding them from cumulative kernel stats */
+    rhashtable_walk_enter(&pid_ht, &iter);
+    rhashtable_walk_start(&iter);
+    while ((it = rhashtable_walk_next(&iter))) {
+        if (IS_ERR(it)) {
+            if (PTR_ERR(it) == -EAGAIN)
+                continue;
+            break;
+        }
+        it->alive = 0;
+        it->cpu_ns = 0;
+        it->wakeups = 0;
+        it->disk_read_bytes = 0;
+        it->disk_write_bytes = 0;
+        it->mem_bytes = 0;
+    }
+    rhashtable_walk_stop(&iter);
+    rhashtable_walk_exit(&iter);
+
+    /* aggregate per-thread cumulative counters into process-level totals */
+    rcu_read_lock();
+    for_each_process_thread(p, t) {
         u32 tgid = task_tgid_nr(t);
         struct pid_metrics *pm;
 
         pm = rhashtable_lookup_fast(&pid_ht, &tgid, ht_params);
-
-        if (!pm) {
-            pm = kmem_cache_zalloc(pm_cache, GFP_KERNEL);
-            if (!pm)
-                continue;
-
-            pm->pid = tgid;
-            get_task_comm(pm->comm, p);
-
-            if (rhashtable_insert_fast(&pid_ht, &pm->node, ht_params)) {
-                kmem_cache_free(pm_cache, pm);
-                continue;
-            }
-
-            if (pmu_supported) {
-                struct perf_event_attr attr = {
-                    .type       = PERF_TYPE_HARDWARE,
-                    .config     = PERF_COUNT_HW_INSTRUCTIONS,
-                    .size       = sizeof(attr),
-                    .disabled   = 1,
-                    .exclude_hv = 1,
-                    .inherit    = 1,
-                };
-                pm->insn_evt =
-                    perf_event_create_kernel_counter(
-                            &attr, -1, p,
-                            NULL, NULL);
-                if (!IS_ERR(pm->insn_evt))
-                    perf_event_enable(pm->insn_evt);
-                else
-                    pm->insn_evt = NULL;
-            }
-            pm->is_kernel = (p->flags & PF_KTHREAD) || !p->mm;
-        }
+        if (!pm)
+            continue;
 
 
         /* collect metrics */
         pm->alive            = 1;
         pm->last_seen        = jiffies;
-        pm->cpu_ns           += t->se.sum_exec_runtime;
+        pm->cpu_ns          += t->se.sum_exec_runtime;
 
         #ifdef CONFIG_SCHEDSTATS
             pm->wakeups          += t->stats.nr_wakeups;
@@ -724,28 +808,35 @@ static void collect_values(struct work_struct *wk)
             pm->disk_read_bytes  = 0;
             pm->disk_write_bytes = 0;
         #endif
-
-        rcu_read_unlock();
     }
+    rcu_read_unlock();
 
+    /* snapshot memory via process leaders */
+    rhashtable_walk_enter(&pid_ht, &iter);
+    rhashtable_walk_start(&iter);
+    while ((it = rhashtable_walk_next(&iter))) {
+        struct task_struct *task;
+        struct mm_struct *mm;
 
-    for_each_process(p) {
-        u32 tgid = task_tgid_nr(p);
-        struct pid_metrics *pm;
-        rcu_read_lock();
-        pm = rhashtable_lookup_fast(&pid_ht, &tgid, ht_params);
-        rcu_read_unlock();
-        if (!pm) continue;
+        if (IS_ERR(it)) {
+            if (PTR_ERR(it) == -EAGAIN)
+                continue;
+            break;
+        }
 
-        struct mm_struct *mm = get_task_mm(p);
-        if (mm) { pm->mem_bytes = (u64)get_mm_rss(mm) << PAGE_SHIFT; mmput(mm); }
-        else     pm->mem_bytes = 0;
+        task = get_task_by_tgid(it->pid);
+        if (!task)
+            continue;
+
+        mm = get_task_mm(task);
+        if (mm) {
+            it->mem_bytes = (u64)get_mm_rss(mm) << PAGE_SHIFT;
+            mmput(mm);
+        }
+        put_task_struct(task);
     }
-
-    /* lazy eviction */
-    struct rhashtable_iter iter;
-    struct pid_metrics *it;
-
+    rhashtable_walk_stop(&iter);
+    rhashtable_walk_exit(&iter);
 
     /* Instructions: read once from the process’ perf event */
     rhashtable_walk_enter(&pid_ht, &iter);
@@ -765,7 +856,7 @@ static void collect_values(struct work_struct *wk)
     rhashtable_walk_stop(&iter);
     rhashtable_walk_exit(&iter);
 
-
+    /* evict stale pids that no longer exist */
     rhashtable_walk_enter(&pid_ht, &iter);
     rhashtable_walk_start(&iter);
     while ((it = rhashtable_walk_next(&iter))) {
@@ -774,12 +865,36 @@ static void collect_values(struct work_struct *wk)
                 continue;
             break;
         }
-        if (it && !pid_still_alive(it->pid)){
-            it->alive = 0;
+        if (it && !it->alive) {
+            stale = kmalloc(sizeof(*stale), GFP_KERNEL);
+            if (!stale)
+                continue;
+            stale->pm = it;
+            list_add_tail(&stale->node, &stale_pids);
         }
     }
     rhashtable_walk_stop(&iter);
     rhashtable_walk_exit(&iter);
+
+    list_for_each_entry_safe(stale, stale_tmp, &stale_pids, node) {
+        if (!rhashtable_remove_fast(&pid_ht, &stale->pm->node, ht_params))
+            list_move_tail(&stale->node, &removed_pids);
+        else {
+            list_del(&stale->node);
+            kfree(stale);
+        }
+    }
+
+    if (!list_empty(&removed_pids))
+        synchronize_rcu();
+
+    list_for_each_entry_safe(stale, stale_tmp, &removed_pids, node) {
+        if (stale->pm->insn_evt)
+            perf_event_release_kernel(stale->pm->insn_evt);
+        kmem_cache_free(pm_cache, stale->pm);
+        list_del(&stale->node);
+        kfree(stale);
+    }
 
     queue_delayed_work(pm_wq, dw, nsecs_to_jiffies(sample_ns));
 }
@@ -941,12 +1056,13 @@ static int cgroup_energy_show(struct seq_file *m, void *v){
     cg_get_name(cgrp, cgname, sizeof(cgname));
     //seq_printf(m, "cgroup: %s\n", cgname);
 
-    struct task_struct *p, *t;
+    struct task_struct *p;
 
     rcu_read_lock();
-    for_each_process_thread(p, t) {
-        if (task_dfl_cgroup(t) == cgrp){
-            struct pid_metrics *pm = rhashtable_lookup_fast(&pid_ht, &t->pid, ht_params);
+    for_each_process(p) {
+        if (task_dfl_cgroup(p) == cgrp){
+            u32 tgid = task_tgid_nr(p);
+            struct pid_metrics *pm = rhashtable_lookup_fast(&pid_ht, &tgid, ht_params);
             if (pm && READ_ONCE(pm->alive)){
                 print_pm_window(m, pm);
             }
@@ -1017,21 +1133,32 @@ static int __init pidmetrics_init(void)
 
     // Debugfs setup that just dumps everything. This is only accessible by root!
     dir = debugfs_create_dir("energy", NULL);
-    if (!dir) {
-        ret = -ENOMEM;
+    if (IS_ERR_OR_NULL(dir)) {
+        ret = IS_ERR(dir) ? PTR_ERR(dir) : -ENOMEM;
+        dir = NULL;
         goto err_trace;
     }
 
-    if (!debugfs_create_file("all", 0444, dir, NULL, &cnt_fops)) {
-        ret = -ENOMEM;
-        goto err_debugfs;
+    {
+        struct dentry *entry;
+
+        entry = debugfs_create_file("all", 0444, dir, NULL, &cnt_fops);
+        if (IS_ERR_OR_NULL(entry)) {
+            ret = IS_ERR(entry) ? PTR_ERR(entry) : -ENOMEM;
+            goto err_debugfs;
+        }
     }
 
     pr_info(DRV_NAME ": created /sys/kernel/debug/energy/all\n");
 
-    if (!debugfs_create_file("sys", 0444, dir, NULL, &sys_only_fops)) {
-        ret = -ENOMEM;
-        goto err_debugfs;
+    {
+        struct dentry *entry;
+
+        entry = debugfs_create_file("sys", 0444, dir, NULL, &sys_only_fops);
+        if (IS_ERR_OR_NULL(entry)) {
+            ret = IS_ERR(entry) ? PTR_ERR(entry) : -ENOMEM;
+            goto err_debugfs;
+        }
     }
 
     pr_info(DRV_NAME ": created /sys/kernel/debug/energy/sys\n");
@@ -1104,6 +1231,7 @@ err_ht:
     rhashtable_destroy(&pid_ht);
 err_cache:
     kmem_cache_destroy(pm_cache);
+    sys_pmu_exit();
     return ret;
 }
 
@@ -1137,6 +1265,8 @@ static void __exit pidmetrics_exit(void)
     proc_remove(energy_dir);
 
     rhashtable_free_and_destroy(&pid_ht, free_pm, NULL);
+    rcu_barrier();
+    kmem_cache_destroy(pm_cache);
     pr_info(DRV_NAME ": unloaded. Bye!\n");
 }
 
