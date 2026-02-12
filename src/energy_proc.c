@@ -32,6 +32,7 @@
 #include <linux/printk.h>
 #include <asm/msr.h>
 #include <asm/msr-index.h>
+#include <linux/bitops.h>
 #include <linux/cpumask.h>
 #include <linux/cgroup.h>
 #include <linux/proc_fs.h>
@@ -46,6 +47,14 @@
 
 #define DRV_NAME    "energy_proc"
 #define PM_LINE_MAX 256
+
+#define ENERGY_CPU_NS_UNIT      1000000ULL      /* 1 ms */
+#define ENERGY_MEM_BYTES_UNIT   (1ULL << 20)    /* 1 MiB */
+#define ENERGY_INSTR_UNIT       1000000ULL      /* 1M instructions */
+#define ENERGY_WAKEUPS_UNIT     1ULL
+#define ENERGY_DISK_BYTES_UNIT  4096ULL         /* 4 KiB */
+#define ENERGY_NET_PKTS_UNIT    1ULL
+#define NL_LUT_BINS             8
 
 #ifndef CGROUP_NAME_LEN
 #define CGROUP_NAME_LEN 128
@@ -73,6 +82,19 @@ static u64 w_disk_read_bytes  = 0;
 static u64 w_disk_write_bytes = 0;
 static u64 w_net_rx_packets   = 0;
 static u64 w_net_tx_packets   = 0;
+static unsigned long long w_sys_idle_uj = 0;
+static unsigned long long nl_cpu_lut_pmil[NL_LUT_BINS] = {
+    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000
+};
+static unsigned long long nl_mem_lut_pmil[NL_LUT_BINS] = {
+    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000
+};
+static unsigned long long nl_disk_lut_pmil[NL_LUT_BINS] = {
+    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000
+};
+static unsigned long long nl_net_lut_pmil[NL_LUT_BINS] = {
+    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000
+};
 
 #define ENERGY_PARAM(_name)                                  \
     module_param(_name, ullong, 0644);                       \
@@ -86,6 +108,16 @@ ENERGY_PARAM(w_disk_read_bytes)
 ENERGY_PARAM(w_disk_write_bytes)
 ENERGY_PARAM(w_net_rx_packets)
 ENERGY_PARAM(w_net_tx_packets)
+ENERGY_PARAM(w_sys_idle_uj)
+
+module_param_array(nl_cpu_lut_pmil, ullong, NULL, 0644);
+MODULE_PARM_DESC(nl_cpu_lut_pmil, "CPU nonlinear per-bin multipliers in permille for window model");
+module_param_array(nl_mem_lut_pmil, ullong, NULL, 0644);
+MODULE_PARM_DESC(nl_mem_lut_pmil, "Memory nonlinear per-bin multipliers in permille for window model");
+module_param_array(nl_disk_lut_pmil, ullong, NULL, 0644);
+MODULE_PARM_DESC(nl_disk_lut_pmil, "Disk nonlinear per-bin multipliers in permille for window model");
+module_param_array(nl_net_lut_pmil, ullong, NULL, 0644);
+MODULE_PARM_DESC(nl_net_lut_pmil, "Network nonlinear per-bin multipliers in permille for window model");
 
 #undef ENERGY_PARAM
 
@@ -139,6 +171,14 @@ struct pid_metrics {
     u64 window_mem_bytes;
     u64 window_energy_uj;
     u64 window_timestamp_ns;
+    bool window_ready;
+    u64 prev_cpu_ns;
+    u64 prev_instructions;
+    u64 prev_wakeups;
+    u64 prev_disk_read_bytes;
+    u64 prev_disk_write_bytes;
+    u64 prev_net_rx_packets;
+    u64 prev_net_tx_packets;
 
     /* internals */
     struct rhash_head   node;
@@ -523,19 +563,110 @@ static int kp_sock_recvmsg_ret(struct kretprobe_instance *ri,
 
 static u64 energy_model(const struct pid_metrics *e)
 {
-
+    u64 rx_packets = (u64)atomic64_read(&e->net_rx_packets);
+    u64 tx_packets = (u64)atomic64_read(&e->net_tx_packets);
     u64 score = 0;
 
-    score += e->cpu_ns                            * w_cpu_ns;
-    score += e->mem_bytes                         * w_mem_bytes;
-    score += (pmu_supported ? e->instructions : 0) * w_instructions;
-    score += e->wakeups                           * w_wakeups;
-    score += e->disk_read_bytes                   * w_disk_read_bytes;
-    score += e->disk_write_bytes                  * w_disk_write_bytes;
-    score += (u64)atomic64_read(&e->net_rx_packets)    * w_net_rx_packets;
-    score += (u64)atomic64_read(&e->net_tx_packets)    * w_net_tx_packets;
+    /* Legacy cumulative view for debug/all output */
+    score += div_u64(e->cpu_ns, ENERGY_CPU_NS_UNIT) * w_cpu_ns;
+    score += div_u64(e->mem_bytes, ENERGY_MEM_BYTES_UNIT) * w_mem_bytes;
+    score += div_u64((pmu_supported ? e->instructions : 0), ENERGY_INSTR_UNIT) * w_instructions;
+    score += div_u64(e->wakeups, ENERGY_WAKEUPS_UNIT) * w_wakeups;
+    score += div_u64(e->disk_read_bytes, ENERGY_DISK_BYTES_UNIT) * w_disk_read_bytes;
+    score += div_u64(e->disk_write_bytes, ENERGY_DISK_BYTES_UNIT) * w_disk_write_bytes;
+    score += div_u64(rx_packets, ENERGY_NET_PKTS_UNIT) * w_net_rx_packets;
+    score += div_u64(tx_packets, ENERGY_NET_PKTS_UNIT) * w_net_tx_packets;
 
     return score;
+}
+
+static inline u64 u64_delta(u64 now, u64 prev)
+{
+    return now >= prev ? now - prev : 0;
+}
+
+struct energy_window_parts {
+    u64 cpu;
+    u64 mem;
+    u64 disk;
+    u64 net;
+};
+
+static void energy_model_window_parts(const struct pid_metrics *e, struct energy_window_parts *parts)
+{
+    parts->cpu = 0;
+    parts->mem = 0;
+    parts->disk = 0;
+    parts->net = 0;
+
+    parts->cpu += div_u64(e->window_cpu_ns, ENERGY_CPU_NS_UNIT) * w_cpu_ns;
+    parts->cpu += div_u64((pmu_supported ? e->window_instructions : 0), ENERGY_INSTR_UNIT) * w_instructions;
+    parts->cpu += div_u64(e->window_wakeups, ENERGY_WAKEUPS_UNIT) * w_wakeups;
+
+    parts->mem += div_u64(e->window_mem_bytes, ENERGY_MEM_BYTES_UNIT) * w_mem_bytes;
+
+    parts->disk += div_u64(e->window_disk_read_bytes, ENERGY_DISK_BYTES_UNIT) * w_disk_read_bytes;
+    parts->disk += div_u64(e->window_disk_write_bytes, ENERGY_DISK_BYTES_UNIT) * w_disk_write_bytes;
+
+    parts->net += div_u64(e->window_net_rx_packets, ENERGY_NET_PKTS_UNIT) * w_net_rx_packets;
+    parts->net += div_u64(e->window_net_tx_packets, ENERGY_NET_PKTS_UNIT) * w_net_tx_packets;
+}
+
+static unsigned int cpu_util_bin(u64 cpu_ns_delta, u64 period_ns)
+{
+    u64 util_permille;
+    unsigned int bin;
+
+    if (!period_ns)
+        return 0;
+
+    util_permille = div_u64(cpu_ns_delta * 1000ULL, period_ns);
+    if (util_permille > 1000ULL)
+        util_permille = 1000ULL;
+
+    bin = (unsigned int)div_u64(util_permille * NL_LUT_BINS, 1001ULL);
+    if (bin >= NL_LUT_BINS)
+        bin = NL_LUT_BINS - 1;
+
+    return bin;
+}
+
+static unsigned int activity_bin_log2(u64 activity_units)
+{
+    unsigned int pos;
+
+    if (!activity_units)
+        return 0;
+
+    pos = fls64(activity_units) - 1;
+    if (pos >= NL_LUT_BINS)
+        pos = NL_LUT_BINS - 1;
+    return pos;
+}
+
+static u64 energy_model_window(const struct pid_metrics *e, bool include_system_idle)
+{
+    struct energy_window_parts parts;
+    u64 mem_mib = div_u64(e->window_mem_bytes, ENERGY_MEM_BYTES_UNIT);
+    u64 disk_4k = div_u64(e->window_disk_read_bytes + e->window_disk_write_bytes, ENERGY_DISK_BYTES_UNIT);
+    u64 net_pkts = e->window_net_rx_packets + e->window_net_tx_packets;
+    unsigned int cpu_bin = cpu_util_bin(e->window_cpu_ns, window_ns);
+    unsigned int mem_bin = activity_bin_log2(mem_mib);
+    unsigned int disk_bin = activity_bin_log2(disk_4k);
+    unsigned int net_bin = activity_bin_log2(net_pkts);
+    u64 scaled = 0;
+
+    energy_model_window_parts(e, &parts);
+
+    scaled += div_u64(parts.cpu * nl_cpu_lut_pmil[cpu_bin], 1000ULL);
+    scaled += div_u64(parts.mem * nl_mem_lut_pmil[mem_bin], 1000ULL);
+    scaled += div_u64(parts.disk * nl_disk_lut_pmil[disk_bin], 1000ULL);
+    scaled += div_u64(parts.net * nl_net_lut_pmil[net_bin], 1000ULL);
+
+    if (include_system_idle)
+        scaled += w_sys_idle_uj;
+
+    return scaled;
 }
 
 
@@ -905,38 +1036,91 @@ static void calculate_window(struct work_struct *wk)
 
     struct rhashtable_iter iter;
     struct pid_metrics *it;
+    u64 now_ns = ktime_get_ns();
 
     rhashtable_walk_enter(&pid_ht, &iter);
     rhashtable_walk_start(&iter);
-    while ((it = rhashtable_walk_next(&iter)) && !IS_ERR(it)){
+    while ((it = rhashtable_walk_next(&iter))) {
+        if (IS_ERR(it)) {
+            if (PTR_ERR(it) == -EAGAIN)
+                continue;
+            break;
+        }
         if (it->alive == 1){
-            it->window_cpu_ns          = it->cpu_ns;
-            it->window_instructions    = it->instructions;
-            it->window_wakeups         = it->wakeups;
-            it->window_mem_bytes       = it->mem_bytes;
-            it->window_disk_read_bytes = it->disk_read_bytes;
-            it->window_disk_write_bytes= it->disk_write_bytes;
-            it->window_net_rx_packets  = (u64)atomic64_read(&it->net_rx_packets);
-            it->window_net_tx_packets  = (u64)atomic64_read(&it->net_tx_packets);
+            u64 cur_rx = (u64)atomic64_read(&it->net_rx_packets);
+            u64 cur_tx = (u64)atomic64_read(&it->net_tx_packets);
 
-            it->window_energy_uj       = energy_model(it);
-            it->window_timestamp_ns    = ktime_get_ns();
+            if (!it->window_ready) {
+                it->window_cpu_ns = 0;
+                it->window_instructions = 0;
+                it->window_wakeups = 0;
+                it->window_disk_read_bytes = 0;
+                it->window_disk_write_bytes = 0;
+                it->window_net_rx_packets = 0;
+                it->window_net_tx_packets = 0;
+                it->window_ready = true;
+            } else {
+                it->window_cpu_ns = u64_delta(it->cpu_ns, it->prev_cpu_ns);
+                it->window_instructions = u64_delta(it->instructions, it->prev_instructions);
+                it->window_wakeups = u64_delta(it->wakeups, it->prev_wakeups);
+                it->window_disk_read_bytes = u64_delta(it->disk_read_bytes, it->prev_disk_read_bytes);
+                it->window_disk_write_bytes = u64_delta(it->disk_write_bytes, it->prev_disk_write_bytes);
+                it->window_net_rx_packets = u64_delta(cur_rx, it->prev_net_rx_packets);
+                it->window_net_tx_packets = u64_delta(cur_tx, it->prev_net_tx_packets);
+            }
+
+            it->window_mem_bytes = it->mem_bytes;
+
+            it->prev_cpu_ns = it->cpu_ns;
+            it->prev_instructions = it->instructions;
+            it->prev_wakeups = it->wakeups;
+            it->prev_disk_read_bytes = it->disk_read_bytes;
+            it->prev_disk_write_bytes = it->disk_write_bytes;
+            it->prev_net_rx_packets = cur_rx;
+            it->prev_net_tx_packets = cur_tx;
+
+            it->window_energy_uj = energy_model_window(it, false);
+            it->window_timestamp_ns = now_ns;
         }
     }
     rhashtable_walk_stop(&iter);
     rhashtable_walk_exit(&iter);
 
 
-    sys_metrics.window_cpu_ns           = sys_metrics.cpu_ns;
-    sys_metrics.window_instructions     = sys_metrics.instructions;
-    sys_metrics.window_wakeups          = sys_metrics.wakeups;
-    sys_metrics.window_mem_bytes        = sys_metrics.mem_bytes;
-    sys_metrics.window_disk_read_bytes  = sys_metrics.disk_read_bytes;
-    sys_metrics.window_disk_write_bytes = sys_metrics.disk_write_bytes;
-    sys_metrics.window_net_rx_packets   = (u64)atomic64_read(&sys_metrics.net_rx_packets);
-    sys_metrics.window_net_tx_packets   = (u64)atomic64_read(&sys_metrics.net_tx_packets);
-    sys_metrics.window_energy_uj        = energy_model(&sys_metrics);
-    sys_metrics.window_timestamp_ns     = ktime_get_ns();
+    {
+        u64 cur_rx = (u64)atomic64_read(&sys_metrics.net_rx_packets);
+        u64 cur_tx = (u64)atomic64_read(&sys_metrics.net_tx_packets);
+
+        if (!sys_metrics.window_ready) {
+            sys_metrics.window_cpu_ns = 0;
+            sys_metrics.window_instructions = 0;
+            sys_metrics.window_wakeups = 0;
+            sys_metrics.window_disk_read_bytes = 0;
+            sys_metrics.window_disk_write_bytes = 0;
+            sys_metrics.window_net_rx_packets = 0;
+            sys_metrics.window_net_tx_packets = 0;
+            sys_metrics.window_ready = true;
+        } else {
+            sys_metrics.window_cpu_ns = u64_delta(sys_metrics.cpu_ns, sys_metrics.prev_cpu_ns);
+            sys_metrics.window_instructions = u64_delta(sys_metrics.instructions, sys_metrics.prev_instructions);
+            sys_metrics.window_wakeups = u64_delta(sys_metrics.wakeups, sys_metrics.prev_wakeups);
+            sys_metrics.window_disk_read_bytes = u64_delta(sys_metrics.disk_read_bytes, sys_metrics.prev_disk_read_bytes);
+            sys_metrics.window_disk_write_bytes = u64_delta(sys_metrics.disk_write_bytes, sys_metrics.prev_disk_write_bytes);
+            sys_metrics.window_net_rx_packets = u64_delta(cur_rx, sys_metrics.prev_net_rx_packets);
+            sys_metrics.window_net_tx_packets = u64_delta(cur_tx, sys_metrics.prev_net_tx_packets);
+        }
+
+        sys_metrics.window_mem_bytes = sys_metrics.mem_bytes;
+        sys_metrics.prev_cpu_ns = sys_metrics.cpu_ns;
+        sys_metrics.prev_instructions = sys_metrics.instructions;
+        sys_metrics.prev_wakeups = sys_metrics.wakeups;
+        sys_metrics.prev_disk_read_bytes = sys_metrics.disk_read_bytes;
+        sys_metrics.prev_disk_write_bytes = sys_metrics.disk_write_bytes;
+        sys_metrics.prev_net_rx_packets = cur_rx;
+        sys_metrics.prev_net_tx_packets = cur_tx;
+        sys_metrics.window_energy_uj = energy_model_window(&sys_metrics, true);
+        sys_metrics.window_timestamp_ns = now_ns;
+    }
 
     queue_delayed_work(win_wq, dw, nsecs_to_jiffies(window_ns));
 }
