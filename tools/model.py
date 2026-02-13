@@ -223,19 +223,30 @@ def gather_rows(paths: Iterable[Path], mode: str, min_target_uj: float) -> pd.Da
     return pd.concat(rows, ignore_index=True)
 
 
-def split_time(df: pd.DataFrame, test_frac: float) -> tuple[pd.DataFrame, pd.DataFrame]:
+def split_random(df: pd.DataFrame, test_frac: float, seed: int) -> tuple[pd.DataFrame, pd.DataFrame]:
     if not 0 < test_frac < 1:
         raise ValueError("test-frac must be in (0, 1)")
+    rng = np.random.default_rng(seed)
+    idx = rng.permutation(len(df))
     cut = max(1, int(len(df) * (1.0 - test_frac)))
     cut = min(cut, len(df) - 1)
-    return df.iloc[:cut].copy(), df.iloc[cut:].copy()
+    train_idx = idx[:cut]
+    test_idx = idx[cut:]
+    return df.iloc[train_idx].copy(), df.iloc[test_idx].copy()
 
 
-def trim_train(df: pd.DataFrame, quantile: float) -> pd.DataFrame:
+def trim_by_quantile(
+    train_df: pd.DataFrame,
+    test_df: pd.DataFrame,
+    quantile: float,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     if quantile >= 1.0:
-        return df
-    q = df["target_uj"].quantile(quantile)
-    return df[df["target_uj"] <= q]
+        return train_df, test_df
+    q = train_df["target_uj"].quantile(quantile)
+    return (
+        train_df[train_df["target_uj"] <= q],
+        test_df[test_df["target_uj"] <= q],
+    )
 
 
 def fit_nonnegative_ridge(X: np.ndarray, y: np.ndarray, alpha: float) -> np.ndarray:
@@ -254,6 +265,25 @@ def fit_nonnegative_ridge(X: np.ndarray, y: np.ndarray, alpha: float) -> np.ndar
     if not res.success:
         raise RuntimeError(f"linear solver failed: {res.message}")
     return res.x
+
+
+def fit_two_stage_nonnegative_ridge(
+    X: np.ndarray,
+    y: np.ndarray,
+    alpha: float,
+    stage1_idx: list[int],
+    stage2_idx: list[int],
+) -> np.ndarray:
+    w = np.zeros(X.shape[1], dtype=np.float64)
+    X1 = X[:, stage1_idx]
+    w1 = fit_nonnegative_ridge(X1, y, alpha)
+    w[stage1_idx] = w1
+    residual = y - X1 @ w1
+
+    X2 = X[:, stage2_idx]
+    w2 = fit_nonnegative_ridge(X2, residual, alpha)
+    w[stage2_idx] = w2
+    return w
 
 
 def _group_base(X_lin: np.ndarray, w: np.ndarray, idxs: list[int]) -> np.ndarray:
@@ -379,8 +409,8 @@ def main() -> None:
     if df.empty or len(df) < 40:
         raise RuntimeError("Not enough usable rows (need >= 40 after filtering)")
 
-    train_df, test_df = split_time(df, args.test_frac)
-    train_df = trim_train(train_df, args.trim_upper_quantile)
+    train_df, test_df = split_random(df, args.test_frac, args.random_seed)
+    train_df, test_df = trim_by_quantile(train_df, test_df, args.trim_upper_quantile)
     if train_df.empty or test_df.empty:
         raise RuntimeError("Train/test split produced an empty set")
 
@@ -389,7 +419,9 @@ def main() -> None:
     X_test_lin = test_df[FEATURE_COLS].to_numpy(dtype=np.float64)
     y_test = test_df["target_uj"].to_numpy(dtype=np.float64)
 
-    w = fit_nonnegative_ridge(X_train_lin, y_train, args.alpha)
+    stage1_idx = sorted(IDX["cpu"] + IDX["mem"])
+    stage2_idx = sorted(IDX["disk"] + IDX["net"])
+    w = fit_two_stage_nonnegative_ridge(X_train_lin, y_train, args.alpha, stage1_idx, stage2_idx)
     pred_lin_train = X_train_lin @ w
     pred_lin_test = X_test_lin @ w
 

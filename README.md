@@ -215,6 +215,8 @@ echo 1000,1000,1000,1000,1000,1000,1000,1000 | sudo tee /sys/module/energy_proc/
 Tips:
 - Use multiple logs from different workloads in one training run for better generalization.
 - Include CPU-, memory-, disk-, and network-heavy workloads in your training set so all LUTs are identifiable.
+- `--trim-upper-quantile` now trims both train and test using the train quantile cutoff (helps ignore extreme outliers).
+- The linear fit is two-stage (CPU/mem first, then disk+net on residuals) to avoid disk/net weights collapsing to zero.
 
 ## Test
 
