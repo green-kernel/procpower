@@ -1,147 +1,249 @@
 #!/usr/bin/env python3
-from pathlib import Path
+import re
+import sys
 import argparse
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
-from sklearn.linear_model import LinearRegression, Ridge
-from sklearn.metrics import (
-    r2_score,
-    mean_squared_error,
-    mean_absolute_error,
-    mean_absolute_percentage_error,
-)
-from sklearn.model_selection import train_test_split, KFold, cross_validate
-from sklearn.metrics import mean_squared_error
 
-# ---- reuse helper functions you already have -----------------------------
-from parse_log import (
-    parse_monitor_file,
-    remove_samples,
-    compute_deltas,
-)
-# --------------------------------------------------------------------------
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression, Ridge, HuberRegressor
+from sklearn.metrics import r2_score, mean_absolute_error, mean_absolute_percentage_error
 
-FEATURES = [
-    "cpu_ns",
-    "mem",
-    "instructions",
-    "wakeups",
-    "diski",
-    "disko",
-    "rx",
-    "tx",
-]
+from xgboost import XGBRegressor
+import statsmodels.api as sm
 
-def aggregate_sample(sample: dict, use_rate: bool) -> dict:
-    """Collapse one timestamp block into a single feature row."""
-    row = {f: 0.0 for f in FEATURES}
-    for metrics in sample["values"].values():
-        for f in FEATURES:
-            row[f] += metrics[f]
-
-    if use_rate and sample.get("sample_ns"):
-        secs = sample["sample_ns"] / 1e9
-        for f in FEATURES:
-            row[f] /= secs
-
-    row["target"] = sample["rapl_psys_sum_uj"]
-    return row
-
-def load_dataframe(paths: list[Path], deltas: bool, rate: bool) -> pd.DataFrame:
+def parse_monitor_file(path: str | Path):
+    """Parse logfile into a DataFrame of relevant metrics."""
     rows = []
-    for path in paths:
-        samples = parse_monitor_file(path)
-        remove_samples(samples, "alive", True)
-        #remove_samples(samples, "kernel", False)
-        if deltas:
-            compute_deltas(samples)
-        rows.extend(aggregate_sample(s, rate) for s in samples)
+
+    pid0_re = re.compile(
+        r"pid=0.*?"
+        r"cpu_ns=(\d+)\s+mem=(\d+)\s+instructions=(\d+)\s+wakeups=(\d+)\s+"
+        r"diski=(\d+)\s+disko=(\d+)\s+rx=(\d+)\s+tx=(\d+)"
+    )
+
+    with open(path, encoding="utf-8") as f:
+        blocks = [b.strip() for b in f.read().split("-------") if b.strip()]
+
+    for block in blocks:
+        rapl = re.search(r"rapl_psys_sum_uj=(\d+)", block)
+        pid0 = pid0_re.search(block)
+
+        if rapl and pid0:
+            rows.append({
+                "rapl_psys_sum_uj": int(rapl.group(1)),
+                "cpu_ns": int(pid0.group(1)),
+                "mem": int(pid0.group(2)),
+                "instructions": int(pid0.group(3)),
+                "wakeups": int(pid0.group(4)),
+                "diski": int(pid0.group(5)),
+                "disko": int(pid0.group(6)),
+                "rx": int(pid0.group(7)),
+                "tx": int(pid0.group(8)),
+            })
+
     return pd.DataFrame(rows)
 
-# --------------------------------------------------------------------------
 
-def print_metrics(y_true, y_pred, label="test"):
-    rmse = np.sqrt(mean_squared_error(y_true, y_pred))
-    mae  = mean_absolute_error(y_true, y_pred)
+
+def fit_statsmodels_ols(X, y, FEATURES, intercept, scaler=None):
+    """Return a statsmodels OLS model for summary purposes."""
+    X_df = pd.DataFrame(X, columns=FEATURES)
+    if intercept:
+        X_df = sm.add_constant(X_df)  # adds intercept as 'const'
+    model = sm.OLS(y, X_df).fit()
+
+    if scaler is not None:
+        if intercept:
+            beta_scaled = model.params[1:].values
+            beta_index = model.params.index[1:]
+            intercept_value = model.params.iloc[0]
+
+            sigma = scaler.scale_
+            mu = scaler.mean_
+
+            beta_original = beta_scaled / sigma
+            intercept_uncentered = intercept_value - np.sum(beta_scaled * mu / sigma)
+
+            params_rescaled = pd.Series([intercept_uncentered, *beta_original], index=model.params.index)
+        else:
+            beta_scaled = model.params.values
+            beta_index = model.params.index
+
+            sigma = scaler.scale_
+            beta_original = beta_scaled / sigma
+
+            params_rescaled = pd.Series(beta_original, index=beta_index)
+        model.params_rescaled = params_rescaled
+    else:
+        model.params_rescaled = model.params.copy()
+
+
+    return model
+
+
+def fit_sklearn_model(model_name, X, y, intercept):
+    """Return sklearn LinearRegression fitted on scaled data."""
+    if model_name == 'ols':
+        model = LinearRegression(fit_intercept=intercept)
+    elif model_name == 'ridge':
+        model = Ridge(alpha=1e6, fit_intercept=intercept)
+    elif model_name == 'huber':
+        # HuberRegressor uses epsilon for outlier sensitivity (default 1.35)
+        model = HuberRegressor(epsilon=1.35, alpha=1e6, fit_intercept=intercept, max_iter=1000)
+    elif model_name == 'xgboost':
+        # XGBRegressor doesn't need fit_intercept; it handles internally
+        model = XGBRegressor(
+            n_estimators=500,
+            learning_rate=0.05,
+            max_depth=3,
+            objective='reg:squarederror',
+            random_state=42,
+            verbosity=0
+        )
+    else:
+        raise ValueError(f"Unknown model supplied: {model}")
+
+    model.fit(X, y)
+
+    return model
+
+
+def calculate_metrics(y_true, y_pred):
+    mae = mean_absolute_error(y_true, y_pred)
     mape = mean_absolute_percentage_error(y_true, y_pred)
-    r2   = r2_score(y_true, y_pred)
+    r2 = r2_score(y_true, y_pred)
+    return mae, mape, r2
 
-    print(f"\n# --- {label} metrics ---")
-    print(f"R²     : {r2:7.4f}")
-    print(f"RMSE   : {rmse:10.2f}  μJ")
-    print(f"MAE    : {mae:10.2f}  μJ")
-    print(f"MAPE   : {mape*100:7.2f}  %")
+def select_fit_and_features(df_inner, features):
+    # add extra features
+    df_inner['ips'] = (df_inner['instructions'] / df_inner['cpu_ns'])
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("logfiles", nargs="+", type=Path)
-    ap.add_argument("--deltas", action="store_true",
-                    help="Use per-PID deltas (subtract previous sample)")
-    ap.add_argument("--rate", action="store_true",
-                    help="Convert counters to per-second rates")
-    ap.add_argument("--ridge", action="store_true",
-                    help="Use Ridge (L2) instead of plain OLS")
-    ap.add_argument("--alpha", type=float, default=1.0,
-                    help="Ridge regularisation strength (ignored without --ridge)")
-    ap.add_argument("--test-frac", type=float, default=0.25,
-                    help="Fraction of data reserved for the hold-out test set")
-    ap.add_argument("--cv", type=int, default=0,
-                    help="If >0, run k-fold cross-validation instead of single split")
-    args = ap.parse_args()
+    if features == 'normal':
+        feature_list = ['instructions', 'wakeups', 'rx', 'tx']
+    elif features == 'extra':
+        feature_list = ['instructions', 'ips', 'wakeups', 'rx', 'tx']
+    elif features == 'idle':
+        feature_list = ['wakeups']
+    elif features == 'compute':
+        feature_list = ['instructions']
+    elif features == 'polynomial':
+        print('Warning: Current implemented Polynomial transformation is non-sensical. Is just an example how to do it! Needs context aware implementation.')
+        df_inner['cpu_ns_squared'] = (df_inner['cpu_ns']**2).astype('int64')
+        feature_list = ['cpu_ns', 'cpu_ns_squared', 'ips', 'mem', 'instructions', 'wakeups', 'diski', 'disko', 'rx', 'tx']
 
-    # ----- data ------------------------------------------------------------
-    df = load_dataframe(args.logfiles, args.deltas, args.rate).dropna()
-    X = df[FEATURES].values.astype(np.float64)
-    y = df["target"].values.astype(np.float64)
+    return df_inner, feature_list
 
-    # ----- choose model ----------------------------------------------------
-    if args.ridge:
-        model = Ridge(alpha=args.alpha, fit_intercept=True)
-    else:
-        model = LinearRegression(fit_intercept=True)
-
-    # ======= option 1: k-fold CV ===========================================
-    if args.cv > 1:
-        cv = KFold(n_splits=args.cv, shuffle=True, random_state=42)
-        cv_results = cross_validate(
-            model,
-            X,
-            y,
-            cv=cv,
-            scoring={
-                "r2": "r2",
-                "neg_rmse": "neg_root_mean_squared_error",
-                "neg_mae": "neg_mean_absolute_error",
-                "neg_mape": "neg_mean_absolute_percentage_error",
-            },
-            return_train_score=False,
-        )
-        print("\n# === cross-validation (k = %d) ===" % args.cv)
-        for metric, vals in cv_results.items():
-            if metric.startswith("test_"):
-                name = metric[5:].lstrip("neg_")
-                scores = -vals if metric.startswith("test_neg") else vals
-                print(f"{name.upper():5s}: {scores.mean():.4f} ± {scores.std():.4f}")
-        # Fit on full data so we can output coefficients below
-        model.fit(X, y)
-
-    # ======= option 2: single train/test split =============================
-    else:
-        X_tr, X_te, y_tr, y_te = train_test_split(
-            X, y, test_size=args.test_frac, random_state=42, shuffle=True
-        )
-        model.fit(X_tr, y_tr)
-        y_pred = model.predict(X_te)
-        print_metrics(y_te, y_pred)
-
-    # ----- coefficients ----------------------------------------------------
-    weights = dict(zip(FEATURES, model.coef_))
-    bias    = float(model.intercept_)
-
-    print("\n# --- coefficients ---")
-    for k, v in weights.items():
-        print(f"{k:14s} = {v}")
-    print(f"bias          = {bias:.6e}")
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Fit model and estimate weights on energy-logger data")
+    parser.add_argument("logfile", help="Logfile of energy-logger to use")
+    parser.add_argument("--predict", help="Logfile to parse for prediction")
+    parser.add_argument("--features",
+        choices=['normal', 'extra', 'compute', 'idle', 'polynomial'],
+        help='Select feature set to include for fitting',
+        default='normal'
+    )
+    parser.add_argument("--model",
+        choices=['ols', 'xgboost', 'ridge', 'huber', 'xgboost'],
+        help='Select model to use for fitting',
+        default='ols'
+    )
+
+    parser.add_argument("--log", action="store_true", help="Apply log transform. Can improve stability. Will prohibt interpretation of coefficients.")
+    parser.add_argument("--scale", action="store_true", help="Apply standard scaling. Can improve stability.")
+    parser.add_argument("--add-intercept", action="store_true", default=False, help="Use an intercept for the OLS model")
+    parser.add_argument("--dump-raw", action="store_true", help="Dump parsed data")
+    parser.add_argument("--dump-diff", action="store_true", help="Dump parsed and diffed data")
+    parser.add_argument("--dump-predictions", action="store_true", help="Dump predictions")
+    parser.add_argument("--dump-top-errors", action="store_true", help="Dump top errors")
+    parser.add_argument("--no-summary", action="store_true", help="Do not print statsmodels OLS summary")
+    parser.add_argument("--no-validate", action="store_true", help="Do not validate OLS model assumptions")
+    args = parser.parse_args()
+
+
+    df = parse_monitor_file(args.logfile)
+
+    if args.dump_raw:
+        print(df)
+
+    df = df.diff().drop(index=0).reset_index(drop=True)
+
+    df, FEATURES = select_fit_and_features(df, args.features)
+
+    TARGET = 'rapl_psys_sum_uj'
+
+    if args.dump_diff:
+        print(df)
+
+
+    if args.log:
+        df = df.applymap(lambda x: np.log1p(x) if np.issubdtype(type(x), np.number) else x)
+
+    X = df[FEATURES]
+    y = df[TARGET]
+
+    if X.isna().any().any() or y.isna().any():
+        raise ValueError('NA Values in df found!')
+
+    scaler = None
+    if args.scale:
+        scaler = StandardScaler()
+        X = scaler.fit_transform(X)
+
+    sk_model = fit_sklearn_model(args.model, X, y, args.add_intercept)
+
+    # Fit statsmodels OLS only for summary
+    if args.model == 'ols':
+        if not args.no_validate:
+            raise NotImplementedError('Validation is not implented yet. Please use --no-validate for now ...')
+
+        sm_model = fit_statsmodels_ols(X, y, FEATURES, args.add_intercept, scaler)
+
+        if not args.no_summary:
+            print(sm_model.summary())
+            print('Rescaled params:\n', sm_model.params_rescaled)
+
+    if args.predict:
+        df2 = parse_monitor_file(args.predict)
+
+        df2 = df2.diff().drop(index=0).reset_index(drop=True)
+
+        if args.log:
+            df2 = df2.applymap(lambda x: np.log1p(x) if np.issubdtype(type(x), np.number) else x)
+
+        df2, FEATURES = select_fit_and_features(df2, args.features)
+
+        X2 = df2[FEATURES]
+        y2_true = df2[TARGET]
+
+        if X2.isna().any().any() or y2_true.isna().any():
+            raise ValueError('NA Values in Prediction df found!')
+
+        if args.scale:
+            X2 = scaler.transform(df2[FEATURES])
+
+
+        predictions = sk_model.predict(X2)
+
+        if args.log:
+            predictions = np.expm1(predictions)
+
+        if args.dump_predictions:
+            X2_df = pd.DataFrame(X2, columns=FEATURES)
+            y2_df = pd.Series(predictions, name=TARGET)
+            X2_df.insert(0, y2_df.name, y2_df)
+            print(X2_df)
+
+
+        print("MAE:", mean_absolute_error(y2_true, predictions))
+        print("MAPE:", mean_absolute_percentage_error(y2_true, predictions))
+        print("R²:", r2_score(y2_true, predictions))
+
+        # Show top errors
+        if args.dump_top_errors:
+            errors = abs(y2_true - predictions)
+            top_errors = df2.iloc[errors.nlargest(10).index]
+            print(top_errors)

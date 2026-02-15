@@ -1,0 +1,29 @@
+- Capture was run at 100 ms
+
+OLS Regression Results
+==============================================================================
+Dep. Variable:       rapl_psys_sum_uj   R-squared:                       0.915
+Model:                            OLS   Adj. R-squared:                  0.912
+Method:                 Least Squares   F-statistic:                     385.3
+Date:                Tue, 09 Sep 2025   Prob (F-statistic):           8.13e-21
+Time:                        19:54:52   Log-Likelihood:                -625.50
+No. Observations:                  38   AIC:                             1255.
+Df Residuals:                      36   BIC:                             1258.
+Df Model:                           1
+Covariance Type:            nonrobust
+================================================================================
+                   coef    std err          t      P>|t|      [0.025      0.975]
+--------------------------------------------------------------------------------
+Intercept     1.627e+07    1.1e+06     14.743      0.000     1.4e+07    1.85e+07
+instructions     0.0008   3.85e-05     19.629      0.000       0.001       0.001
+==============================================================================
+Omnibus:                        8.100   Durbin-Watson:                   0.478
+Prob(Omnibus):                  0.017   Jarque-Bera (JB):                7.410
+Skew:                          -0.754   Prob(JB):                       0.0246
+Kurtosis:                       4.551   Cond. No.                     5.58e+10
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 5.58e+10. This might indicate that there are
+strong multicollinearity or other numerical problems.

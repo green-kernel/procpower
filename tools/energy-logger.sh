@@ -5,9 +5,11 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-# 1) Create a unique log file in /tmp (e.g. /tmp/energy‑abcd1234.log)
+# 1) Create a unique log file in /tmp (e.g. /tmp/energy‑abcd1234.log) if nothing supplied. Otherwise take user supplied dir which must also be writeable
 LOGFILE=$(mktemp /tmp/energy-XXXXXXXX.log)
+
 chmod 777 $LOGFILE
+
 echo "Logging to $LOGFILE"
 
 # 2) Counters and timers
