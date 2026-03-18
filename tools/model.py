@@ -243,9 +243,13 @@ def trim_by_quantile(
     if quantile >= 1.0:
         return train_df, test_df
     q = train_df["target_uj"].quantile(quantile)
+    low = train_df["target_uj"].quantile(1 - quantile)
+    high = train_df["target_uj"].quantile(quantile)
+
+
     return (
-        train_df[train_df["target_uj"] <= q],
-        test_df[test_df["target_uj"] <= q],
+        train_df[(train_df["target_uj"] >= low) & (train_df["target_uj"] <= high)],
+        test_df[(test_df["target_uj"] >= low) & (test_df["target_uj"] <= high)],
     )
 
 
@@ -393,6 +397,7 @@ def main() -> None:
         description="Train nonlinear PSYS model and distill to kernel-friendly linear+multi-LUT params."
     )
     parser.add_argument("logfiles", nargs="+", type=Path)
+    parser.add_argument("--test-data", type=Path, help="Optional separate dataset for testing")
     parser.add_argument("--mode", choices=("delta",), default="delta")
     parser.add_argument("--alpha", type=float, default=10.0, help="L2 strength for non-negative linear fit")
     parser.add_argument("--test-frac", type=float, default=0.2)
@@ -401,15 +406,26 @@ def main() -> None:
     parser.add_argument("--random-seed", type=int, default=42)
     args = parser.parse_args()
 
+    # Check all files exist
     for path in args.logfiles:
         if not path.exists():
             raise FileNotFoundError(path)
+    if args.test_data and not args.test_data.exists():
+        raise FileNotFoundError(args.test_data)
 
-    df = gather_rows(args.logfiles, args.mode, args.min_target_uj)
-    if df.empty or len(df) < 40:
+    # Gather training data
+    train_df = gather_rows(args.logfiles, args.mode, args.min_target_uj)
+    if train_df.empty or len(train_df) < 40:
         raise RuntimeError("Not enough usable rows (need >= 40 after filtering)")
 
-    train_df, test_df = split_random(df, args.test_frac, args.random_seed)
+    # Gather test data
+    if args.test_data:
+        test_df = gather_rows([args.test_data], args.mode, args.min_target_uj)
+        if test_df.empty:
+            raise RuntimeError("No usable rows in test-data file")
+    else:
+        train_df, test_df = split_random(train_df, args.test_frac, args.random_seed)
+
     train_df, test_df = trim_by_quantile(train_df, test_df, args.trim_upper_quantile)
     if train_df.empty or test_df.empty:
         raise RuntimeError("Train/test split produced an empty set")
@@ -505,7 +521,7 @@ def main() -> None:
     )
 
     print(f"# mode={args.mode} alpha={args.alpha}")
-    print(f"# rows_total={len(df)} rows_train={len(train_df)} rows_test={len(test_df)}")
+    print(f"# rows_train={len(train_df)} rows_test={len(test_df)}")
 
     print_metrics("test metrics (current module defaults)", metric_bundle(y_test, pred_baseline_test))
     print_metrics("test metrics (linear non-negative ridge)", metric_bundle(y_test, pred_lin_test))
