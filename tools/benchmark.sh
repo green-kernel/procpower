@@ -34,7 +34,7 @@ FILE_MB=512
 MEM_MB=512
 CPU_WORKERS="$(nproc)"
 WAKEUP_THREADS="$(nproc)"
-NET_URL="https://speed.hetzner.de/100MB.bin"
+NET_URL="https://nbg1-speed.hetzner.com/100MB.bin"
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
