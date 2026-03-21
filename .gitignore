@@ -52,3 +52,7 @@ Mkfile.old
 dkms.conf
 __pycache__
 venv/
+sftp-config.json
+procpower.sublime-project
+procpower.sublime-workspace
+TODOS.md
