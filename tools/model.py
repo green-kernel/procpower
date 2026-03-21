@@ -14,6 +14,8 @@ from sklearn.metrics import r2_score, mean_absolute_error, mean_absolute_percent
 from xgboost import XGBRegressor
 import statsmodels.api as sm
 
+TARGET_COL = None # Will be set by argparse
+
 def parse_monitor_file(path: str | Path):
     """Parse logfile into a DataFrame of relevant metrics."""
     rows = []
@@ -28,12 +30,12 @@ def parse_monitor_file(path: str | Path):
         blocks = [b.strip() for b in f.read().split("-------") if b.strip()]
 
     for block in blocks:
-        rapl = re.search(r"rapl_psys_sum_uj=(\d+)", block)
+        rapl = re.search(rf"{TARGET_COL}=(\d+)", block)
         pid0 = pid0_re.search(block)
 
         if rapl and pid0:
             rows.append({
-                "rapl_psys_sum_uj": int(rapl.group(1)),
+                TARGET_COL: int(rapl.group(1)),
                 "cpu_ns": int(pid0.group(1)),
                 "mem": int(pid0.group(2)),
                 "instructions": int(pid0.group(3)),
@@ -136,33 +138,10 @@ def select_fit_and_features(df_inner, features):
 
     return df_inner, feature_list
 
+def main(args):
+    global TARGET_COL
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Fit model and estimate weights on energy-logger data")
-    parser.add_argument("logfile", help="Logfile of energy-logger to use")
-    parser.add_argument("--predict", help="Logfile to parse for prediction")
-    parser.add_argument("--features",
-        choices=['normal', 'extra', 'compute', 'idle', 'polynomial'],
-        help='Select feature set to include for fitting',
-        default='normal'
-    )
-    parser.add_argument("--model",
-        choices=['ols', 'xgboost', 'ridge', 'huber', 'xgboost'],
-        help='Select model to use for fitting',
-        default='ols'
-    )
-
-    parser.add_argument("--log", action="store_true", help="Apply log transform. Can improve stability. Will prohibt interpretation of coefficients.")
-    parser.add_argument("--scale", action="store_true", help="Apply standard scaling. Can improve stability.")
-    parser.add_argument("--add-intercept", action="store_true", default=False, help="Use an intercept for the OLS model")
-    parser.add_argument("--dump-raw", action="store_true", help="Dump parsed data")
-    parser.add_argument("--dump-diff", action="store_true", help="Dump parsed and diffed data")
-    parser.add_argument("--dump-predictions", action="store_true", help="Dump predictions")
-    parser.add_argument("--dump-top-errors", action="store_true", help="Dump top errors")
-    parser.add_argument("--no-summary", action="store_true", help="Do not print statsmodels OLS summary")
-    parser.add_argument("--no-validate", action="store_true", help="Do not validate OLS model assumptions")
-    args = parser.parse_args()
-
+    TARGET_COL = args.target
 
     df = parse_monitor_file(args.logfile)
 
@@ -173,7 +152,7 @@ if __name__ == "__main__":
 
     df, FEATURES = select_fit_and_features(df, args.features)
 
-    TARGET = 'rapl_psys_sum_uj'
+
 
     if args.dump_diff:
         print(df)
@@ -183,7 +162,7 @@ if __name__ == "__main__":
         df = df.applymap(lambda x: np.log1p(x) if np.issubdtype(type(x), np.number) else x)
 
     X = df[FEATURES]
-    y = df[TARGET]
+    y = df[TARGET_COL]
 
     if X.isna().any().any() or y.isna().any():
         raise ValueError('NA Values in df found!')
@@ -217,7 +196,7 @@ if __name__ == "__main__":
         df2, FEATURES = select_fit_and_features(df2, args.features)
 
         X2 = df2[FEATURES]
-        y2_true = df2[TARGET]
+        y2_true = df2[TARGET_COL]
 
         if X2.isna().any().any() or y2_true.isna().any():
             raise ValueError('NA Values in Prediction df found!')
@@ -233,7 +212,7 @@ if __name__ == "__main__":
 
         if args.dump_predictions:
             X2_df = pd.DataFrame(X2, columns=FEATURES)
-            y2_df = pd.Series(predictions, name=TARGET)
+            y2_df = pd.Series(predictions, name=TARGET_COL)
             X2_df.insert(0, y2_df.name, y2_df)
             print(X2_df)
 
@@ -247,3 +226,34 @@ if __name__ == "__main__":
             errors = abs(y2_true - predictions)
             top_errors = df2.iloc[errors.nlargest(10).index]
             print(top_errors)
+
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Fit model and estimate weights on energy-logger data")
+    parser.add_argument("logfile", help="Logfile of energy-logger to use")
+    parser.add_argument("--predict", help="Logfile to parse for prediction")
+    parser.add_argument("--features",
+        choices=['normal', 'extra', 'compute', 'idle', 'polynomial'],
+        help='Select feature set to include for fitting',
+        default='normal'
+    )
+    parser.add_argument("--model",
+        choices=['ols', 'xgboost', 'ridge', 'huber', 'xgboost'],
+        help='Select model to use for fitting',
+        default='ols'
+    )
+
+    parser.add_argument("--log", action="store_true", help="Apply log transform. Can improve stability. Will prohibt interpretation of coefficients.")
+    parser.add_argument("--scale", action="store_true", help="Apply standard scaling. Can improve stability.")
+    parser.add_argument("--add-intercept", action="store_true", default=False, help="Use an intercept for the OLS model")
+    parser.add_argument("--dump-raw", action="store_true", help="Dump parsed data")
+    parser.add_argument("--dump-diff", action="store_true", help="Dump parsed and diffed data")
+    parser.add_argument("--dump-predictions", action="store_true", help="Dump predictions")
+    parser.add_argument("--dump-top-errors", action="store_true", help="Dump top errors")
+    parser.add_argument("--no-summary", action="store_true", help="Do not print statsmodels OLS summary")
+    parser.add_argument("--no-validate", action="store_true", help="Do not validate OLS model assumptions")
+    parser.add_argument("--target", type=str, choices=["rapl_psys_sum_uj", "rapl_core_sum_uj"], default="rapl_psys_sum_uj")
+    args = parser.parse_args()
+
+    main(args)
