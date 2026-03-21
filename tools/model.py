@@ -573,6 +573,7 @@ if __name__ == "__main__":
         description="Train nonlinear PSYS model and distill to kernel-friendly linear+multi-LUT params."
     )
     parser.add_argument("logfiles", nargs="+", type=Path)
+    parser.add_argument("--test-data", type=Path, help="Optional separate dataset for testing")
     parser.add_argument("--mode", choices=("delta",), default="delta")
     parser.add_argument("--alpha", type=float, default=10.0, help="L2 strength for non-negative linear fit")
     parser.add_argument("--test-frac", type=float, default=0.2)
