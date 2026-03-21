@@ -10,3 +10,4 @@ threadpoolctl
 tzdata
 psutil
 statsmodels
+xgboost-cpu
