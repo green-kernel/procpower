@@ -11,7 +11,7 @@ import pandas as pd
 from scipy.optimize import lsq_linear
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-
+import plotext as plt
 
 NL_LUT_BINS = 8
 
@@ -408,6 +408,18 @@ def main(args) -> None:
     if train_df.empty or len(train_df) < 40:
         raise RuntimeError("Not enough usable rows (need >= 40 after filtering)")
 
+    if args.plot:
+        x = train_df["timestamp"].tolist()
+        y = train_df["target_uj"].tolist()
+
+        plt.clear_data()
+        plt.plot(x, y, marker='dot')
+        plt.title("Energy of time")
+        plt.xlabel("Time")
+        plt.ylabel(TARGET_COL)
+        plt.show()
+        return
+
     # Gather test data
     if args.test_data:
         test_df = gather_rows([args.test_data], args.mode, args.min_target_uj)
@@ -581,6 +593,7 @@ if __name__ == "__main__":
     parser.add_argument("--trim-upper-quantile", type=float, default=0.999)
     parser.add_argument("--random-seed", type=int, default=42)
     parser.add_argument("--target", type=str, choices=["rapl_psys_sum_uj", "rapl_core_sum_uj"], default="rapl_psys_sum_uj")
+    parser.add_argument("--plot", action='store_true')
 
     args = parser.parse_args()
 
