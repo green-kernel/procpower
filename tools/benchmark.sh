@@ -17,6 +17,7 @@ Options:
   --cpu-workers N       CPU worker processes (default: nproc)
   --wakeup-threads N    wakeup threads (default: nproc)
   --net-url URL         download URL for network phase
+  --cpu-only            end benchmark after the CPU workload
   -h, --help            show this help
 
 Notes:
@@ -27,6 +28,7 @@ USAGE
 
 have() { command -v "$1" >/dev/null 2>&1; }
 
+CPU_ONLY=false
 DURATION=20
 ROUNDS=1
 TMPDIR="/tmp/procpower-bench"
@@ -46,6 +48,7 @@ while [[ $# -gt 0 ]]; do
         --cpu-workers) CPU_WORKERS="$2"; shift 2 ;;
         --wakeup-threads) WAKEUP_THREADS="$2"; shift 2 ;;
         --net-url) NET_URL="$2"; shift 2 ;;
+        --cpu-only) CPU_ONLY=true; shift ;;
         -h|--help) usage; exit 0 ;;
         *) echo "Unknown arg: $1" >&2; usage; exit 1 ;;
     esac
@@ -154,6 +157,10 @@ syscall_phase() {
 for ((i=1; i<=ROUNDS; i++)); do
     echo "Round $i/$ROUNDS"
     cpu_phase
+    if $CPU_ONLY; then
+        echo "Aborting after CPU phase (--cpu-only)"
+        continue
+    fi
     mem_phase
     disk_write_phase
     disk_read_phase
