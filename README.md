@@ -208,7 +208,7 @@ echo 99000000 | sudo tee /sys/module/energy_proc/parameters/sample_ns
 ## run workload sandwiched between energy logger and start and end
 sudo pkill -f energy-logger.sh
 sudo ./energy-logger.sh & # will output the file it will write to
-python3 run-workload.py mixed
+bash benchmark.sh
 sudo pkill -f energy-logger.sh
 ```
 
