@@ -172,6 +172,11 @@ def main(args):
 
     df = parse_monitor_file(args.logfile)
 
+    if args.dump_raw:
+        print(df)
+
+    df = df.diff().drop(index=0).reset_index(drop=True)
+
     if args.plot_only:
         x = df["timestamp"].tolist()
         y = df[TARGET_COL].tolist()
@@ -183,14 +188,7 @@ def main(args):
         plt.show()
         return
 
-    if args.dump_raw:
-        print(df)
-
-    df = df.diff().drop(index=0).reset_index(drop=True)
-
     df, FEATURES = select_fit_and_features(df, args.features)
-
-
 
     if args.dump_diff:
         print(df)
