@@ -10,6 +10,7 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression, Ridge, HuberRegressor
 from sklearn.metrics import r2_score, mean_absolute_error, mean_absolute_percentage_error
+import plotext as plt
 
 from xgboost import XGBRegressor
 import statsmodels.api as sm
@@ -26,16 +27,23 @@ def parse_monitor_file(path: str | Path):
         r"diski=(\d+)\s+disko=(\d+)\s+rx=(\d+)\s+tx=(\d+)"
     )
 
+    target_col_re = re.compile(rf"{TARGET_COL}=(\d+)")
+    timestamp_re =  re.compile(r'timestamp=(\d+)')
+
+
     with open(path, encoding="utf-8") as f:
         blocks = [b.strip() for b in f.read().split("-------") if b.strip()]
 
     for block in blocks:
-        rapl = re.search(rf"{TARGET_COL}=(\d+)", block)
+        rapl = target_col_re.search(block)
+
         pid0 = pid0_re.search(block)
+        timestamp = timestamp_re.search(block)
 
         if rapl and pid0:
             rows.append({
                 TARGET_COL: int(rapl.group(1)),
+                "timestamp": int(timestamp.group(1)),
                 "cpu_ns": int(pid0.group(1)),
                 "mem": int(pid0.group(2)),
                 "instructions": int(pid0.group(3)),
@@ -164,6 +172,17 @@ def main(args):
 
     df = parse_monitor_file(args.logfile)
 
+    if args.plot_only:
+        x = df["timestamp"].tolist()
+        y = df[TARGET_COL].tolist()
+
+        plt.clear_data()
+        plt.plot(x, y, marker='dot')
+        plt.xlabel("Time")
+        plt.ylabel(TARGET_COL)
+        plt.show()
+        return
+
     if args.dump_raw:
         print(df)
 
@@ -275,6 +294,8 @@ if __name__ == "__main__":
     parser.add_argument("--no-summary", action="store_true", help="Do not print statsmodels OLS summary")
     parser.add_argument("--no-validate", action="store_true", help="Do not validate OLS model assumptions")
     parser.add_argument("--target", type=str, choices=["rapl_psys_sum_uj", "rapl_core_sum_uj"], default="rapl_psys_sum_uj")
+    parser.add_argument("--plot-only", action='store_true', help="Plot the training data file and exit")
+
     args = parser.parse_args()
 
     main(args)
