@@ -175,7 +175,12 @@ def main(args):
     if args.dump_raw:
         print(df)
 
-    df = df.diff().drop(index=0).reset_index(drop=True)
+    df_original = df.copy()
+    df = df.diff()
+    df["timestamp"] = df_original["timestamp"]
+    df["sample_ns"] = df_original["sample_ns"]
+
+    df = df.drop(index=0).reset_index(drop=True)
 
     if args.plot_only:
         x = df["timestamp"].tolist()
@@ -224,7 +229,12 @@ def main(args):
     if args.predict:
         df2 = parse_monitor_file(args.predict)
 
-        df2 = df2.diff().drop(index=0).reset_index(drop=True)
+        df2_original = df2.copy()
+        df2 = df2.diff()
+        df2["timestamp"] = df2_original["timestamp"]
+        df2["sample_ns"] = df2_original["sample_ns"]
+
+        df2 = df2.drop(index=0).reset_index(drop=True)
 
         if args.log:
             df2 = df2.applymap(lambda x: np.log1p(x) if np.issubdtype(type(x), np.number) else x)
