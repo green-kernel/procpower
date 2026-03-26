@@ -11,3 +11,4 @@ tzdata
 psutil
 statsmodels
 xgboost-cpu
+plotext
