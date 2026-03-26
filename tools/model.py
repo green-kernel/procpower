@@ -29,6 +29,7 @@ def parse_monitor_file(path: str | Path):
 
     target_col_re = re.compile(rf"{TARGET_COL}=(\d+)")
     timestamp_re =  re.compile(r'timestamp=(\d+)')
+    sample_re =  re.compile(r'sample_ns=(\d+)')
 
 
     with open(path, encoding="utf-8") as f:
@@ -39,11 +40,13 @@ def parse_monitor_file(path: str | Path):
 
         pid0 = pid0_re.search(block)
         timestamp = timestamp_re.search(block)
+        sample_ns = sample_re.search(block)
 
         if rapl and pid0:
             rows.append({
                 TARGET_COL: int(rapl.group(1)),
                 "timestamp": int(timestamp.group(1)),
+                "sample_ns": int(sample_ns.group(1)),
                 "cpu_ns": int(pid0.group(1)),
                 "mem": int(pid0.group(2)),
                 "instructions": int(pid0.group(3)),
