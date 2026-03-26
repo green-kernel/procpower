@@ -100,10 +100,24 @@ cpu_phase() {
     done
 }
 
-mem_phase() {
-    phase "memory"
+# VM is more unstable and thus shows strongly varying energy on the DRAM.
+# Good because it is quite unpredictable
+mem_phase_vm() {
+    phase "memory VM"
     stress-ng --vm 1 --vm-bytes "${MEM_MB}M" --timeout "${DURATION}s" --metrics-brief
+
+    stress-ng --vm "${CPU_WORKERS}" --vm-bytes "${MEM_MB}M" --timeout "${DURATION}s" --metrics-brief
+
 }
+
+# stream is more stable and allows to stress the memory to it fullest
+mem_phase_stream() {
+    phase "memory stream"
+    stress-ng --stream 1 --vm-bytes "${MEM_MB}M" --timeout "${DURATION}s" --metrics-brief
+
+    stress-ng --stream "${CPU_WORKERS}" --vm-bytes "${MEM_MB}M" --timeout "${DURATION}s" --metrics-brief
+}
+
 
 disk_write_phase() {
     phase "disk write"
@@ -161,7 +175,8 @@ for ((i=1; i<=ROUNDS; i++)); do
         echo "Aborting after CPU phase (--cpu-only)"
         continue
     fi
-    mem_phase
+    mem_phase_vm
+    mem_phase_stream
     disk_write_phase
     disk_read_phase
     net_phase
