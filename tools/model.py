@@ -140,6 +140,23 @@ def select_fit_and_features(df_inner, features):
 
     return df_inner, feature_list
 
+def safe_mape(y_true, y_pred, eps=1e-8):
+    y_true = np.asarray(y_true)
+    y_pred = np.asarray(y_pred)
+    denom = np.maximum(np.abs(y_true), eps)
+    return np.mean(np.abs(y_true - y_pred) / denom)
+
+def wape(y_true, y_pred):
+    y_true = np.asarray(y_true)
+    y_pred = np.asarray(y_pred)
+    return np.sum(np.abs(y_true - y_pred)) / np.sum(np.abs(y_true))
+
+def smape(y_true, y_pred, eps=1e-8):
+    y_true = np.asarray(y_true)
+    y_pred = np.asarray(y_pred)
+    denom = np.maximum(np.abs(y_true) + np.abs(y_pred), eps)
+    return np.mean(2 * np.abs(y_pred - y_true) / denom)
+
 def main(args):
     global TARGET_COL
 
@@ -220,7 +237,9 @@ def main(args):
 
 
         print("MAE:", mean_absolute_error(y2_true, predictions))
-        print("MAPE:", mean_absolute_percentage_error(y2_true, predictions))
+        print("MAPE (%):", 100*mean_absolute_percentage_error(y2_true, predictions))
+        print("WAPE (%):", 100 * wape(y2_true, predictions))
+        print("sMAPE (%):", 100 * smape(y2_true, predictions))
         print("R²:", r2_score(y2_true, predictions))
 
         # Show top errors
