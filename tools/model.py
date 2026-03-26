@@ -127,6 +127,8 @@ def select_fit_and_features(df_inner, features):
         feature_list = ['instructions', 'wakeups', 'rx', 'tx']
     elif features == 'extra':
         feature_list = ['instructions', 'ips', 'wakeups', 'rx', 'tx']
+    elif features == 'all':
+        feature_list = ['cpu_ns', 'mem', 'instructions', 'wakeups', 'diski', 'disko', 'rx', 'tx']
     elif features == 'idle':
         feature_list = ['wakeups']
     elif features == 'compute':
@@ -234,7 +236,7 @@ if __name__ == "__main__":
     parser.add_argument("logfile", help="Logfile of energy-logger to use")
     parser.add_argument("--predict", help="Logfile to parse for prediction")
     parser.add_argument("--features",
-        choices=['normal', 'extra', 'compute', 'idle', 'polynomial'],
+        choices=['normal', 'extra', 'compute', 'idle', 'polynomial', 'all'],
         help='Select feature set to include for fitting',
         default='normal'
     )
