@@ -135,7 +135,7 @@ def select_fit_and_features(df_inner, features):
     df_inner['ips'] = (df_inner['instructions'] / df_inner['cpu_ns'])
 
     if features == 'normal':
-        feature_list = ['instructions', 'wakeups', 'rx', 'tx']
+        feature_list = ['instructions', 'wakeups', 'mem']
     elif features == 'extra':
         feature_list = ['instructions', 'ips', 'wakeups', 'rx', 'tx']
     elif features == 'all':
@@ -304,7 +304,7 @@ if __name__ == "__main__":
     parser.add_argument("--dump-top-errors", action="store_true", help="Dump top errors")
     parser.add_argument("--no-summary", action="store_true", help="Do not print statsmodels OLS summary")
     parser.add_argument("--no-validate", action="store_true", help="Do not validate OLS model assumptions")
-    parser.add_argument("--target", type=str, choices=["rapl_psys_sum_uj", "rapl_core_sum_uj"], default="rapl_psys_sum_uj")
+    parser.add_argument("--target", type=str, choices=["rapl_psys_sum_uj", "rapl_core_sum_uj", "psu_energy_ac_mcp_machine"], default="rapl_psys_sum_uj")
     parser.add_argument("--plot-only", action='store_true', help="Plot the training data file and exit")
 
     args = parser.parse_args()
