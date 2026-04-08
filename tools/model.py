@@ -35,7 +35,7 @@ FEATURES: list[FeatureSpec] = [
     FeatureSpec("tx", "w_net_tx_packets", 1.0, True),
 ]
 
-TARGET_COL = "rapl_psys_sum_uj"
+TARGET_COL = None # will be overridden later
 FEATURE_COLS = [f.param_name for f in FEATURES]
 BASELINE_WEIGHTS = {
     "w_cpu_ns": 5.0,
@@ -388,22 +388,14 @@ def print_metrics(label: str, metrics: dict[str, float]) -> None:
     print(f"MAPE   : {metrics['mape_pct']:.3f} %" if np.isfinite(metrics["mape_pct"]) else "MAPE   : n/a")
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Train nonlinear PSYS model and distill to kernel-friendly linear+multi-LUT params."
-    )
-    parser.add_argument("logfiles", nargs="+", type=Path)
-    parser.add_argument("--mode", choices=("delta",), default="delta")
-    parser.add_argument("--alpha", type=float, default=10.0, help="L2 strength for non-negative linear fit")
-    parser.add_argument("--test-frac", type=float, default=0.2)
-    parser.add_argument("--min-target-uj", type=float, default=1.0)
-    parser.add_argument("--trim-upper-quantile", type=float, default=0.999)
-    parser.add_argument("--random-seed", type=int, default=42)
-    args = parser.parse_args()
+def main(args) -> None:
+    global TARGET_COL
 
     for path in args.logfiles:
         if not path.exists():
             raise FileNotFoundError(path)
+
+    TARGET_COL = args.target
 
     df = gather_rows(args.logfiles, args.mode, args.min_target_uj)
     if df.empty or len(df) < 40:
@@ -563,4 +555,18 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(
+        description="Train nonlinear PSYS model and distill to kernel-friendly linear+multi-LUT params."
+    )
+    parser.add_argument("logfiles", nargs="+", type=Path)
+    parser.add_argument("--mode", choices=("delta",), default="delta")
+    parser.add_argument("--alpha", type=float, default=10.0, help="L2 strength for non-negative linear fit")
+    parser.add_argument("--test-frac", type=float, default=0.2)
+    parser.add_argument("--min-target-uj", type=float, default=1.0)
+    parser.add_argument("--trim-upper-quantile", type=float, default=0.999)
+    parser.add_argument("--random-seed", type=int, default=42)
+    parser.add_argument("--target", type=str, choices=["rapl_psys_sum_uj", "rapl_core_sum_uj"], default="rapl_psys_sum_uj")
+
+    args = parser.parse_args()
+
+    main(args)
