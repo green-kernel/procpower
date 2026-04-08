@@ -1,9 +1,6 @@
 # procpower / energy_proc
 A Linux kernel module that exposes per‑PID runtime, I/O and energy‑related statistics—including Intel RAPL readings—via /proc and debugfs. It is designed for lightweight, high‑frequency sampling so that userspace can build accurate power‑ or carbon‑aware schedulers, profilers and monitors. When you run it on the host, the same metrics are surfaced securely inside every Docker container, preserving isolation while giving full per‑cgroup visibility. An extensible energy model is built‑in—collect samples with the helper script, retrain the weights, and tailor the score to your hardware or carbon‑intensity signals. The module also runs inside virtual machines; because raw RAPL energy counters are absent, the model falls back to workload metrics and absolute energy estimates are less precise.
 
-## Thank you
-
-This work has been made possible by the [Prototype Fund](https://www.prototypefund.de/), [Catalyst Fund](https://greenscreen.network/en/blog/announcing-the-new-catalyst-fund-awardees/) and [Green Coding Solutions](https://www.green-coding.io/)
 
 ## Table of Contents
 1. [Features](#features)
@@ -27,6 +24,14 @@ This work has been made possible by the [Prototype Fund](https://www.prototypefu
 * **Container aware**: `/proc/energy/cgroup` only shows processes in the caller’s default cgroup; `/proc/energy/all` and `debugfs/.../all` are root‑only.
 * **Low overhead**: Uses RCU look‑ups, rhashtable and per‑CPU workqueue.  Sampling at 100 ms costs <0.3 % CPU on a 16‑core host.
 * **VM**: Works in VMs but accuracy will drop.
+
+## Thank you
+
+This work has been made possible by the [Prototype Fund](https://www.prototypefund.de/), [Catalyst Fund](https://greenscreen.network/en/blog/announcing-the-new-catalyst-fund-awardees/) and [Green Coding Solutions](https://www.green-coding.io/). Funded by the [BMFTR](https://www.bmftr.bund.de/DE/Home/home_node.html). Foerderkennzeichen: 16IS25S22:
+
+[![BMFTR](./BMFTR_en_Web_RGB_gef_durch.png)](https://www.bmftr.bund.de/DE/Home/home_node.html)
+
+
 
 ## Requirements
 |             | Minimum | Notes |
