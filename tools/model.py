@@ -11,7 +11,7 @@ import pandas as pd
 from scipy.optimize import lsq_linear
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-
+import plotext as plt
 
 NL_LUT_BINS = 8
 
@@ -243,9 +243,13 @@ def trim_by_quantile(
     if quantile >= 1.0:
         return train_df, test_df
     q = train_df["target_uj"].quantile(quantile)
+    low = train_df["target_uj"].quantile(1 - quantile)
+    high = train_df["target_uj"].quantile(quantile)
+
+
     return (
-        train_df[train_df["target_uj"] <= q],
-        test_df[test_df["target_uj"] <= q],
+        train_df[(train_df["target_uj"] >= low) & (train_df["target_uj"] <= high)],
+        test_df[(test_df["target_uj"] >= low) & (test_df["target_uj"] <= high)],
     )
 
 
@@ -390,18 +394,40 @@ def print_metrics(label: str, metrics: dict[str, float]) -> None:
 
 def main(args) -> None:
     global TARGET_COL
+    TARGET_COL = args.target
 
+    # Check all files exist
     for path in args.logfiles:
         if not path.exists():
             raise FileNotFoundError(path)
+    if args.test_data and not args.test_data.exists():
+        raise FileNotFoundError(args.test_data)
 
-    TARGET_COL = args.target
-
-    df = gather_rows(args.logfiles, args.mode, args.min_target_uj)
-    if df.empty or len(df) < 40:
+    # Gather training data
+    train_df = gather_rows(args.logfiles, args.mode, args.min_target_uj)
+    if train_df.empty or len(train_df) < 40:
         raise RuntimeError("Not enough usable rows (need >= 40 after filtering)")
 
-    train_df, test_df = split_random(df, args.test_frac, args.random_seed)
+    if args.plot:
+        x = train_df["timestamp"].tolist()
+        y = train_df["target_uj"].tolist()
+
+        plt.clear_data()
+        plt.plot(x, y, marker='dot')
+        plt.title("Energy of time")
+        plt.xlabel("Time")
+        plt.ylabel(TARGET_COL)
+        plt.show()
+        return
+
+    # Gather test data
+    if args.test_data:
+        test_df = gather_rows([args.test_data], args.mode, args.min_target_uj)
+        if test_df.empty:
+            raise RuntimeError("No usable rows in test-data file")
+    else:
+        train_df, test_df = split_random(train_df, args.test_frac, args.random_seed)
+
     train_df, test_df = trim_by_quantile(train_df, test_df, args.trim_upper_quantile)
     if train_df.empty or test_df.empty:
         raise RuntimeError("Train/test split produced an empty set")
@@ -497,7 +523,7 @@ def main(args) -> None:
     )
 
     print(f"# mode={args.mode} alpha={args.alpha}")
-    print(f"# rows_total={len(df)} rows_train={len(train_df)} rows_test={len(test_df)}")
+    print(f"# rows_train={len(train_df)} rows_test={len(test_df)}")
 
     print_metrics("test metrics (current module defaults)", metric_bundle(y_test, pred_baseline_test))
     print_metrics("test metrics (linear non-negative ridge)", metric_bundle(y_test, pred_lin_test))
@@ -559,6 +585,7 @@ if __name__ == "__main__":
         description="Train nonlinear PSYS model and distill to kernel-friendly linear+multi-LUT params."
     )
     parser.add_argument("logfiles", nargs="+", type=Path)
+    parser.add_argument("--test-data", type=Path, help="Optional separate dataset for testing")
     parser.add_argument("--mode", choices=("delta",), default="delta")
     parser.add_argument("--alpha", type=float, default=10.0, help="L2 strength for non-negative linear fit")
     parser.add_argument("--test-frac", type=float, default=0.2)
@@ -566,6 +593,7 @@ if __name__ == "__main__":
     parser.add_argument("--trim-upper-quantile", type=float, default=0.999)
     parser.add_argument("--random-seed", type=int, default=42)
     parser.add_argument("--target", type=str, choices=["rapl_psys_sum_uj", "rapl_core_sum_uj"], default="rapl_psys_sum_uj")
+    parser.add_argument("--plot", action='store_true')
 
     args = parser.parse_args()
 
