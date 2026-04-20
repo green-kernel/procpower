@@ -20,7 +20,7 @@ A Linux kernel module that exposes per‑PID runtime, I/O and energy‑related s
 * **Per‑process metrics**: CPU time, RSS memory, disk I/O, network packets, context switch/wakeup counts and (optionally) retired instructions via PMU.
 * **Energy accounting**: Integrates Intel RAPL MSRs (`PP0`/core and `PSYS`) to compute energy usage in µJ.
 * **Dynamic sampling interval**: Run‑time adjustable via the `sample_ns` module parameter.
-* **Weight‑based energy model**: Each metric has a tunable weight (`w_cpu_ns`, `w_mem_bytes`, …); the weighted sum is exported as `energy=<fixed‑point‑milliJ>` in each record.
+* **Hybrid energy model**: A kernel-safe linear core (`w_*`) plus nonlinear lookup-table corrections for CPU, memory, disk, and network (`nl_*_lut_pmil`), with optional system idle offset (`w_sys_idle_uj`).
 * **Container aware**: `/proc/energy/cgroup` only shows processes in the caller’s default cgroup; `/proc/energy/all` and `debugfs/.../all` are root‑only.
 * **Low overhead**: Uses RCU look‑ups, rhashtable and per‑CPU workqueue.  Sampling at 100 ms costs <0.3 % CPU on a 16‑core host.
 * **VM**: Works in VMs but accuracy will drop.
@@ -128,7 +128,11 @@ echo 5000000 | sudo tee /sys/module/energy_proc/parameters/sample_ns
 sudo modprobe -r energy_proc
 sudo insmod energy_proc.ko w_net_rx_packets=2
 ```
-> Each weight is multiplied by its metric and the sum is exposed as `energy=INT.FRAC` where FRAC has three decimal places (kilo‑scaling).
+> `energy` is a weighted sum over normalized units:
+> `cpu_ns/1e6`, `mem/1MiB`, `instructions/1e6`, `wakeups`, `disk_bytes/4096`, `net_packets`.
+> The window model then applies per-resource LUT corrections:
+> `nl_cpu_lut_pmil`, `nl_mem_lut_pmil`, `nl_disk_lut_pmil`, `nl_net_lut_pmil` (permille),
+> and (for pid 0/system) adds `w_sys_idle_uj`.
 
 ## Windowing (decoupled sampling vs reporting)
 
@@ -172,7 +176,7 @@ Field               | Meaning
 It is imporant to not that we use pid 0 as the whole system and not the idle process.
 
 ## Data Collection Helper
-The repository ships with **`energy-logger.sh`** which periodically dumps `/proc/energy/all` to disk for offline analysis (e.g. weight regression).
+The repository ships with **`energy-logger.sh`** which periodically dumps `/sys/kernel/debug/energy/sys` to disk for offline analysis.
 
 1. Pick a longer sampling interval to keep file size manageable:
    ```bash
@@ -185,25 +189,39 @@ The repository ships with **`energy-logger.sh`** which periodically dumps `/proc
 
 ## Model
 
-We use a linear model to calculate the energy score for each process. You should train this model yourself by
+`tools/model.py` now trains three models from `/sys/kernel/debug/energy/sys` logs against `rapl_psys_sum_uj`:
+- linear non-negative ridge baseline (`w_*`)
+- nonlinear reference model (hist gradient boosting)
+- distilled kernel model (`w_*` + `nl_*_lut_pmil` + `w_sys_idle_uj`)
 
-1) `src`
-1) running the data collection helper
-```
-echo 100000000 > /sys/module/energy_proc/parameters/sample_ns
+1. Collect training data:
+```bash
+echo 100000000 | sudo tee /sys/module/energy_proc/parameters/sample_ns
+cd tools
 sudo ./energy-logger.sh
 ```
-1) `python3 -m venv venv`
-1) `source venv/bin/activate`
-1) `pip install -r requirements.txt`
-1) `python3 model.py tmp/energy-XXXX.log`
-
-You can then add the weights to your kernel module by
+2. Train:
 ```bash
-echo 1231232 > /sys/module/energy_proc/parameters/PARAM   # 100 ms
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python3 model.py /tmp/energy-XXXX.log --mode delta --alpha 10
+```
+3. Apply the printed params:
+```bash
+echo <value> | sudo tee /sys/module/energy_proc/parameters/w_cpu_ns
+echo <idle>  | sudo tee /sys/module/energy_proc/parameters/w_sys_idle_uj
+echo 900,950,1000,1000,1050,1100,1200,1300 | sudo tee /sys/module/energy_proc/parameters/nl_cpu_lut_pmil
+echo 1000,1000,1000,1000,1000,1000,1000,1000 | sudo tee /sys/module/energy_proc/parameters/nl_mem_lut_pmil
+echo 1000,1000,1000,1000,1000,1000,1000,1000 | sudo tee /sys/module/energy_proc/parameters/nl_disk_lut_pmil
+echo 1000,1000,1000,1000,1000,1000,1000,1000 | sudo tee /sys/module/energy_proc/parameters/nl_net_lut_pmil
 ```
 
-Please remember that you can not add floats. We use fix decimal values with 3 decimal points.
+Tips:
+- Use multiple logs from different workloads in one training run for better generalization.
+- Include CPU-, memory-, disk-, and network-heavy workloads in your training set so all LUTs are identifiable.
+- `--trim-upper-quantile` now trims both train and test using the train quantile cutoff (helps ignore extreme outliers).
+- The linear fit is two-stage (CPU/mem first, then disk+net on residuals) to avoid disk/net weights collapsing to zero.
 
 ## Test
 
@@ -224,4 +242,3 @@ sudo ./test.sh
 Patches and 🍻 are welcome!
 
 You can either contribute here on GitHub or drop me a message under didi@ribalba.de
-
