@@ -1,0 +1,4851 @@
+timestamp=1373669282310
+iterations=12750
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4400048244
+rapl_psys_sum_uj=0
+pid=0 energy=11664287925615 alive=1 kernel=1 cpu_ns=749357000000 mem=242302976 instructions=1583500585123 wakeups=7612484 diski=11010048 disko=154550272 rx=164717 tx=74171 comm=*system*
+psu_energy_ac_mcp_machine=1049561
+-------
+timestamp=1373812056314
+iterations=12751
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4400827296
+rapl_psys_sum_uj=0
+pid=0 energy=11666974035765 alive=1 kernel=1 cpu_ns=749500000000 mem=260091904 instructions=1583894807153 wakeups=7612966 diski=11010048 disko=154570752 rx=164730 tx=74179 comm=*system*
+psu_energy_ac_mcp_machine=3989624
+-------
+timestamp=1373952814041
+iterations=12753
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4402275660
+rapl_psys_sum_uj=0
+pid=0 energy=11672118794590 alive=1 kernel=1 cpu_ns=749761000000 mem=260894720 instructions=1584662758918 wakeups=7613186 diski=11010048 disko=154570752 rx=164750 tx=74189 comm=*system*
+psu_energy_ac_mcp_machine=8049927
+-------
+timestamp=1374095816182
+iterations=12754
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4403005701
+rapl_psys_sum_uj=0
+pid=0 energy=11674673702750 alive=1 kernel=1 cpu_ns=749888000000 mem=260366336 instructions=1585046740550 wakeups=7613372 diski=11010048 disko=154570752 rx=164760 tx=74194 comm=*system*
+psu_energy_ac_mcp_machine=12031372
+-------
+timestamp=1374239287698
+iterations=12755
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4403753869
+rapl_psys_sum_uj=0
+pid=0 energy=11677333262540 alive=1 kernel=1 cpu_ns=750023000000 mem=260366336 instructions=1585443652508 wakeups=7613583 diski=11010048 disko=154570752 rx=164768 tx=74198 comm=*system*
+psu_energy_ac_mcp_machine=14984253
+-------
+timestamp=1374379804289
+iterations=12756
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4404507470
+rapl_psys_sum_uj=0
+pid=0 energy=11680021604650 alive=1 kernel=1 cpu_ns=750164000000 mem=260378624 instructions=1585840320930 wakeups=7613777 diski=11010048 disko=154570752 rx=164778 tx=74203 comm=*system*
+psu_energy_ac_mcp_machine=18991943
+-------
+timestamp=1374523440943
+iterations=12758
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4405936241
+rapl_psys_sum_uj=0
+pid=0 energy=11685068442980 alive=1 kernel=1 cpu_ns=750416000000 mem=260374528 instructions=1586597688596 wakeups=7614004 diski=11010048 disko=154570752 rx=164798 tx=74213 comm=*system*
+psu_energy_ac_mcp_machine=21957764
+-------
+timestamp=1374664285331
+iterations=12759
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4406688865
+rapl_psys_sum_uj=0
+pid=0 energy=11687751748925 alive=1 kernel=1 cpu_ns=750556000000 mem=260374528 instructions=1586994349785 wakeups=7614206 diski=11010048 disko=154570752 rx=164806 tx=74217 comm=*system*
+psu_energy_ac_mcp_machine=25994995
+-------
+timestamp=1374808750347
+iterations=12760
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4407447287
+rapl_psys_sum_uj=0
+pid=0 energy=11690440494605 alive=1 kernel=1 cpu_ns=750697000000 mem=260374528 instructions=1587391098921 wakeups=7614404 diski=11010048 disko=154570752 rx=164818 tx=74222 comm=*system*
+psu_energy_ac_mcp_machine=28921875
+-------
+timestamp=1374948293027
+iterations=12761
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4408196798
+rapl_psys_sum_uj=0
+pid=0 energy=11693103498645 alive=1 kernel=1 cpu_ns=750833000000 mem=260354048 instructions=1587787699729 wakeups=7614604 diski=11010048 disko=154570752 rx=164828 tx=74227 comm=*system*
+psu_energy_ac_mcp_machine=32934204
+-------
+timestamp=1375092738455
+iterations=12763
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4409623128
+rapl_psys_sum_uj=0
+pid=0 energy=11698161332130 alive=1 kernel=1 cpu_ns=751089000000 mem=260337664 instructions=1588543266426 wakeups=7614824 diski=11010048 disko=154570752 rx=164850 tx=74238 comm=*system*
+psu_energy_ac_mcp_machine=35884155
+-------
+timestamp=1375232886242
+iterations=12764
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4410373555
+rapl_psys_sum_uj=0
+pid=0 energy=11700815454030 alive=1 kernel=1 cpu_ns=751223000000 mem=260308992 instructions=1588940090806 wakeups=7615036 diski=11010048 disko=154570752 rx=164859 tx=74243 comm=*system*
+psu_energy_ac_mcp_machine=39906860
+-------
+timestamp=1375376198360
+iterations=12765
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4411127766
+rapl_psys_sum_uj=0
+pid=0 energy=11703499433555 alive=1 kernel=1 cpu_ns=751363000000 mem=260489216 instructions=1589336886711 wakeups=7615238 diski=11010048 disko=154570752 rx=164868 tx=74247 comm=*system*
+psu_energy_ac_mcp_machine=43899170
+-------
+timestamp=1375519521387
+iterations=12767
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4412574604
+rapl_psys_sum_uj=0
+pid=0 energy=11708675522355 alive=1 kernel=1 cpu_ns=751627000000 mem=261160960 instructions=1590108104471 wakeups=7615471 diski=11010048 disko=154570752 rx=164888 tx=74257 comm=*system*
+psu_energy_ac_mcp_machine=46852783
+-------
+timestamp=1375659715097
+iterations=12768
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4413310260
+rapl_psys_sum_uj=0
+pid=0 energy=11711261079955 alive=1 kernel=1 cpu_ns=751762000000 mem=260370432 instructions=1590490215991 wakeups=7615670 diski=11010048 disko=154570752 rx=164898 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=50916504
+-------
+timestamp=1375803509840
+iterations=12769
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4414063555
+rapl_psys_sum_uj=0
+pid=0 energy=11713932038850 alive=1 kernel=1 cpu_ns=751900000000 mem=260399104 instructions=1590886407770 wakeups=7615859 diski=11010048 disko=154570752 rx=164898 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=53848267
+-------
+timestamp=1375944428847
+iterations=12770
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4414819414
+rapl_psys_sum_uj=0
+pid=0 energy=11716606673325 alive=1 kernel=1 cpu_ns=752038000000 mem=260403200 instructions=1591283334665 wakeups=7616064 diski=11010048 disko=154570752 rx=164898 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=57880127
+-------
+timestamp=1376088855178
+iterations=12772
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4416245438
+rapl_psys_sum_uj=0
+pid=0 energy=11721660022895 alive=1 kernel=1 cpu_ns=752294000000 mem=260399104 instructions=1592038004579 wakeups=7616270 diski=11010048 disko=154570752 rx=164898 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=60817749
+-------
+timestamp=1376229051333
+iterations=12773
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4416994522
+rapl_psys_sum_uj=0
+pid=0 energy=11724321291795 alive=1 kernel=1 cpu_ns=752430000000 mem=260399104 instructions=1592434258359 wakeups=7616472 diski=11010048 disko=154570752 rx=164898 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=64838013
+-------
+timestamp=1376373113598
+iterations=12774
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4417753127
+rapl_psys_sum_uj=0
+pid=0 energy=11726981652375 alive=1 kernel=1 cpu_ns=752566000000 mem=260395008 instructions=1592830330475 wakeups=7616671 diski=11010048 disko=154570752 rx=164898 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=67780640
+-------
+timestamp=1376513618198
+iterations=12775
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4418506606
+rapl_psys_sum_uj=0
+pid=0 energy=11729668731385 alive=1 kernel=1 cpu_ns=752706000000 mem=260341760 instructions=1593227746277 wakeups=7616868 diski=11010048 disko=154570752 rx=164900 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=71790161
+-------
+timestamp=1376657157806
+iterations=12777
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4419931715
+rapl_psys_sum_uj=0
+pid=0 energy=11734701754340 alive=1 kernel=1 cpu_ns=752958000000 mem=260399104 instructions=1593982350868 wakeups=7617072 diski=11010048 disko=154570752 rx=164900 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=75798950
+-------
+timestamp=1376799765453
+iterations=12778
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4420680433
+rapl_psys_sum_uj=0
+pid=0 energy=11737372014235 alive=1 kernel=1 cpu_ns=753096000000 mem=260399104 instructions=1594378402847 wakeups=7617272 diski=11010048 disko=154570752 rx=164902 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=78755249
+-------
+timestamp=1376940535709
+iterations=12779
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4421434888
+rapl_psys_sum_uj=0
+pid=0 energy=11740053640200 alive=1 kernel=1 cpu_ns=753236000000 mem=260419584 instructions=1594774728040 wakeups=7617472 diski=11010048 disko=154570752 rx=164902 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=82765869
+-------
+timestamp=1377083610836
+iterations=12781
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4422890941
+rapl_psys_sum_uj=0
+pid=0 energy=11745285650145 alive=1 kernel=1 cpu_ns=753504000000 mem=261468160 instructions=1595553130029 wakeups=7617702 diski=11010048 disko=154570752 rx=164902 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=85718018
+-------
+timestamp=1377224363494
+iterations=12782
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4423609813
+rapl_psys_sum_uj=0
+pid=0 energy=11747775823285 alive=1 kernel=1 cpu_ns=753629000000 mem=260411392 instructions=1595926164657 wakeups=7617874 diski=11010048 disko=154570752 rx=164902 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=89753540
+-------
+timestamp=1377369192492
+iterations=12783
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4424367381
+rapl_psys_sum_uj=0
+pid=0 energy=11750463798465 alive=1 kernel=1 cpu_ns=753770000000 mem=260423680 instructions=1596322759693 wakeups=7618072 diski=11010048 disko=154570752 rx=164902 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=92699341
+-------
+timestamp=1377510076421
+iterations=12784
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4425123423
+rapl_psys_sum_uj=0
+pid=0 energy=11753126566420 alive=1 kernel=1 cpu_ns=753905000000 mem=260415488 instructions=1596720313284 wakeups=7618272 diski=11010048 disko=154570752 rx=164902 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=96760010
+-------
+timestamp=1377653165882
+iterations=12786
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4426562021
+rapl_psys_sum_uj=0
+pid=0 energy=11758224953055 alive=1 kernel=1 cpu_ns=754164000000 mem=260239360 instructions=1597480990611 wakeups=7618482 diski=11010048 disko=154570752 rx=164902 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=99728638
+-------
+timestamp=1377793598821
+iterations=12787
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4427300851
+rapl_psys_sum_uj=0
+pid=0 energy=11760860606985 alive=1 kernel=1 cpu_ns=754300000000 mem=260419584 instructions=1597872121397 wakeups=7618670 diski=11010048 disko=154570752 rx=164902 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=103767090
+-------
+timestamp=1377937108354
+iterations=12788
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4428057992
+rapl_psys_sum_uj=0
+pid=0 energy=11763527507370 alive=1 kernel=1 cpu_ns=754437000000 mem=260423680 instructions=1598268501474 wakeups=7618867 diski=11010048 disko=154570752 rx=164902 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=107766113
+-------
+timestamp=1378080342373
+iterations=12789
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4428811043
+rapl_psys_sum_uj=0
+pid=0 energy=11766207244125 alive=1 kernel=1 cpu_ns=754577000000 mem=260362240 instructions=1598664448825 wakeups=7619059 diski=11010048 disko=154570752 rx=164902 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=110741089
+-------
+timestamp=1378221346427
+iterations=12791
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4430237372
+rapl_psys_sum_uj=0
+pid=0 energy=11771270406010 alive=1 kernel=1 cpu_ns=754834000000 mem=260423680 instructions=1599420081202 wakeups=7619272 diski=11010048 disko=154570752 rx=164902 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=114786987
+-------
+timestamp=1378365590883
+iterations=12792
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4430991339
+rapl_psys_sum_uj=0
+pid=0 energy=11773972358160 alive=1 kernel=1 cpu_ns=754978000000 mem=260435968 instructions=1599816471632 wakeups=7619473 diski=11010048 disko=154570752 rx=164902 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=117727661
+-------
+timestamp=1378506499295
+iterations=12793
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4431746649
+rapl_psys_sum_uj=0
+pid=0 energy=11776638495565 alive=1 kernel=1 cpu_ns=755115000000 mem=260427776 instructions=1600212699113 wakeups=7619671 diski=11010048 disko=154570752 rx=164902 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=121758423
+-------
+timestamp=1378649581151
+iterations=12794
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4432500433
+rapl_psys_sum_uj=0
+pid=0 energy=11779323552430 alive=1 kernel=1 cpu_ns=755255000000 mem=260411392 instructions=1600609710486 wakeups=7619868 diski=11010048 disko=154570752 rx=164902 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=124693481
+-------
+timestamp=1378791624304
+iterations=12796
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4433932683
+rapl_psys_sum_uj=0
+pid=0 energy=11784370822630 alive=1 kernel=1 cpu_ns=755509000000 mem=260440064 instructions=1601365164526 wakeups=7620081 diski=11010048 disko=154570752 rx=164904 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=128786011
+-------
+timestamp=1378935657919
+iterations=12797
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4434688847
+rapl_psys_sum_uj=0
+pid=0 energy=11787041438635 alive=1 kernel=1 cpu_ns=755647000000 mem=260440064 instructions=1601761287727 wakeups=7620286 diski=11010048 disko=154591232 rx=164904 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=131762939
+-------
+timestamp=1379076919168
+iterations=12798
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4435448734
+rapl_psys_sum_uj=0
+pid=0 energy=11789706542995 alive=1 kernel=1 cpu_ns=755784000000 mem=260440064 instructions=1602157308599 wakeups=7620486 diski=11010048 disko=154591232 rx=164904 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=135799072
+-------
+timestamp=1379217473876
+iterations=12800
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4436892947
+rapl_psys_sum_uj=0
+pid=0 energy=11794851513195 alive=1 kernel=1 cpu_ns=756046000000 mem=260972544 instructions=1602924302639 wakeups=7620704 diski=11010048 disko=154591232 rx=164904 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=139816772
+-------
+timestamp=1379360830698
+iterations=12801
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4437628054
+rapl_psys_sum_uj=0
+pid=0 energy=11797461884270 alive=1 kernel=1 cpu_ns=756183000000 mem=260452352 instructions=1603309376854 wakeups=7620900 diski=11010048 disko=154591232 rx=164904 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=142756836
+-------
+timestamp=1379501781491
+iterations=12802
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4438388674
+rapl_psys_sum_uj=0
+pid=0 energy=11800124245545 alive=1 kernel=1 cpu_ns=756319000000 mem=260452352 instructions=1603705849109 wakeups=7621105 diski=11010048 disko=154591232 rx=164904 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=146787109
+-------
+timestamp=1379645908309
+iterations=12803
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4439150026
+rapl_psys_sum_uj=0
+pid=0 energy=11802805742225 alive=1 kernel=1 cpu_ns=756458000000 mem=260448256 instructions=1604103148445 wakeups=7621310 diski=11010048 disko=154591232 rx=164904 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=149744019
+-------
+timestamp=1379786423244
+iterations=12805
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4440576294
+rapl_psys_sum_uj=0
+pid=0 energy=11807851195400 alive=1 kernel=1 cpu_ns=756712000000 mem=260464640 instructions=1604858239080 wakeups=7621520 diski=11010048 disko=154591232 rx=164904 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=153802246
+-------
+timestamp=1379930150156
+iterations=12806
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4441331420
+rapl_psys_sum_uj=0
+pid=0 energy=11810531471025 alive=1 kernel=1 cpu_ns=756852000000 mem=260452352 instructions=1605254294205 wakeups=7621711 diski=11010048 disko=154591232 rx=164904 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=156730103
+-------
+timestamp=1380070464704
+iterations=12807
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4442087889
+rapl_psys_sum_uj=0
+pid=0 energy=11813197670955 alive=1 kernel=1 cpu_ns=756989000000 mem=260407296 instructions=1605650534191 wakeups=7621915 diski=11010048 disko=154591232 rx=164904 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=160790405
+-------
+timestamp=1380214323897
+iterations=12808
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4442838255
+rapl_psys_sum_uj=0
+pid=0 energy=11815861388635 alive=1 kernel=1 cpu_ns=757126000000 mem=260304896 instructions=1606046277727 wakeups=7622105 diski=11010048 disko=154591232 rx=164904 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=163715698
+-------
+timestamp=1380355505554
+iterations=12810
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4444260862
+rapl_psys_sum_uj=0
+pid=0 energy=11820911093775 alive=1 kernel=1 cpu_ns=757381000000 mem=260419584 instructions=1606801218755 wakeups=7622317 diski=11010048 disko=154591232 rx=164904 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=167770508
+-------
+timestamp=1380497802916
+iterations=12811
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4445014096
+rapl_psys_sum_uj=0
+pid=0 energy=11823592027580 alive=1 kernel=1 cpu_ns=757521000000 mem=260280320 instructions=1607197405516 wakeups=7622517 diski=11010048 disko=154591232 rx=164904 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=171761963
+-------
+timestamp=1380641416816
+iterations=12812
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4445769283
+rapl_psys_sum_uj=0
+pid=0 energy=11826254345760 alive=1 kernel=1 cpu_ns=757656000000 mem=260149248 instructions=1607594869152 wakeups=7622719 diski=11010048 disko=154591232 rx=164904 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=174730713
+-------
+timestamp=1380782289377
+iterations=12814
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4447222834
+rapl_psys_sum_uj=0
+pid=0 energy=11831454107355 alive=1 kernel=1 cpu_ns=757924000000 mem=261165056 instructions=1608366821471 wakeups=7622943 diski=11010048 disko=154591232 rx=164906 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=178774902
+-------
+timestamp=1380926518843
+iterations=12815
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4447952814
+rapl_psys_sum_uj=0
+pid=0 energy=11833984932300 alive=1 kernel=1 cpu_ns=758051000000 mem=260468736 instructions=1608745986460 wakeups=7623128 diski=11010048 disko=154591232 rx=164906 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=181717407
+-------
+timestamp=1381066869900
+iterations=12816
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4448707574
+rapl_psys_sum_uj=0
+pid=0 energy=11836649916550 alive=1 kernel=1 cpu_ns=758188000000 mem=260599808 instructions=1609141983310 wakeups=7623331 diski=11010048 disko=154591232 rx=164906 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=185737183
+-------
+timestamp=1381210395098
+iterations=12817
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4449461724
+rapl_psys_sum_uj=0
+pid=0 energy=11839310390050 alive=1 kernel=1 cpu_ns=758324000000 mem=260624384 instructions=1609538078010 wakeups=7623528 diski=11010048 disko=154591232 rx=164906 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=188649414
+-------
+timestamp=1381351184940
+iterations=12819
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4450888420
+rapl_psys_sum_uj=0
+pid=0 energy=11844392194415 alive=1 kernel=1 cpu_ns=758583000000 mem=260579328 instructions=1610295438883 wakeups=7623738 diski=11010048 disko=154591232 rx=164906 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=192668823
+-------
+timestamp=1381495159855
+iterations=12820
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4451635063
+rapl_psys_sum_uj=0
+pid=0 energy=11847036139240 alive=1 kernel=1 cpu_ns=758718000000 mem=260616192 instructions=1610689227848 wakeups=7623939 diski=11010048 disko=154591232 rx=164906 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=195619263
+-------
+timestamp=1381635215023
+iterations=12821
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4452384818
+rapl_psys_sum_uj=0
+pid=0 energy=11849716891075 alive=1 kernel=1 cpu_ns=758857000000 mem=260497408 instructions=1611086378215 wakeups=7624139 diski=11010048 disko=154591232 rx=164906 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=199637573
+-------
+timestamp=1381778821874
+iterations=12822
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4453141287
+rapl_psys_sum_uj=0
+pid=0 energy=11852382446225 alive=1 kernel=1 cpu_ns=758994000000 mem=260468736 instructions=1611482489245 wakeups=7624334 diski=11010048 disko=154591232 rx=164906 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=203696045
+-------
+timestamp=1381921969088
+iterations=12824
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4454568349
+rapl_psys_sum_uj=0
+pid=0 energy=11857424680040 alive=1 kernel=1 cpu_ns=759247000000 mem=260476928 instructions=1612237936008 wakeups=7624551 diski=11010048 disko=154591232 rx=164906 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=206627075
+-------
+timestamp=1382062698853
+iterations=12825
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4455320668
+rapl_psys_sum_uj=0
+pid=0 energy=11860120284725 alive=1 kernel=1 cpu_ns=759390000000 mem=260489216 instructions=1612634056945 wakeups=7624752 diski=11010048 disko=154591232 rx=164906 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=210671021
+-------
+timestamp=1382207060336
+iterations=12826
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4456075550
+rapl_psys_sum_uj=0
+pid=0 energy=11862792518525 alive=1 kernel=1 cpu_ns=759528000000 mem=260349952 instructions=1613030503705 wakeups=7624949 diski=11010048 disko=154591232 rx=164906 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=213628784
+-------
+timestamp=1382350907017
+iterations=12828
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4457535448
+rapl_psys_sum_uj=0
+pid=0 energy=11868013832750 alive=1 kernel=1 cpu_ns=759796000000 mem=261558272 instructions=1613806766550 wakeups=7625181 diski=11010048 disko=154591232 rx=164906 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=217698364
+-------
+timestamp=1382495508386
+iterations=12829
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4458258165
+rapl_psys_sum_uj=0
+pid=0 energy=11870519278935 alive=1 kernel=1 cpu_ns=759922000000 mem=260730880 instructions=1614181855787 wakeups=7625360 diski=11010048 disko=154591232 rx=164906 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=220637817
+-------
+timestamp=1382635888663
+iterations=12830
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4459014329
+rapl_psys_sum_uj=0
+pid=0 energy=11873190000335 alive=1 kernel=1 cpu_ns=760059000000 mem=260530176 instructions=1614579000067 wakeups=7625554 diski=11010048 disko=154591232 rx=164906 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=224665039
+-------
+timestamp=1382778874340
+iterations=12831
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4459773484
+rapl_psys_sum_uj=0
+pid=0 energy=11875850976010 alive=1 kernel=1 cpu_ns=760195000000 mem=260694016 instructions=1614975195202 wakeups=7625745 diski=11010048 disko=154591232 rx=164908 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=228665894
+-------
+timestamp=1382921870349
+iterations=12833
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4461202011
+rapl_psys_sum_uj=0
+pid=0 energy=11880897108515 alive=1 kernel=1 cpu_ns=760451000000 mem=260489216 instructions=1615728421703 wakeups=7625960 diski=11010048 disko=154591232 rx=164908 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=231628784
+-------
+timestamp=1383062381434
+iterations=12834
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4461952926
+rapl_psys_sum_uj=0
+pid=0 energy=11883555047720 alive=1 kernel=1 cpu_ns=760590000000 mem=260612096 instructions=1616121009544 wakeups=7626157 diski=11010048 disko=154591232 rx=164908 tx=74262 comm=*system*
+psu_energy_ac_mcp_machine=235656860
+-------
+timestamp=1383206049546
+iterations=12835
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4462703048
+rapl_psys_sum_uj=0
+pid=0 energy=11886218934730 alive=1 kernel=1 cpu_ns=760730000000 mem=260685824 instructions=1616513786946 wakeups=7626355 diski=11010048 disko=154591232 rx=164909 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=238592285
+-------
+timestamp=1383346077377
+iterations=12836
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4463452132
+rapl_psys_sum_uj=0
+pid=0 energy=11888866444400 alive=1 kernel=1 cpu_ns=760867000000 mem=260382720 instructions=1616906288880 wakeups=7626558 diski=11010048 disko=154591232 rx=164909 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=242608398
+-------
+timestamp=1383489993755
+iterations=12838
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4464876997
+rapl_psys_sum_uj=0
+pid=0 energy=11893878449100 alive=1 kernel=1 cpu_ns=761122000000 mem=260673536 instructions=1617653689820 wakeups=7626769 diski=11010048 disko=154591232 rx=164909 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=245585327
+-------
+timestamp=1383630173430
+iterations=12839
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4465631025
+rapl_psys_sum_uj=0
+pid=0 energy=11896525042015 alive=1 kernel=1 cpu_ns=761258000000 mem=260485120 instructions=1618047008403 wakeups=7626962 diski=11010048 disko=154591232 rx=164909 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=249616455
+-------
+timestamp=1383772772527
+iterations=12840
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4466380414
+rapl_psys_sum_uj=0
+pid=0 energy=11899177162885 alive=1 kernel=1 cpu_ns=761396000000 mem=260587520 instructions=1618439432577 wakeups=7627163 diski=11010048 disko=154591232 rx=164909 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=252562378
+-------
+timestamp=1383913389675
+iterations=12841
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4467128949
+rapl_psys_sum_uj=0
+pid=0 energy=11901815460245 alive=1 kernel=1 cpu_ns=761532000000 mem=260362240 instructions=1618831092049 wakeups=7627353 diski=11010048 disko=154591232 rx=164909 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=256596802
+-------
+timestamp=1384057052422
+iterations=12843
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4468558086
+rapl_psys_sum_uj=0
+pid=0 energy=11906849580510 alive=1 kernel=1 cpu_ns=761790000000 mem=260505600 instructions=1619579916102 wakeups=7627577 diski=11010048 disko=154607616 rx=164909 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=259554321
+-------
+timestamp=1384197691002
+iterations=12844
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4469309978
+rapl_psys_sum_uj=0
+pid=0 energy=11909507056530 alive=1 kernel=1 cpu_ns=761929000000 mem=260517888 instructions=1619972411306 wakeups=7627778 diski=11010048 disko=154607616 rx=164909 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=263593994
+-------
+timestamp=1384338916314
+iterations=12845
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4470065837
+rapl_psys_sum_uj=0
+pid=0 energy=11912154235460 alive=1 kernel=1 cpu_ns=762066000000 mem=260513792 instructions=1620364847092 wakeups=7627986 diski=11010048 disko=154607616 rx=164909 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=267603149
+-------
+timestamp=1384482806420
+iterations=12847
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4471503702
+rapl_psys_sum_uj=0
+pid=0 energy=11917250819050 alive=1 kernel=1 cpu_ns=762328000000 mem=260861952 instructions=1621122163810 wakeups=7628217 diski=11010048 disko=154607616 rx=164909 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=270564087
+-------
+timestamp=1384623497443
+iterations=12848
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4472240091
+rapl_psys_sum_uj=0
+pid=0 energy=11919814153195 alive=1 kernel=1 cpu_ns=762457000000 mem=260509696 instructions=1621505830639 wakeups=7628399 diski=11010048 disko=154607616 rx=164909 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=274612915
+-------
+timestamp=1384767513232
+iterations=12849
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4472994668
+rapl_psys_sum_uj=0
+pid=0 energy=11922466589780 alive=1 kernel=1 cpu_ns=762595000000 mem=260513792 instructions=1621898317956 wakeups=7628604 diski=11010048 disko=154607616 rx=164911 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=277559448
+-------
+timestamp=1384908070508
+iterations=12850
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4473745766
+rapl_psys_sum_uj=0
+pid=0 energy=11925107245270 alive=1 kernel=1 cpu_ns=762731000000 mem=260456448 instructions=1622290449054 wakeups=7628800 diski=11010048 disko=154607616 rx=164911 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=281630737
+-------
+timestamp=1385051528574
+iterations=12852
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4475168494
+rapl_psys_sum_uj=0
+pid=0 energy=11930124216000 alive=1 kernel=1 cpu_ns=762987000000 mem=260497408 instructions=1623037843200 wakeups=7629004 diski=11010048 disko=154607616 rx=164911 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=284574707
+-------
+timestamp=1385192065644
+iterations=12853
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4475922217
+rapl_psys_sum_uj=0
+pid=0 energy=11932767344350 alive=1 kernel=1 cpu_ns=763123000000 mem=260575232 instructions=1623430468870 wakeups=7629207 diski=11010048 disko=154607616 rx=164911 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=288613281
+-------
+timestamp=1385335727130
+iterations=12854
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4476675573
+rapl_psys_sum_uj=0
+pid=0 energy=11935430811035 alive=1 kernel=1 cpu_ns=763263000000 mem=260591616 instructions=1623823162207 wakeups=7629411 diski=11010048 disko=154607616 rx=164911 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=291550781
+-------
+timestamp=1385476308739
+iterations=12855
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4477423741
+rapl_psys_sum_uj=0
+pid=0 energy=11938068132485 alive=1 kernel=1 cpu_ns=763398000000 mem=260517888 instructions=1624215626497 wakeups=7629606 diski=11010048 disko=154607616 rx=164911 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=295563965
+-------
+timestamp=1385620208214
+iterations=12857
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4478844577
+rapl_psys_sum_uj=0
+pid=0 energy=11943095125165 alive=1 kernel=1 cpu_ns=763656000000 mem=260599808 instructions=1624963025033 wakeups=7629806 diski=11010048 disko=154607616 rx=164911 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=299589844
+-------
+timestamp=1385764777010
+iterations=12858
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4479604342
+rapl_psys_sum_uj=0
+pid=0 energy=11945759048305 alive=1 kernel=1 cpu_ns=763795000000 mem=260796416 instructions=1625356809661 wakeups=7630013 diski=11010048 disko=154607616 rx=164911 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=302523315
+-------
+timestamp=1385905441499
+iterations=12859
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4480356966
+rapl_psys_sum_uj=0
+pid=0 energy=11948410112980 alive=1 kernel=1 cpu_ns=763933000000 mem=260812800 instructions=1625749022596 wakeups=7630203 diski=11010048 disko=154607616 rx=164911 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=306579712
+-------
+timestamp=1386048233398
+iterations=12861
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4481803986
+rapl_psys_sum_uj=0
+pid=0 energy=11953536143975 alive=1 kernel=1 cpu_ns=764197000000 mem=261246976 instructions=1626510228795 wakeups=7630422 diski=11010048 disko=154607616 rx=164911 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=309526611
+-------
+timestamp=1386188995620
+iterations=12862
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4482536346
+rapl_psys_sum_uj=0
+pid=0 energy=11956087983060 alive=1 kernel=1 cpu_ns=764328000000 mem=260485120 instructions=1626889596612 wakeups=7630621 diski=11010048 disko=154607616 rx=164911 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=313587402
+-------
+timestamp=1386333660491
+iterations=12863
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4483288787
+rapl_psys_sum_uj=0
+pid=0 energy=11958759747635 alive=1 kernel=1 cpu_ns=764470000000 mem=260513792 instructions=1627281949527 wakeups=7630816 diski=11010048 disko=154607616 rx=164911 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=316501831
+-------
+timestamp=1386474209116
+iterations=12864
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4484039092
+rapl_psys_sum_uj=0
+pid=0 energy=11961404289840 alive=1 kernel=1 cpu_ns=764607000000 mem=260366336 instructions=1627673857968 wakeups=7631025 diski=11010048 disko=154607616 rx=164911 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=320544312
+-------
+timestamp=1386617940870
+iterations=12866
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4485461820
+rapl_psys_sum_uj=0
+pid=0 energy=11966414761915 alive=1 kernel=1 cpu_ns=764861000000 mem=260562944 instructions=1628421952383 wakeups=7631223 diski=11010048 disko=154607616 rx=164913 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=323484253
+-------
+timestamp=1386758793545
+iterations=12867
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4486217374
+rapl_psys_sum_uj=0
+pid=0 energy=11969081477165 alive=1 kernel=1 cpu_ns=765001000000 mem=260534272 instructions=1628815295433 wakeups=7631424 diski=11010048 disko=154607616 rx=164915 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=327561523
+-------
+timestamp=1386899595156
+iterations=12868
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4486971280
+rapl_psys_sum_uj=0
+pid=0 energy=11971724655555 alive=1 kernel=1 cpu_ns=765137000000 mem=260538368 instructions=1629207931111 wakeups=7631627 diski=11010048 disko=154607616 rx=164915 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=331575195
+-------
+timestamp=1387042977731
+iterations=12869
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4487720242
+rapl_psys_sum_uj=0
+pid=0 energy=11974366247440 alive=1 kernel=1 cpu_ns=765273000000 mem=260636672 instructions=1629600249488 wakeups=7631832 diski=11010048 disko=154607616 rx=164915 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=334528687
+-------
+timestamp=1387183493628
+iterations=12871
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4489140591
+rapl_psys_sum_uj=0
+pid=0 energy=11979363258970 alive=1 kernel=1 cpu_ns=765525000000 mem=260673536 instructions=1630347651794 wakeups=7632044 diski=11010048 disko=154607616 rx=164915 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=338566162
+-------
+timestamp=1387327087612
+iterations=12872
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4489889492
+rapl_psys_sum_uj=0
+pid=0 energy=11982024541855 alive=1 kernel=1 cpu_ns=765665000000 mem=260546560 instructions=1630739908371 wakeups=7632238 diski=11010048 disko=154607616 rx=164915 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=341512939
+-------
+timestamp=1387467767056
+iterations=12873
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4490638332
+rapl_psys_sum_uj=0
+pid=0 energy=11984686523270 alive=1 kernel=1 cpu_ns=765805000000 mem=260530176 instructions=1631132304654 wakeups=7632443 diski=11010048 disko=154607616 rx=164915 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=345544678
+-------
+timestamp=1387612210727
+iterations=12875
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4492088953
+rapl_psys_sum_uj=0
+pid=0 energy=11989867193540 alive=1 kernel=1 cpu_ns=766073000000 mem=261570560 instructions=1631900438708 wakeups=7632673 diski=11010048 disko=154607616 rx=164915 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=348470215
+-------
+timestamp=1387753881594
+iterations=12876
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4492806055
+rapl_psys_sum_uj=0
+pid=0 energy=11992363736215 alive=1 kernel=1 cpu_ns=766200000000 mem=260567040 instructions=1632272747243 wakeups=7632845 diski=11010048 disko=154607616 rx=164915 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=352589233
+-------
+timestamp=1387897957978
+iterations=12877
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4493559350
+rapl_psys_sum_uj=0
+pid=0 energy=11995010312265 alive=1 kernel=1 cpu_ns=766337000000 mem=260366336 instructions=1632665062453 wakeups=7633041 diski=11010048 disko=154607616 rx=164915 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=355542480
+-------
+timestamp=1388038200983
+iterations=12878
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4494308739
+rapl_psys_sum_uj=0
+pid=0 energy=11997657829750 alive=1 kernel=1 cpu_ns=766474000000 mem=260550656 instructions=1633057565950 wakeups=7633241 diski=11010048 disko=154607616 rx=164915 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=359560303
+-------
+timestamp=1388180315323
+iterations=12880
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4495745932
+rapl_psys_sum_uj=0
+pid=0 energy=12002728575510 alive=1 kernel=1 cpu_ns=766734000000 mem=260898816 instructions=1633811715102 wakeups=7633460 diski=11010048 disko=154607616 rx=164915 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=363617310
+-------
+timestamp=1388325348638
+iterations=12881
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4496491720
+rapl_psys_sum_uj=0
+pid=0 energy=12005319746220 alive=1 kernel=1 cpu_ns=766867000000 mem=260550656 instructions=1634196949244 wakeups=7633644 diski=11010048 disko=154607616 rx=164915 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=366537231
+-------
+timestamp=1388466196986
+iterations=12882
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4497247335
+rapl_psys_sum_uj=0
+pid=0 energy=12007989042630 alive=1 kernel=1 cpu_ns=767008000000 mem=260550656 instructions=1634589808526 wakeups=7633850 diski=11010048 disko=154607616 rx=164915 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=370589844
+-------
+timestamp=1388609095528
+iterations=12883
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4498001607
+rapl_psys_sum_uj=0
+pid=0 energy=12010640823060 alive=1 kernel=1 cpu_ns=767146000000 mem=260456448 instructions=1634982164612 wakeups=7634040 diski=11010048 disko=154607616 rx=164915 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=373537964
+-------
+timestamp=1388750403374
+iterations=12885
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4499421345
+rapl_psys_sum_uj=0
+pid=0 energy=12015662732910 alive=1 kernel=1 cpu_ns=767401000000 mem=260562944 instructions=1635731546582 wakeups=7634251 diski=11010048 disko=154607616 rx=164917 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=377586670
+-------
+timestamp=1388894371909
+iterations=12886
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4500173969
+rapl_psys_sum_uj=0
+pid=0 energy=12018334665025 alive=1 kernel=1 cpu_ns=767543000000 mem=260567040 instructions=1636123933005 wakeups=7634454 diski=11010048 disko=154607616 rx=164917 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=380535278
+-------
+timestamp=1389035009118
+iterations=12887
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4500927081
+rapl_psys_sum_uj=0
+pid=0 energy=12020995609365 alive=1 kernel=1 cpu_ns=767683000000 mem=260390912 instructions=1636516121873 wakeups=7634645 diski=11010048 disko=154607616 rx=164917 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=384588989
+-------
+timestamp=1389178617191
+iterations=12889
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4502396379
+rapl_psys_sum_uj=0
+pid=0 energy=12026207051960 alive=1 kernel=1 cpu_ns=767953000000 mem=261664768 instructions=1637288410392 wakeups=7634903 diski=11010048 disko=154624000 rx=164919 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=388652100
+-------
+timestamp=1389322979424
+iterations=12890
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4503112321
+rapl_psys_sum_uj=0
+pid=0 energy=12028659542005 alive=1 kernel=1 cpu_ns=768075000000 mem=260571136 instructions=1637656908401 wakeups=7635074 diski=11010048 disko=154624000 rx=164919 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=391614990
+-------
+timestamp=1389463306670
+iterations=12891
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4503869462
+rapl_psys_sum_uj=0
+pid=0 energy=12031308582445 alive=1 kernel=1 cpu_ns=768212000000 mem=260628480 instructions=1638049716489 wakeups=7635280 diski=11010048 disko=154624000 rx=164919 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=395642700
+-------
+timestamp=1389606874717
+iterations=12892
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4504619217
+rapl_psys_sum_uj=0
+pid=0 energy=12033980210215 alive=1 kernel=1 cpu_ns=768354000000 mem=260616192 instructions=1638442042043 wakeups=7635470 diski=11010048 disko=154624000 rx=164919 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=398597900
+-------
+timestamp=1389746849712
+iterations=12894
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4506053237
+rapl_psys_sum_uj=0
+pid=0 energy=12039068524245 alive=1 kernel=1 cpu_ns=768614000000 mem=260907008 instructions=1639199704849 wakeups=7635690 diski=11010048 disko=154624000 rx=164919 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=402641724
+-------
+timestamp=1389890624410
+iterations=12895
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4506791518
+rapl_psys_sum_uj=0
+pid=0 energy=12041641829545 alive=1 kernel=1 cpu_ns=768746000000 mem=260583424 instructions=1639582365909 wakeups=7635882 diski=11010048 disko=154624000 rx=164919 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=405579346
+-------
+timestamp=1390030856858
+iterations=12896
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4507537184
+rapl_psys_sum_uj=0
+pid=0 energy=12044278780700 alive=1 kernel=1 cpu_ns=768881000000 mem=260575232 instructions=1639974756140 wakeups=7636074 diski=11010048 disko=154624000 rx=164919 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=409612183
+-------
+timestamp=1390173799715
+iterations=12897
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4508288160
+rapl_psys_sum_uj=0
+pid=0 energy=12046930966390 alive=1 kernel=1 cpu_ns=769019000000 mem=260493312 instructions=1640367193278 wakeups=7636276 diski=11010048 disko=154624000 rx=164919 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=412529785
+-------
+timestamp=1390314326064
+iterations=12899
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4509708692
+rapl_psys_sum_uj=0
+pid=0 energy=12051923072180 alive=1 kernel=1 cpu_ns=769270000000 mem=260579328 instructions=1641114614436 wakeups=7636484 diski=11010048 disko=154624000 rx=164919 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=416570679
+-------
+timestamp=1390458388440
+iterations=12900
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4510455945
+rapl_psys_sum_uj=0
+pid=0 energy=12054579127055 alive=1 kernel=1 cpu_ns=769409000000 mem=260579328 instructions=1641506825411 wakeups=7636674 diski=11010048 disko=154624000 rx=164919 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=419494019
+-------
+timestamp=1390598446503
+iterations=12901
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4511202221
+rapl_psys_sum_uj=0
+pid=0 energy=12057255990050 alive=1 kernel=1 cpu_ns=769552000000 mem=260583424 instructions=1641899198010 wakeups=7636870 diski=11010048 disko=154624000 rx=164919 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=423519775
+-------
+timestamp=1390739904715
+iterations=12902
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4511952953
+rapl_psys_sum_uj=0
+pid=0 energy=12059918707855 alive=1 kernel=1 cpu_ns=769692000000 mem=260526080 instructions=1642291741571 wakeups=7637063 diski=11010048 disko=154624000 rx=164919 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=427568359
+-------
+timestamp=1390883735174
+iterations=12904
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4513379222
+rapl_psys_sum_uj=0
+pid=0 energy=12064945411280 alive=1 kernel=1 cpu_ns=769948000000 mem=260591616 instructions=1643041082256 wakeups=7637276 diski=11010048 disko=154624000 rx=164921 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=430490356
+-------
+timestamp=1391024516187
+iterations=12905
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4514132090
+rapl_psys_sum_uj=0
+pid=0 energy=12067586514540 alive=1 kernel=1 cpu_ns=770084000000 mem=260591616 instructions=1643433302908 wakeups=7637464 diski=11010048 disko=154624000 rx=164921 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=434507324
+-------
+timestamp=1391166979841
+iterations=12906
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4514885630
+rapl_psys_sum_uj=0
+pid=0 energy=12070234861900 alive=1 kernel=1 cpu_ns=770221000000 mem=260591616 instructions=1643825972380 wakeups=7637667 diski=11010048 disko=154624000 rx=164921 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=437471069
+-------
+timestamp=1391306662457
+iterations=12908
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4516347970
+rapl_psys_sum_uj=0
+pid=0 energy=12075434284375 alive=1 kernel=1 cpu_ns=770490000000 mem=261824512 instructions=1644596856875 wakeups=7637905 diski=11010048 disko=154624000 rx=164921 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=441506714
+-------
+timestamp=1391450769009
+iterations=12909
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4517055550
+rapl_psys_sum_uj=0
+pid=0 energy=12077885574310 alive=1 kernel=1 cpu_ns=770612000000 mem=260415488 instructions=1644965114862 wakeups=7638075 diski=11010048 disko=154624000 rx=164921 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=444421997
+-------
+timestamp=1391591713111
+iterations=12910
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4517808784
+rapl_psys_sum_uj=0
+pid=0 energy=12080539068070 alive=1 kernel=1 cpu_ns=770750000000 mem=260591616 instructions=1645357813614 wakeups=7638277 diski=11010048 disko=154624000 rx=164921 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=448446045
+-------
+timestamp=1391734408997
+iterations=12911
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4518557563
+rapl_psys_sum_uj=0
+pid=0 energy=12083175688000 alive=1 kernel=1 cpu_ns=770885000000 mem=260591616 instructions=1645750137600 wakeups=7638468 diski=11010048 disko=154624000 rx=164921 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=451408691
+-------
+timestamp=1391875283905
+iterations=12913
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4519992621
+rapl_psys_sum_uj=0
+pid=0 energy=12088283406760 alive=1 kernel=1 cpu_ns=771149000000 mem=260947968 instructions=1646507681352 wakeups=7638692 diski=11010048 disko=154624000 rx=164921 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=455454712
+-------
+timestamp=1392018552429
+iterations=12914
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4520730108
+rapl_psys_sum_uj=0
+pid=0 energy=12090864235685 alive=1 kernel=1 cpu_ns=771282000000 mem=260599808 instructions=1646890847137 wakeups=7638873 diski=11010048 disko=154624000 rx=164921 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=458401245
+-------
+timestamp=1392159791020
+iterations=12915
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4521486516
+rapl_psys_sum_uj=0
+pid=0 energy=12093523230545 alive=1 kernel=1 cpu_ns=771421000000 mem=260599808 instructions=1647283646109 wakeups=7639077 diski=11010048 disko=154624000 rx=164921 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=462422485
+-------
+timestamp=1392300611945
+iterations=12916
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4522239262
+rapl_psys_sum_uj=0
+pid=0 energy=12096165452735 alive=1 kernel=1 cpu_ns=771557000000 mem=260550656 instructions=1647676090547 wakeups=7639273 diski=11010048 disko=154624000 rx=164921 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=466435669
+-------
+timestamp=1392443720843
+iterations=12918
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4523661624
+rapl_psys_sum_uj=0
+pid=0 energy=12101168484050 alive=1 kernel=1 cpu_ns=771810000000 mem=260608000 instructions=1648423696810 wakeups=7639480 diski=11010048 disko=154624000 rx=164921 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=469401367
+-------
+timestamp=1392583948605
+iterations=12919
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4524415652
+rapl_psys_sum_uj=0
+pid=0 energy=12103820542565 alive=1 kernel=1 cpu_ns=771948000000 mem=260603904 instructions=1648816108513 wakeups=7639677 diski=11010048 disko=154624000 rx=164921 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=473428589
+-------
+timestamp=1392727162968
+iterations=12920
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4525160097
+rapl_psys_sum_uj=0
+pid=0 energy=12106461236625 alive=1 kernel=1 cpu_ns=772084000000 mem=260612096 instructions=1649208247325 wakeups=7639859 diski=11010048 disko=154624000 rx=164921 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=476344727
+-------
+timestamp=1392867790790
+iterations=12921
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4525908204
+rapl_psys_sum_uj=0
+pid=0 energy=12109109098420 alive=1 kernel=1 cpu_ns=772221000000 mem=260554752 instructions=1649600819684 wakeups=7640066 diski=11010048 disko=154624000 rx=164923 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=480411499
+-------
+timestamp=1393011098781
+iterations=12923
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4527318665
+rapl_psys_sum_uj=0
+pid=0 energy=12114110975165 alive=1 kernel=1 cpu_ns=772473000000 mem=260608000 instructions=1650349195033 wakeups=7640270 diski=11010048 disko=154624000 rx=164923 tx=74263 comm=*system*
+psu_energy_ac_mcp_machine=483345337
+-------
+timestamp=1393151605131
+iterations=12924
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4528071533
+rapl_psys_sum_uj=0
+pid=0 energy=12116769953550 alive=1 kernel=1 cpu_ns=772612000000 mem=260608000 instructions=1650741990710 wakeups=7640468 diski=11010048 disko=154624000 rx=164924 tx=74264 comm=*system*
+psu_energy_ac_mcp_machine=487392090
+-------
+timestamp=1393294552626
+iterations=12925
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4528825683
+rapl_psys_sum_uj=0
+pid=0 energy=12119417260145 alive=1 kernel=1 cpu_ns=772749000000 mem=260784128 instructions=1651134452029 wakeups=7640660 diski=11010048 disko=154624000 rx=164924 tx=74264 comm=*system*
+psu_energy_ac_mcp_machine=490324951
+-------
+timestamp=1393435386178
+iterations=12927
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4530283690
+rapl_psys_sum_uj=0
+pid=0 energy=12124611064975 alive=1 kernel=1 cpu_ns=773018000000 mem=261664768 instructions=1651904212995 wakeups=7640896 diski=11010048 disko=154624000 rx=164924 tx=74264 comm=*system*
+psu_energy_ac_mcp_machine=494381958
+-------
+timestamp=1393580400534
+iterations=12928
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4531001280
+rapl_psys_sum_uj=0
+pid=0 energy=12127082726120 alive=1 kernel=1 cpu_ns=773142000000 mem=260608000 instructions=1652274545224 wakeups=7641064 diski=11010048 disko=154624000 rx=164924 tx=74264 comm=*system*
+psu_energy_ac_mcp_machine=498343750
+-------
+timestamp=1393723808487
+iterations=12929
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4531767942
+rapl_psys_sum_uj=0
+pid=0 energy=12129848586375 alive=1 kernel=1 cpu_ns=773295000000 mem=260784128 instructions=1652674717275 wakeups=7641281 diski=11010048 disko=154624000 rx=164928 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=501569458
+-------
+timestamp=1393865197672
+iterations=12930
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4532868588
+rapl_psys_sum_uj=0
+pid=0 energy=12134774571360 alive=1 kernel=1 cpu_ns=773542000000 mem=261136384 instructions=1653412914272 wakeups=7641480 diski=11010048 disko=154624000 rx=164928 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=506190308
+-------
+timestamp=1394011447075
+iterations=12932
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4534987971
+rapl_psys_sum_uj=0
+pid=0 energy=12144364702970 alive=1 kernel=1 cpu_ns=774019000000 mem=261464064 instructions=1654853940594 wakeups=7641697 diski=11010048 disko=154624000 rx=164928 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=509565063
+-------
+timestamp=1394152465673
+iterations=12933
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4536086359
+rapl_psys_sum_uj=0
+pid=0 energy=12149290974250 alive=1 kernel=1 cpu_ns=774268000000 mem=261472256 instructions=1655590194850 wakeups=7641887 diski=11010048 disko=154624000 rx=164928 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=514227051
+-------
+timestamp=1394297430735
+iterations=12934
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4537192438
+rapl_psys_sum_uj=0
+pid=0 energy=12154241211010 alive=1 kernel=1 cpu_ns=774521000000 mem=261468160 instructions=1656327242202 wakeups=7642106 diski=11010048 disko=154644480 rx=164929 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=517608643
+-------
+timestamp=1394438928555
+iterations=12935
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4538289483
+rapl_psys_sum_uj=0
+pid=0 energy=12159195023820 alive=1 kernel=1 cpu_ns=774775000000 mem=261443584 instructions=1657064004764 wakeups=7642306 diski=11010048 disko=154644480 rx=164929 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=522201538
+-------
+timestamp=1394580907670
+iterations=12937
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4540413261
+rapl_psys_sum_uj=0
+pid=0 energy=12168809923865 alive=1 kernel=1 cpu_ns=775258000000 mem=261480448 instructions=1658503984773 wakeups=7642530 diski=11010048 disko=154644480 rx=164929 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=526832764
+-------
+timestamp=1394724101028
+iterations=12938
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4541511161
+rapl_psys_sum_uj=0
+pid=0 energy=12173743583600 alive=1 kernel=1 cpu_ns=775508000000 mem=261472256 instructions=1659240716720 wakeups=7642720 diski=11010048 disko=154644480 rx=164931 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=530232666
+-------
+timestamp=1394865610164
+iterations=12939
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4542611991
+rapl_psys_sum_uj=0
+pid=0 energy=12178668914900 alive=1 kernel=1 cpu_ns=775756000000 mem=261480448 instructions=1659977782980 wakeups=7642929 diski=11010048 disko=154644480 rx=164931 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=534866699
+-------
+timestamp=1395009361448
+iterations=12941
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4544752065
+rapl_psys_sum_uj=0
+pid=0 energy=12188358477375 alive=1 kernel=1 cpu_ns=776242000000 mem=262000640 instructions=1661429695475 wakeups=7643151 diski=11010048 disko=154644480 rx=164931 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=538255249
+-------
+timestamp=1395150732410
+iterations=12942
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4545832814
+rapl_psys_sum_uj=0
+pid=0 energy=12193181304935 alive=1 kernel=1 cpu_ns=776482000000 mem=261406720 instructions=1662154260987 wakeups=7643339 diski=11010048 disko=154644480 rx=164931 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=542892944
+-------
+timestamp=1395294994311
+iterations=12943
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4546932179
+rapl_psys_sum_uj=0
+pid=0 energy=12198126305680 alive=1 kernel=1 cpu_ns=776734000000 mem=261435392 instructions=1662891261136 wakeups=7643546 diski=11010048 disko=154644480 rx=164931 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=546257568
+-------
+timestamp=1395436489730
+iterations=12944
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4548030689
+rapl_psys_sum_uj=0
+pid=0 energy=12203055162315 alive=1 kernel=1 cpu_ns=776983000000 mem=261435392 instructions=1663628032463 wakeups=7643738 diski=11010048 disko=154644480 rx=164931 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=550896729
+-------
+timestamp=1395581372190
+iterations=12946
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4550154650
+rapl_psys_sum_uj=0
+pid=0 energy=12212650533045 alive=1 kernel=1 cpu_ns=777462000000 mem=261505024 instructions=1665068106609 wakeups=7643956 diski=11010048 disko=154644480 rx=164931 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=555504883
+-------
+timestamp=1395726202649
+iterations=12947
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4551256334
+rapl_psys_sum_uj=0
+pid=0 energy=12217597233320 alive=1 kernel=1 cpu_ns=777714000000 mem=261500928 instructions=1665805446664 wakeups=7644155 diski=11010048 disko=154644480 rx=164931 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=558909180
+-------
+timestamp=1395867676690
+iterations=12948
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4552355394
+rapl_psys_sum_uj=0
+pid=0 energy=12222526285910 alive=1 kernel=1 cpu_ns=777964000000 mem=261476352 instructions=1666541257182 wakeups=7644355 diski=11010048 disko=154644480 rx=164931 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=563569458
+-------
+timestamp=1396014941174
+iterations=12950
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4554510849
+rapl_psys_sum_uj=0
+pid=0 energy=12232304991605 alive=1 kernel=1 cpu_ns=778458000000 mem=262656000 instructions=1668002998321 wakeups=7644590 diski=11010048 disko=154644480 rx=164931 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=566943481
+-------
+timestamp=1396156606196
+iterations=12951
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4555574203
+rapl_psys_sum_uj=0
+pid=0 energy=12237079204515 alive=1 kernel=1 cpu_ns=778697000000 mem=261488640 instructions=1668718840903 wakeups=7644764 diski=11010048 disko=154644480 rx=164931 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=571563721
+-------
+timestamp=1396300725451
+iterations=12952
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4556673385
+rapl_psys_sum_uj=0
+pid=0 energy=12242016900630 alive=1 kernel=1 cpu_ns=778948000000 mem=261492736 instructions=1669455380126 wakeups=7644974 diski=11010048 disko=154644480 rx=164931 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=576148560
+-------
+timestamp=1396444244058
+iterations=12953
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4557775069
+rapl_psys_sum_uj=0
+pid=0 energy=12246935936585 alive=1 kernel=1 cpu_ns=779195000000 mem=261496832 instructions=1670192187317 wakeups=7645172 diski=11010048 disko=154644480 rx=164931 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=579541992
+-------
+timestamp=1396585380419
+iterations=12955
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4559892560
+rapl_psys_sum_uj=0
+pid=0 energy=12256521757445 alive=1 kernel=1 cpu_ns=779673000000 mem=261496832 instructions=1671631351489 wakeups=7645375 diski=11010048 disko=154644480 rx=164931 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=584161621
+-------
+timestamp=1396729272673
+iterations=12956
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4560991375
+rapl_psys_sum_uj=0
+pid=0 energy=12261460448330 alive=1 kernel=1 cpu_ns=779924000000 mem=261509120 instructions=1672368089666 wakeups=7645573 diski=11010048 disko=154644480 rx=164933 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=587571167
+-------
+timestamp=1396871053705
+iterations=12957
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4562091106
+rapl_psys_sum_uj=0
+pid=0 energy=12266390701470 alive=1 kernel=1 cpu_ns=780173000000 mem=261500928 instructions=1673105140294 wakeups=7645768 diski=11010048 disko=154644480 rx=164933 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=592209473
+-------
+timestamp=1397015359980
+iterations=12958
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4563190471
+rapl_psys_sum_uj=0
+pid=0 energy=12271318420965 alive=1 kernel=1 cpu_ns=780421000000 mem=261476352 instructions=1673842684193 wakeups=7645978 diski=11010048 disko=154644480 rx=164933 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=595593872
+-------
+timestamp=1397157087588
+iterations=12960
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4565316996
+rapl_psys_sum_uj=0
+pid=0 energy=12280929982315 alive=1 kernel=1 cpu_ns=780903000000 mem=261500928 instructions=1675282996463 wakeups=7646192 diski=11010048 disko=154644480 rx=164933 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=600223877
+-------
+timestamp=1397300548801
+iterations=12961
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4566419168
+rapl_psys_sum_uj=0
+pid=0 energy=12285865718005 alive=1 kernel=1 cpu_ns=781153000000 mem=261505024 instructions=1676020143601 wakeups=7646402 diski=11010048 disko=154644480 rx=164933 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=604810425
+-------
+timestamp=1397444617860
+iterations=12962
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4567515725
+rapl_psys_sum_uj=0
+pid=0 energy=12290835264490 alive=1 kernel=1 cpu_ns=781410000000 mem=261505024 instructions=1676757052898 wakeups=7646599 diski=11010048 disko=154644480 rx=164933 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=608210449
+-------
+timestamp=1397587027563
+iterations=12964
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4569650368
+rapl_psys_sum_uj=0
+pid=0 energy=12300510944680 alive=1 kernel=1 cpu_ns=781897000000 mem=261857280 instructions=1678205188936 wakeups=7646826 diski=11010048 disko=154644480 rx=164933 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=612857910
+-------
+timestamp=1397731918605
+iterations=12965
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4570732094
+rapl_psys_sum_uj=0
+pid=0 energy=12305369539140 alive=1 kernel=1 cpu_ns=782141000000 mem=261505024 instructions=1678932907828 wakeups=7647013 diski=11010048 disko=154644480 rx=164933 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=616222046
+-------
+timestamp=1397872985094
+iterations=12966
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4571826942
+rapl_psys_sum_uj=0
+pid=0 energy=12310292581830 alive=1 kernel=1 cpu_ns=782389000000 mem=261509120 instructions=1679669516366 wakeups=7647204 diski=11010048 disko=154644480 rx=164933 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=620878052
+-------
+timestamp=1398017530534
+iterations=12967
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4572922889
+rapl_psys_sum_uj=0
+pid=0 energy=12315236924685 alive=1 kernel=1 cpu_ns=782640000000 mem=261455872 instructions=1680407384937 wakeups=7647403 diski=11010048 disko=154644480 rx=164933 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=624254272
+-------
+timestamp=1398159683924
+iterations=12969
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4575039831
+rapl_psys_sum_uj=0
+pid=0 energy=12324829546530 alive=1 kernel=1 cpu_ns=783119000000 mem=261513216 instructions=1681846909306 wakeups=7647610 diski=11010048 disko=154644480 rx=164933 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=628891357
+-------
+timestamp=1398301194899
+iterations=12970
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4576133458
+rapl_psys_sum_uj=0
+pid=0 energy=12329783451290 alive=1 kernel=1 cpu_ns=783373000000 mem=261517312 instructions=1682583690258 wakeups=7647808 diski=11010048 disko=154644480 rx=164933 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=633493896
+-------
+timestamp=1398444137760
+iterations=12971
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4577228916
+rapl_psys_sum_uj=0
+pid=0 energy=12334728085625 alive=1 kernel=1 cpu_ns=783625000000 mem=261517312 instructions=1683320617125 wakeups=7648012 diski=11010048 disko=154644480 rx=164933 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=636899048
+-------
+timestamp=1398585466043
+iterations=12972
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4578328037
+rapl_psys_sum_uj=0
+pid=0 energy=12339652335425 alive=1 kernel=1 cpu_ns=783873000000 mem=261496832 instructions=1684057467085 wakeups=7648207 diski=11010048 disko=154644480 rx=164933 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=641492798
+-------
+timestamp=1398729414394
+iterations=12974
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4580450045
+rapl_psys_sum_uj=0
+pid=0 energy=12349234605990 alive=1 kernel=1 cpu_ns=784350000000 mem=261517312 instructions=1685496921198 wakeups=7648417 diski=11010048 disko=154644480 rx=164935 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=644874023
+-------
+timestamp=1398870284402
+iterations=12975
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4581549532
+rapl_psys_sum_uj=0
+pid=0 energy=12354188673905 alive=1 kernel=1 cpu_ns=784603000000 mem=261521408 instructions=1686234734781 wakeups=7648615 diski=11010048 disko=154644480 rx=164935 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=649491821
+-------
+timestamp=1399013616469
+iterations=12976
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4582650972
+rapl_psys_sum_uj=0
+pid=0 energy=12359110124280 alive=1 kernel=1 cpu_ns=784850000000 mem=261537792 instructions=1686972024856 wakeups=7648827 diski=11010048 disko=154644480 rx=164935 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=652866699
+-------
+timestamp=1399155301153
+iterations=12978
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4584785188
+rapl_psys_sum_uj=0
+pid=0 energy=12368777079735 alive=1 kernel=1 cpu_ns=785335000000 mem=261955584 instructions=1688420415947 wakeups=7649046 diski=11010048 disko=154644480 rx=164935 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=657548706
+-------
+timestamp=1399300173479
+iterations=12979
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4585869843
+rapl_psys_sum_uj=0
+pid=0 energy=12373620162345 alive=1 kernel=1 cpu_ns=785576000000 mem=261431296 instructions=1689148032469 wakeups=7649240 diski=11010048 disko=154660864 rx=164935 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=662182495
+-------
+timestamp=1399444813995
+iterations=12980
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4586971283
+rapl_psys_sum_uj=0
+pid=0 energy=12378549484070 alive=1 kernel=1 cpu_ns=785825000000 mem=261451776 instructions=1689884896814 wakeups=7649451 diski=11010048 disko=154660864 rx=164935 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=665602051
+-------
+timestamp=1399586197426
+iterations=12981
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4588071197
+rapl_psys_sum_uj=0
+pid=0 energy=12383475781740 alive=1 kernel=1 cpu_ns=786073000000 mem=261464064 instructions=1690622156348 wakeups=7649647 diski=11010048 disko=154660864 rx=164935 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=670244385
+-------
+timestamp=1399729738009
+iterations=12983
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4590192961
+rapl_psys_sum_uj=0
+pid=0 energy=12393063268180 alive=1 kernel=1 cpu_ns=786551000000 mem=261423104 instructions=1692061653636 wakeups=7649854 diski=11010048 disko=154660864 rx=164935 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=673639160
+-------
+timestamp=1399870963572
+iterations=12984
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4591293058
+rapl_psys_sum_uj=0
+pid=0 energy=12398002122455 alive=1 kernel=1 cpu_ns=786802000000 mem=261595136 instructions=1692798424491 wakeups=7650050 diski=11010048 disko=154660864 rx=164935 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=678276489
+-------
+timestamp=1400015612286
+iterations=12985
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4592391629
+rapl_psys_sum_uj=0
+pid=0 energy=12402952060940 alive=1 kernel=1 cpu_ns=787055000000 mem=261545984 instructions=1693535412188 wakeups=7650257 diski=11010048 disko=154660864 rx=164935 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=681653198
+-------
+timestamp=1400157358327
+iterations=12987
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4594548366
+rapl_psys_sum_uj=0
+pid=0 energy=12412737405770 alive=1 kernel=1 cpu_ns=787552000000 mem=262545408 instructions=1694995481154 wakeups=7650486 diski=11010048 disko=154660864 rx=164935 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=686280640
+-------
+timestamp=1400301078557
+iterations=12988
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4595611476
+rapl_psys_sum_uj=0
+pid=0 energy=12417514406605 alive=1 kernel=1 cpu_ns=787790000000 mem=261554176 instructions=1695712881321 wakeups=7650662 diski=11010048 disko=154660864 rx=164935 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=690875488
+-------
+timestamp=1400444621395
+iterations=12989
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4596709620
+rapl_psys_sum_uj=0
+pid=0 energy=12422445517125 alive=1 kernel=1 cpu_ns=788039000000 mem=261574656 instructions=1696450103425 wakeups=7650874 diski=11010048 disko=154660864 rx=164935 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=694288452
+-------
+timestamp=1400585652026
+iterations=12990
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4597809412
+rapl_psys_sum_uj=0
+pid=0 energy=12427373683965 alive=1 kernel=1 cpu_ns=788288000000 mem=261443584 instructions=1697186736793 wakeups=7651066 diski=11010048 disko=154660864 rx=164935 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=698873657
+-------
+timestamp=1400730800251
+iterations=12992
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4599929223
+rapl_psys_sum_uj=0
+pid=0 energy=12436969295600 alive=1 kernel=1 cpu_ns=788768000000 mem=261570560 instructions=1698625859120 wakeups=7651266 diski=11010048 disko=154660864 rx=164937 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=702284180
+-------
+timestamp=1400871386987
+iterations=12993
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4601028893
+rapl_psys_sum_uj=0
+pid=0 energy=12441897677975 alive=1 kernel=1 cpu_ns=789017000000 mem=261660672 instructions=1699362535595 wakeups=7651457 diski=11010048 disko=154660864 rx=164937 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=706922729
+-------
+timestamp=1401015105663
+iterations=12994
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4602128197
+rapl_psys_sum_uj=0
+pid=0 energy=12446824911115 alive=1 kernel=1 cpu_ns=789266000000 mem=261451776 instructions=1700098982223 wakeups=7651658 diski=11010048 disko=154660864 rx=164937 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=710302490
+-------
+timestamp=1401156213228
+iterations=12995
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4603227867
+rapl_psys_sum_uj=0
+pid=0 energy=12451764426680 alive=1 kernel=1 cpu_ns=789516000000 mem=261521408 instructions=1700836885336 wakeups=7651850 diski=11010048 disko=154660864 rx=164937 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=714968872
+-------
+timestamp=1401302825680
+iterations=12997
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4605351707
+rapl_psys_sum_uj=0
+pid=0 energy=12461344730960 alive=1 kernel=1 cpu_ns=789992000000 mem=261402624 instructions=1702276946192 wakeups=7652064 diski=11010048 disko=154660864 rx=164937 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=719607422
+-------
+timestamp=1401446561075
+iterations=12998
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4606452537
+rapl_psys_sum_uj=0
+pid=0 energy=12466256312250 alive=1 kernel=1 cpu_ns=790237000000 mem=261382144 instructions=1703014262450 wakeups=7652273 diski=11010048 disko=154660864 rx=164937 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=723026367
+-------
+timestamp=1401587650184
+iterations=12999
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4607549949
+rapl_psys_sum_uj=0
+pid=0 energy=12471205255080 alive=1 kernel=1 cpu_ns=790490000000 mem=261365760 instructions=1703751051016 wakeups=7652470 diski=11010048 disko=154660864 rx=164937 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=727640869
+-------
+timestamp=1401732704015
+iterations=13001
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4609680441
+rapl_psys_sum_uj=0
+pid=0 energy=12480872794290 alive=1 kernel=1 cpu_ns=790977000000 mem=261718016 instructions=1705197558858 wakeups=7652689 diski=11010048 disko=154660864 rx=164937 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=731005981
+-------
+timestamp=1401873860909
+iterations=13002
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4610769979
+rapl_psys_sum_uj=0
+pid=0 energy=12485762238860 alive=1 kernel=1 cpu_ns=791225000000 mem=261324800 instructions=1705927447772 wakeups=7652890 diski=11010048 disko=154660864 rx=164937 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=735690552
+-------
+timestamp=1402018219496
+iterations=13003
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4611868550
+rapl_psys_sum_uj=0
+pid=0 energy=12490701156385 alive=1 kernel=1 cpu_ns=791476000000 mem=261574656 instructions=1706664231277 wakeups=7653089 diski=11010048 disko=154660864 rx=164937 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=739102539
+-------
+timestamp=1402159712391
+iterations=13004
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4612967060
+rapl_psys_sum_uj=0
+pid=0 energy=12495636462775 alive=1 kernel=1 cpu_ns=791725000000 mem=261513216 instructions=1707402292555 wakeups=7653290 diski=11010048 disko=154660864 rx=164937 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=743719971
+-------
+timestamp=1402301458045
+iterations=13006
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4615086932
+rapl_psys_sum_uj=0
+pid=0 energy=12505242359650 alive=1 kernel=1 cpu_ns=792206000000 mem=261570560 instructions=1708842471930 wakeups=7653503 diski=11010048 disko=154660864 rx=164937 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=748341797
+-------
+timestamp=1402444731477
+iterations=13007
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4616183794
+rapl_psys_sum_uj=0
+pid=0 energy=12510183524605 alive=1 kernel=1 cpu_ns=792457000000 mem=261570560 instructions=1709579704921 wakeups=7653713 diski=11010048 disko=154660864 rx=164937 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=751757324
+-------
+timestamp=1402586232403
+iterations=13008
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4617281694
+rapl_psys_sum_uj=0
+pid=0 energy=12515114120355 alive=1 kernel=1 cpu_ns=792706000000 mem=261582848 instructions=1710316824071 wakeups=7653912 diski=11010048 disko=154660864 rx=164937 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=756381226
+-------
+timestamp=1402730238854
+iterations=13010
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4619444169
+rapl_psys_sum_uj=0
+pid=0 energy=12524883360370 alive=1 kernel=1 cpu_ns=793199000000 mem=262803456 instructions=1711777672074 wakeups=7654153 diski=11010048 disko=154660864 rx=164939 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=759775269
+-------
+timestamp=1402874344783
+iterations=13011
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4620501664
+rapl_psys_sum_uj=0
+pid=0 energy=12529597501410 alive=1 kernel=1 cpu_ns=793433000000 mem=261574656 instructions=1712486500282 wakeups=7654331 diski=11010048 disko=154660864 rx=164939 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=764424561
+-------
+timestamp=1403019325611
+iterations=13012
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4621603653
+rapl_psys_sum_uj=0
+pid=0 energy=12534514548740 alive=1 kernel=1 cpu_ns=793684000000 mem=261574656 instructions=1713218909748 wakeups=7654518 diski=11010048 disko=154660864 rx=164939 tx=74268 comm=*system*
+psu_energy_ac_mcp_machine=767809814
+-------
+timestamp=1403159714581
+iterations=13013
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4622705825
+rapl_psys_sum_uj=0
+pid=0 energy=12539454772540 alive=1 kernel=1 cpu_ns=793938000000 mem=261574656 instructions=1713952954508 wakeups=7654726 diski=11010048 disko=154660864 rx=164940 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=772458252
+-------
+timestamp=1403301609040
+iterations=13015
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4624840773
+rapl_psys_sum_uj=0
+pid=0 energy=12549043935745 alive=1 kernel=1 cpu_ns=794420000000 mem=261398528 instructions=1715388787149 wakeups=7654947 diski=11010048 disko=154660864 rx=164940 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=777077881
+-------
+timestamp=1403446817115
+iterations=13016
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4625937879
+rapl_psys_sum_uj=0
+pid=0 energy=12553932309315 alive=1 kernel=1 cpu_ns=794669000000 mem=261398528 instructions=1716117461863 wakeups=7655149 diski=11010048 disko=154660864 rx=164940 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=780467041
+-------
+timestamp=1403588223850
+iterations=13017
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4627038953
+rapl_psys_sum_uj=0
+pid=0 energy=12558831451420 alive=1 kernel=1 cpu_ns=794917000000 mem=261398528 instructions=1716849290284 wakeups=7655341 diski=11010048 disko=154660864 rx=164940 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=785111572
+-------
+timestamp=1403733917419
+iterations=13018
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4628139233
+rapl_psys_sum_uj=0
+pid=0 energy=12563732700050 alive=1 kernel=1 cpu_ns=795164000000 mem=261574656 instructions=1717582540010 wakeups=7655540 diski=11010048 disko=154660864 rx=164940 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=788508301
+-------
+timestamp=1403874999682
+iterations=13020
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4630263011
+rapl_psys_sum_uj=0
+pid=0 energy=12573279763315 alive=1 kernel=1 cpu_ns=795642000000 mem=261574656 instructions=1719013952663 wakeups=7655754 diski=11010048 disko=154660864 rx=164940 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=793153076
+-------
+timestamp=1404020239507
+iterations=13021
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4631363780
+rapl_psys_sum_uj=0
+pid=0 energy=12578189813475 alive=1 kernel=1 cpu_ns=795891000000 mem=261599232 instructions=1719746962695 wakeups=7655952 diski=11010048 disko=154660864 rx=164940 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=797760864
+-------
+timestamp=1404164769228
+iterations=13022
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4632467051
+rapl_psys_sum_uj=0
+pid=0 energy=12583109338130 alive=1 kernel=1 cpu_ns=796140000000 mem=261595136 instructions=1720481867626 wakeups=7656159 diski=11010048 disko=154660864 rx=164940 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=801161499
+-------
+timestamp=1404307118785
+iterations=13024
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4634601938
+rapl_psys_sum_uj=0
+pid=0 energy=12592728419230 alive=1 kernel=1 cpu_ns=796624000000 mem=261947392 instructions=1721921683846 wakeups=7656389 diski=11010048 disko=154660864 rx=164940 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=805797363
+-------
+timestamp=1404452091619
+iterations=13025
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4635685983
+rapl_psys_sum_uj=0
+pid=0 energy=12597565216625 alive=1 kernel=1 cpu_ns=796867000000 mem=261595136 instructions=1722646043325 wakeups=7656586 diski=11010048 disko=154677248 rx=164940 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=809178345
+-------
+timestamp=1404593068397
+iterations=13026
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4636810738
+rapl_psys_sum_uj=0
+pid=0 energy=12602568694175 alive=1 kernel=1 cpu_ns=797122000000 mem=261607424 instructions=1723391738835 wakeups=7656900 diski=11010048 disko=158068736 rx=164940 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=813888672
+-------
+timestamp=1404738104712
+iterations=13027
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4637911384
+rapl_psys_sum_uj=0
+pid=0 energy=12607498797160 alive=1 kernel=1 cpu_ns=797375000000 mem=261603328 instructions=1724124759432 wakeups=7657104 diski=11010048 disko=158068736 rx=164940 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=817273193
+-------
+timestamp=1404878737646
+iterations=13029
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4640026800
+rapl_psys_sum_uj=0
+pid=0 energy=12617032665030 alive=1 kernel=1 cpu_ns=797851000000 mem=261607424 instructions=1725555533006 wakeups=7657318 diski=11010048 disko=158068736 rx=164942 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=821918457
+-------
+timestamp=1405021376473
+iterations=13030
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4641122014
+rapl_psys_sum_uj=0
+pid=0 energy=12621947466215 alive=1 kernel=1 cpu_ns=798101000000 mem=261607424 instructions=1726288493243 wakeups=7657516 diski=11010048 disko=158068736 rx=164942 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=826516846
+-------
+timestamp=1405165200841
+iterations=13031
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4642223942
+rapl_psys_sum_uj=0
+pid=0 energy=12626880398075 alive=1 kernel=1 cpu_ns=798354000000 mem=261607424 instructions=1727022079615 wakeups=7657724 diski=11010048 disko=158068736 rx=164942 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=829915283
+-------
+timestamp=1405306296504
+iterations=13033
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4644388126
+rapl_psys_sum_uj=0
+pid=0 energy=12636626480910 alive=1 kernel=1 cpu_ns=798847000000 mem=262840320 instructions=1728478296182 wakeups=7657978 diski=11010048 disko=158068736 rx=164942 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=834561768
+-------
+timestamp=1405452307273
+iterations=13034
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4645444522
+rapl_psys_sum_uj=0
+pid=0 energy=12641337725650 alive=1 kernel=1 cpu_ns=799080000000 mem=261607424 instructions=1729187545130 wakeups=7658153 diski=11010048 disko=158068736 rx=164942 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=837933594
+-------
+timestamp=1405593109504
+iterations=13035
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4646540591
+rapl_psys_sum_uj=0
+pid=0 energy=12646251578215 alive=1 kernel=1 cpu_ns=799330000000 mem=261611520 instructions=1729920315643 wakeups=7658359 diski=11010048 disko=158068736 rx=164942 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=842583252
+-------
+timestamp=1405738265727
+iterations=13036
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4647635683
+rapl_psys_sum_uj=0
+pid=0 energy=12651159771570 alive=1 kernel=1 cpu_ns=799579000000 mem=261611520 instructions=1730652954314 wakeups=7658551 diski=11010048 disko=158068736 rx=164942 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=845974976
+-------
+timestamp=1405879265569
+iterations=13038
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4649759095
+rapl_psys_sum_uj=0
+pid=0 energy=12660739871705 alive=1 kernel=1 cpu_ns=800062000000 mem=261640192 instructions=1732085974341 wakeups=7658765 diski=11010048 disko=158068736 rx=164942 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=850625610
+-------
+timestamp=1406021396388
+iterations=13039
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4650853150
+rapl_psys_sum_uj=0
+pid=0 energy=12665614453270 alive=1 kernel=1 cpu_ns=800306000000 mem=261533696 instructions=1732816890654 wakeups=7658960 diski=11010048 disko=158068736 rx=164942 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=855254883
+-------
+timestamp=1406165558790
+iterations=13040
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4651955505
+rapl_psys_sum_uj=0
+pid=0 energy=12670554247830 alive=1 kernel=1 cpu_ns=800560000000 mem=261541888 instructions=1733550849566 wakeups=7659165 diski=11010048 disko=158068736 rx=164942 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=858667603
+-------
+timestamp=1406306697980
+iterations=13041
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4653054748
+rapl_psys_sum_uj=0
+pid=0 energy=12675474793040 alive=1 kernel=1 cpu_ns=800812000000 mem=261640192 instructions=1734282958608 wakeups=7659364 diski=11010048 disko=158068736 rx=164942 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=863290405
+-------
+timestamp=1406450256026
+iterations=13043
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4655177245
+rapl_psys_sum_uj=0
+pid=0 energy=12685036667945 alive=1 kernel=1 cpu_ns=801293000000 mem=261627904 instructions=1735714333589 wakeups=7659581 diski=11010048 disko=158068736 rx=164942 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=866662720
+-------
+timestamp=1406591585535
+iterations=13044
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4656274535
+rapl_psys_sum_uj=0
+pid=0 energy=12689955481965 alive=1 kernel=1 cpu_ns=801544000000 mem=261644288 instructions=1736447096393 wakeups=7659783 diski=11010048 disko=158068736 rx=164942 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=871289795
+-------
+timestamp=1406735567031
+iterations=13045
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4657371641
+rapl_psys_sum_uj=0
+pid=0 energy=12694876814760 alive=1 kernel=1 cpu_ns=801795000000 mem=261619712 instructions=1737180362952 wakeups=7659980 diski=11010048 disko=158068736 rx=164942 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=874635864
+-------
+timestamp=1406876626101
+iterations=13047
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4659524411
+rapl_psys_sum_uj=0
+pid=0 energy=12704606036880 alive=1 kernel=1 cpu_ns=802290000000 mem=262508544 instructions=1738631207376 wakeups=7660223 diski=11010048 disko=158068736 rx=164944 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=879254150
+-------
+timestamp=1407021362587
+iterations=13048
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4660587521
+rapl_psys_sum_uj=0
+pid=0 energy=12709350169560 alive=1 kernel=1 cpu_ns=802526000000 mem=261574656 instructions=1739344033912 wakeups=7660398 diski=11010048 disko=158068736 rx=164944 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=883894165
+-------
+timestamp=1407166781327
+iterations=13049
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4661687557
+rapl_psys_sum_uj=0
+pid=0 energy=12714271686245 alive=1 kernel=1 cpu_ns=802778000000 mem=261722112 instructions=1740076337249 wakeups=7660590 diski=11010048 disko=158068736 rx=164944 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=887283081
+-------
+timestamp=1407307809078
+iterations=13050
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4662787288
+rapl_psys_sum_uj=0
+pid=0 energy=12719201690335 alive=1 kernel=1 cpu_ns=803029000000 mem=261550080 instructions=1740811338067 wakeups=7660797 diski=11010048 disko=158068736 rx=164944 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=891910889
+-------
+timestamp=1407453452952
+iterations=13052
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4664910762
+rapl_psys_sum_uj=0
+pid=0 energy=12728736806760 alive=1 kernel=1 cpu_ns=803505000000 mem=261513216 instructions=1742242361352 wakeups=7661002 diski=11010048 disko=158068736 rx=164944 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=895320679
+-------
+timestamp=1407594065771
+iterations=13053
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4666012507
+rapl_psys_sum_uj=0
+pid=0 energy=12733671171785 alive=1 kernel=1 cpu_ns=803759000000 mem=261488640 instructions=1742975234357 wakeups=7661207 diski=11010048 disko=158068736 rx=164944 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=899962402
+-------
+timestamp=1407738289909
+iterations=13054
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4667114435
+rapl_psys_sum_uj=0
+pid=0 energy=12738584124105 alive=1 kernel=1 cpu_ns=804010000000 mem=261591040 instructions=1743706824821 wakeups=7661396 diski=11010048 disko=158068736 rx=164944 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=903371704
+-------
+timestamp=1407879536694
+iterations=13055
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4668213678
+rapl_psys_sum_uj=0
+pid=0 energy=12743502261705 alive=1 kernel=1 cpu_ns=804261000000 mem=261591040 instructions=1744439452341 wakeups=7661602 diski=11010048 disko=158068736 rx=164944 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=908012695
+-------
+timestamp=1408022401869
+iterations=13057
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4670336053
+rapl_psys_sum_uj=0
+pid=0 energy=12753050256690 alive=1 kernel=1 cpu_ns=804739000000 mem=261636096 instructions=1745871051338 wakeups=7661810 diski=11010048 disko=158068736 rx=164944 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=912651123
+-------
+timestamp=1408167791047
+iterations=13058
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4671437859
+rapl_psys_sum_uj=0
+pid=0 energy=12757979644635 alive=1 kernel=1 cpu_ns=804990000000 mem=261603328 instructions=1746605928927 wakeups=7662006 diski=11010048 disko=158068736 rx=164944 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=916047729
+-------
+timestamp=1408308959166
+iterations=13059
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4672537651
+rapl_psys_sum_uj=0
+pid=0 energy=12762916416600 alive=1 kernel=1 cpu_ns=805243000000 mem=261558272 instructions=1747340283320 wakeups=7662222 diski=11010048 disko=158068736 rx=164944 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=920666870
+-------
+timestamp=1408454820828
+iterations=13061
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4674656486
+rapl_psys_sum_uj=0
+pid=0 energy=12772477066205 alive=1 kernel=1 cpu_ns=805721000000 mem=261652480 instructions=1748774413241 wakeups=7662439 diski=11010048 disko=158068736 rx=164944 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=924050171
+-------
+timestamp=1408595756772
+iterations=13062
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4675748343
+rapl_psys_sum_uj=0
+pid=0 energy=12777370361965 alive=1 kernel=1 cpu_ns=805970000000 mem=261623808 instructions=1749504072393 wakeups=7662628 diski=11010048 disko=158068736 rx=164944 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=928691040
+-------
+timestamp=1408740329152
+iterations=13063
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4676847708
+rapl_psys_sum_uj=0
+pid=0 energy=12782262552325 alive=1 kernel=1 cpu_ns=806216000000 mem=261550080 instructions=1750236510465 wakeups=7662820 diski=11010048 disko=158068736 rx=164946 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=933271240
+-------
+timestamp=1408885532168
+iterations=13064
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4677947500
+rapl_psys_sum_uj=0
+pid=0 energy=12787177733680 alive=1 kernel=1 cpu_ns=806466000000 mem=261537792 instructions=1750969546736 wakeups=7663027 diski=11010048 disko=158068736 rx=164946 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=936686401
+-------
+timestamp=1409026679505
+iterations=13066
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4680071217
+rapl_psys_sum_uj=0
+pid=0 energy=12796727540185 alive=1 kernel=1 cpu_ns=806945000000 mem=261664768 instructions=1752400508037 wakeups=7663241 diski=11010048 disko=158068736 rx=164946 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=941310303
+-------
+timestamp=1409170607417
+iterations=13067
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4681172657
+rapl_psys_sum_uj=0
+pid=0 energy=12801663325230 alive=1 kernel=1 cpu_ns=807199000000 mem=261681152 instructions=1753133665046 wakeups=7663440 diski=11010048 disko=158068736 rx=164946 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=944705566
+-------
+timestamp=1409311627587
+iterations=13068
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4682274158
+rapl_psys_sum_uj=0
+pid=0 energy=12806578587020 alive=1 kernel=1 cpu_ns=807448000000 mem=261701632 instructions=1753867717404 wakeups=7663651 diski=11010048 disko=158068736 rx=164946 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=949324219
+-------
+timestamp=1409457386649
+iterations=13070
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4684416308
+rapl_psys_sum_uj=0
+pid=0 energy=12816250861160 alive=1 kernel=1 cpu_ns=807938000000 mem=262164480 instructions=1755312172232 wakeups=7663884 diski=11010048 disko=158093312 rx=164946 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=952739258
+-------
+timestamp=1409598712427
+iterations=13071
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4685498034
+rapl_psys_sum_uj=0
+pid=0 energy=12821063893710 alive=1 kernel=1 cpu_ns=808181000000 mem=261644288 instructions=1756031778742 wakeups=7664066 diski=11010048 disko=158093312 rx=164946 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=957396851
+-------
+timestamp=1409741288891
+iterations=13072
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4686598803
+rapl_psys_sum_uj=0
+pid=0 energy=12825973564515 alive=1 kernel=1 cpu_ns=808430000000 mem=261697536 instructions=1756764712903 wakeups=7664263 diski=11010048 disko=158093312 rx=164946 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=961975342
+-------
+timestamp=1409885196489
+iterations=13073
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4687697740
+rapl_psys_sum_uj=0
+pid=0 energy=12830882102310 alive=1 kernel=1 cpu_ns=808679000000 mem=261685248 instructions=1757497420462 wakeups=7664455 diski=11010048 disko=158093312 rx=164946 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=965379883
+-------
+timestamp=1410026841904
+iterations=13075
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4689820786
+rapl_psys_sum_uj=0
+pid=0 energy=12840438936615 alive=1 kernel=1 cpu_ns=809159000000 mem=261644288 instructions=1758928787323 wakeups=7664663 diski=11010048 disko=158093312 rx=164946 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=970016968
+-------
+timestamp=1410170354818
+iterations=13076
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4690919662
+rapl_psys_sum_uj=0
+pid=0 energy=12845357285845 alive=1 kernel=1 cpu_ns=809410000000 mem=261541888 instructions=1759661457169 wakeups=7664853 diski=11010048 disko=158093312 rx=164946 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=973402100
+-------
+timestamp=1410310991565
+iterations=13077
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4692023971
+rapl_psys_sum_uj=0
+pid=0 energy=12850287926470 alive=1 kernel=1 cpu_ns=809662000000 mem=261451776 instructions=1760395585294 wakeups=7665061 diski=11010048 disko=158093312 rx=164946 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=978043823
+-------
+timestamp=1410456309631
+iterations=13078
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4693122970
+rapl_psys_sum_uj=0
+pid=0 energy=12855201439405 alive=1 kernel=1 cpu_ns=809912000000 mem=261582848 instructions=1761128287881 wakeups=7665251 diski=11010048 disko=158093312 rx=164946 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=981411865
+-------
+timestamp=1410597297564
+iterations=13080
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4695247908
+rapl_psys_sum_uj=0
+pid=0 energy=12864751972745 alive=1 kernel=1 cpu_ns=810390000000 mem=261619712 instructions=1762560394549 wakeups=7665465 diski=11010048 disko=158093312 rx=164946 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=986060547
+-------
+timestamp=1410741918871
+iterations=13081
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4696349836
+rapl_psys_sum_uj=0
+pid=0 energy=12869646403640 alive=1 kernel=1 cpu_ns=810636000000 mem=261525504 instructions=1763293280728 wakeups=7665671 diski=11010048 disko=158093312 rx=164948 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=990658081
+-------
+timestamp=1410885978101
+iterations=13082
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4697450605
+rapl_psys_sum_uj=0
+pid=0 energy=12874524545840 alive=1 kernel=1 cpu_ns=810879000000 mem=261521408 instructions=1764025909168 wakeups=7665865 diski=11010048 disko=158093312 rx=164948 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=994077881
+-------
+timestamp=1411028572119
+iterations=13084
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4699585126
+rapl_psys_sum_uj=0
+pid=0 energy=12884117177095 alive=1 kernel=1 cpu_ns=811359000000 mem=262000640 instructions=1765464435419 wakeups=7666093 diski=11010048 disko=158093312 rx=164948 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=998744141
+-------
+timestamp=1411173304519
+iterations=13085
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4700671856
+rapl_psys_sum_uj=0
+pid=0 energy=12888956165615 alive=1 kernel=1 cpu_ns=811602000000 mem=261636096 instructions=1766189233123 wakeups=7666284 diski=11010048 disko=158093312 rx=164948 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=1002133789
+-------
+timestamp=1411314374481
+iterations=13086
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4701773967
+rapl_psys_sum_uj=0
+pid=0 energy=12893864541230 alive=1 kernel=1 cpu_ns=811850000000 mem=261697536 instructions=1766922908246 wakeups=7666497 diski=11010048 disko=158093312 rx=164948 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=1006752075
+-------
+timestamp=1411458648228
+iterations=13087
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4702872172
+rapl_psys_sum_uj=0
+pid=0 energy=12898797108010 alive=1 kernel=1 cpu_ns=812103000000 mem=261611520 instructions=1767656421602 wakeups=7666689 diski=11010048 disko=158093312 rx=164948 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=1010136963
+-------
+timestamp=1411599146745
+iterations=13089
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4704994729
+rapl_psys_sum_uj=0
+pid=0 energy=12908341370285 alive=1 kernel=1 cpu_ns=812581000000 mem=261574656 instructions=1769087274057 wakeups=7666908 diski=11010048 disko=158093312 rx=164948 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=1014754150
+-------
+timestamp=1411741801568
+iterations=13090
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4706092019
+rapl_psys_sum_uj=0
+pid=0 energy=12913255741275 alive=1 kernel=1 cpu_ns=812830000000 mem=261562368 instructions=1769821148255 wakeups=7667116 diski=11010048 disko=158093312 rx=164948 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=1019352051
+-------
+timestamp=1411885845896
+iterations=13091
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4707190224
+rapl_psys_sum_uj=0
+pid=0 energy=12918160085460 alive=1 kernel=1 cpu_ns=813078000000 mem=261562368 instructions=1770554017092 wakeups=7667314 diski=11010048 disko=158093312 rx=164948 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=1022749146
+-------
+timestamp=1412027102410
+iterations=13093
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4709355018
+rapl_psys_sum_uj=0
+pid=0 energy=12927898838385 alive=1 kernel=1 cpu_ns=813572000000 mem=262938624 instructions=1772007767677 wakeups=7667559 diski=11010048 disko=158093312 rx=164948 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=1027378662
+-------
+timestamp=1412171049395
+iterations=13094
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4710418677
+rapl_psys_sum_uj=0
+pid=0 energy=12932632593205 alive=1 kernel=1 cpu_ns=813808000000 mem=261677056 instructions=1772718518641 wakeups=7667738 diski=11010048 disko=158093312 rx=164948 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=1030791016
+-------
+timestamp=1412312636003
+iterations=13095
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4711521399
+rapl_psys_sum_uj=0
+pid=0 energy=12937547260685 alive=1 kernel=1 cpu_ns=814057000000 mem=261697536 instructions=1773452452137 wakeups=7667946 diski=11010048 disko=158093312 rx=164948 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=1035430908
+-------
+timestamp=1412456637505
+iterations=13096
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4712621923
+rapl_psys_sum_uj=0
+pid=0 energy=12942456022100 alive=1 kernel=1 cpu_ns=814306000000 mem=261738496 instructions=1774185204420 wakeups=7668148 diski=11010048 disko=158093312 rx=164948 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=1038827881
+-------
+timestamp=1412599903876
+iterations=13098
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4714743076
+rapl_psys_sum_uj=0
+pid=0 energy=12952017219575 alive=1 kernel=1 cpu_ns=814787000000 mem=261607424 instructions=1775616443915 wakeups=7668339 diski=11010048 disko=158093312 rx=164948 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=1043459717
+-------
+timestamp=1412742527281
+iterations=13099
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4715839572
+rapl_psys_sum_uj=0
+pid=0 energy=12956929462520 alive=1 kernel=1 cpu_ns=815037000000 mem=261734400 instructions=1776348892504 wakeups=7668537 diski=11010048 disko=158093312 rx=164950 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=1048041504
+-------
+timestamp=1412887866242
+iterations=13100
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4716943148
+rapl_psys_sum_uj=0
+pid=0 energy=12961860831455 alive=1 kernel=1 cpu_ns=815291000000 mem=261632000 instructions=1777081166291 wakeups=7668733 diski=11010048 disko=158093312 rx=164950 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=1051450317
+-------
+timestamp=1413029287739
+iterations=13101
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4718045137
+rapl_psys_sum_uj=0
+pid=0 energy=12966762456600 alive=1 kernel=1 cpu_ns=815539000000 mem=261652480 instructions=1777813491320 wakeups=7668944 diski=11010048 disko=158093312 rx=164950 tx=74269 comm=*system*
+psu_energy_ac_mcp_machine=1056100830
+-------
+timestamp=1413172861063
+iterations=13103
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4720171479
+rapl_psys_sum_uj=0
+pid=0 energy=12976313058475 alive=1 kernel=1 cpu_ns=816017000000 mem=261632000 instructions=1779245611695 wakeups=7669163 diski=11010048 disko=158093312 rx=164951 tx=74270 comm=*system*
+psu_energy_ac_mcp_machine=1059479614
+-------
+timestamp=1413313256889
+iterations=13104
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4721273041
+rapl_psys_sum_uj=0
+pid=0 energy=12981239136260 alive=1 kernel=1 cpu_ns=816268000000 mem=261619712 instructions=1779979827252 wakeups=7669358 diski=11010048 disko=158093312 rx=164951 tx=74270 comm=*system*
+psu_energy_ac_mcp_machine=1064093994
+-------
+timestamp=1413456682584
+iterations=13105
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4722371856
+rapl_psys_sum_uj=0
+pid=0 energy=12986144320620 alive=1 kernel=1 cpu_ns=816516000000 mem=261607424 instructions=1780712864124 wakeups=7669571 diski=11010048 disko=158093312 rx=164951 tx=74270 comm=*system*
+psu_energy_ac_mcp_machine=1067459595
+-------
+timestamp=1413599271034
+iterations=13107
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4724522612
+rapl_psys_sum_uj=0
+pid=0 energy=12995831132900 alive=1 kernel=1 cpu_ns=817006000000 mem=262463488 instructions=1782160226580 wakeups=7669797 diski=11010048 disko=158093312 rx=164951 tx=74270 comm=*system*
+psu_energy_ac_mcp_machine=1072089600
+-------
+timestamp=1413745547239
+iterations=13108
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4725585356
+rapl_psys_sum_uj=0
+pid=0 energy=13000524766590 alive=1 kernel=1 cpu_ns=817248000000 mem=262144000 instructions=1782856953318 wakeups=7670014 diski=11010048 disko=158093312 rx=164955 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1076882813
+-------
+timestamp=1413891017969
+iterations=13109
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4727030546
+rapl_psys_sum_uj=0
+pid=0 energy=13007593801065 alive=1 kernel=1 cpu_ns=817606000000 mem=262320128 instructions=1783912760213 wakeups=7670200 diski=11010048 disko=158093312 rx=164955 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1080693726
+-------
+timestamp=1414033191625
+iterations=13110
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4728488553
+rapl_psys_sum_uj=0
+pid=0 energy=13014706108725 alive=1 kernel=1 cpu_ns=817967000000 mem=262471680 instructions=1784974221745 wakeups=7670402 diski=11010048 disko=158093312 rx=164955 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1085897217
+-------
+timestamp=1414180823441
+iterations=13112
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4731344509
+rapl_psys_sum_uj=0
+pid=0 energy=13028650177980 alive=1 kernel=1 cpu_ns=818668000000 mem=262475776 instructions=1787062035596 wakeups=7670603 diski=11010048 disko=158093312 rx=164955 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1089752808
+-------
+timestamp=1414323640238
+iterations=13113
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4732793300
+rapl_psys_sum_uj=0
+pid=0 energy=13035691004740 alive=1 kernel=1 cpu_ns=819027000000 mem=262582272 instructions=1788111200948 wakeups=7670793 diski=11010048 disko=158093312 rx=164955 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1094925171
+-------
+timestamp=1414468436321
+iterations=13114
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4734255153
+rapl_psys_sum_uj=0
+pid=0 energy=13042816355955 alive=1 kernel=1 cpu_ns=819389000000 mem=262590464 instructions=1789174271191 wakeups=7670998 diski=11010048 disko=158113792 rx=164955 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1100130615
+-------
+timestamp=1414620391554
+iterations=13116
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4737100977
+rapl_psys_sum_uj=0
+pid=0 energy=13056721511440 alive=1 kernel=1 cpu_ns=820091000000 mem=262590464 instructions=1791253302288 wakeups=7671205 diski=11010048 disko=158113792 rx=164955 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1103961670
+-------
+timestamp=1414762887204
+iterations=13117
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4738557458
+rapl_psys_sum_uj=0
+pid=0 energy=13063776066205 alive=1 kernel=1 cpu_ns=820447000000 mem=262565888 instructions=1792308213241 wakeups=7671391 diski=11010048 disko=158113792 rx=164957 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1109151245
+-------
+timestamp=1414905006468
+iterations=13118
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4740018029
+rapl_psys_sum_uj=0
+pid=0 energy=13070890413910 alive=1 kernel=1 cpu_ns=820811000000 mem=262561792 instructions=1793367082782 wakeups=7671587 diski=11010048 disko=158113792 rx=164957 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1114359619
+-------
+timestamp=1415051535837
+iterations=13119
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4741472862
+rapl_psys_sum_uj=0
+pid=0 energy=13077985866560 alive=1 kernel=1 cpu_ns=821172000000 mem=262483968 instructions=1794425173312 wakeups=7671780 diski=11010048 disko=158113792 rx=164957 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1118188843
+-------
+timestamp=1415198862616
+iterations=13121
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4744338645
+rapl_psys_sum_uj=0
+pid=0 energy=13091920638200 alive=1 kernel=1 cpu_ns=821875000000 mem=262483968 instructions=1796509127640 wakeups=7671982 diski=11010048 disko=158113792 rx=164957 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1123420044
+-------
+timestamp=1415343876607
+iterations=13122
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4745797751
+rapl_psys_sum_uj=0
+pid=0 energy=13099015791900 alive=1 kernel=1 cpu_ns=822236000000 mem=262483968 instructions=1797567158380 wakeups=7672177 diski=11010048 disko=158113792 rx=164957 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1128609375
+-------
+timestamp=1415489720310
+iterations=13123
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4747263693
+rapl_psys_sum_uj=0
+pid=0 energy=13106119670255 alive=1 kernel=1 cpu_ns=822597000000 mem=262483968 instructions=1798626934051 wakeups=7672384 diski=11010048 disko=158113792 rx=164957 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1132424438
+-------
+timestamp=1415632070882
+iterations=13125
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4750123311
+rapl_psys_sum_uj=0
+pid=0 energy=13120051865690 alive=1 kernel=1 cpu_ns=823300000000 mem=262483968 instructions=1800710373138 wakeups=7672581 diski=11010048 disko=158113792 rx=164957 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1137639526
+-------
+timestamp=1415776580047
+iterations=13126
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4751577473
+rapl_psys_sum_uj=0
+pid=0 energy=13127136163765 alive=1 kernel=1 cpu_ns=823658000000 mem=262483968 instructions=1801769232753 wakeups=7672769 diski=11010048 disko=158113792 rx=164957 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1141478516
+-------
+timestamp=1415918860836
+iterations=13127
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4753035114
+rapl_psys_sum_uj=0
+pid=0 energy=13134237839545 alive=1 kernel=1 cpu_ns=824020000000 mem=262492160 instructions=1802827567909 wakeups=7672970 diski=11010048 disko=158113792 rx=164957 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1146691772
+-------
+timestamp=1416073588063
+iterations=13129
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4755920367
+rapl_psys_sum_uj=0
+pid=0 energy=13148307695000 alive=1 kernel=1 cpu_ns=824731000000 mem=262852608 instructions=1804930539000 wakeups=7673172 diski=11010048 disko=158113792 rx=164957 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1151909668
+-------
+timestamp=1416218591887
+iterations=13130
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4757352984
+rapl_psys_sum_uj=0
+pid=0 energy=13155273728210 alive=1 kernel=1 cpu_ns=825085000000 mem=262467584 instructions=1805969745642 wakeups=7673366 diski=11010048 disko=158113792 rx=164957 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1155736694
+-------
+timestamp=1416361588013
+iterations=13131
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4758811052
+rapl_psys_sum_uj=0
+pid=0 energy=13162378806065 alive=1 kernel=1 cpu_ns=825448000000 mem=262430720 instructions=1807027761213 wakeups=7673561 diski=11010048 disko=158113792 rx=164957 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1160903809
+-------
+timestamp=1416504191736
+iterations=13132
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4760265336
+rapl_psys_sum_uj=0
+pid=0 energy=13169489197370 alive=1 kernel=1 cpu_ns=825811000000 mem=262406144 instructions=1808086839474 wakeups=7673762 diski=11010048 disko=158113792 rx=164957 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1166121338
+-------
+timestamp=1416655562690
+iterations=13134
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4763111709
+rapl_psys_sum_uj=0
+pid=0 energy=13183431127715 alive=1 kernel=1 cpu_ns=826515000000 mem=262438912 instructions=1810171225543 wakeups=7673962 diski=11010048 disko=158113792 rx=164957 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1169952881
+-------
+timestamp=1416797944181
+iterations=13135
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4764571914
+rapl_psys_sum_uj=0
+pid=0 energy=13190544585185 alive=1 kernel=1 cpu_ns=826879000000 mem=262434816 instructions=1811229917037 wakeups=7674152 diski=11010048 disko=158113792 rx=164959 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1175162964
+-------
+timestamp=1416943393156
+iterations=13136
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4766029616
+rapl_psys_sum_uj=0
+pid=0 energy=13197650404360 alive=1 kernel=1 cpu_ns=827241000000 mem=262508544 instructions=1812289080872 wakeups=7674357 diski=11010048 disko=158113792 rx=164959 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1180356079
+-------
+timestamp=1417089032606
+iterations=13138
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4768877759
+rapl_psys_sum_uj=0
+pid=0 energy=13211577031065 alive=1 kernel=1 cpu_ns=827943000000 mem=262508544 instructions=1814372406213 wakeups=7674558 diski=11010048 disko=158113792 rx=164959 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1184195679
+-------
+timestamp=1417231826355
+iterations=13139
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4770332654
+rapl_psys_sum_uj=0
+pid=0 energy=13218689578065 alive=1 kernel=1 cpu_ns=828307000000 mem=262512640 instructions=1815430915613 wakeups=7674751 diski=11010048 disko=158113792 rx=164959 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1189390747
+-------
+timestamp=1417379880820
+iterations=13140
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4771789074
+rapl_psys_sum_uj=0
+pid=0 energy=13225794682815 alive=1 kernel=1 cpu_ns=828669000000 mem=262512640 instructions=1816489936563 wakeups=7674953 diski=11010048 disko=158113792 rx=164959 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1193213989
+-------
+timestamp=1417530297423
+iterations=13142
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4774689403
+rapl_psys_sum_uj=0
+pid=0 energy=13239987023480 alive=1 kernel=1 cpu_ns=829388000000 mem=263217152 instructions=1818609404696 wakeups=7675156 diski=11010048 disko=158113792 rx=164959 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1198381226
+-------
+timestamp=1417672949142
+iterations=13143
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4776095775
+rapl_psys_sum_uj=0
+pid=0 energy=13246822088580 alive=1 kernel=1 cpu_ns=829734000000 mem=262512640 instructions=1819630417716 wakeups=7675344 diski=11010048 disko=158113792 rx=164959 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1203611206
+-------
+timestamp=1417819226530
+iterations=13144
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4777555491
+rapl_psys_sum_uj=0
+pid=0 energy=13253929468050 alive=1 kernel=1 cpu_ns=830096000000 mem=262512640 instructions=1820689893610 wakeups=7675534 diski=11010048 disko=158113792 rx=164959 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1207451050
+-------
+timestamp=1417961810213
+iterations=13145
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4779015696
+rapl_psys_sum_uj=0
+pid=0 energy=13261030611930 alive=1 kernel=1 cpu_ns=830456000000 mem=262512640 instructions=1821750122386 wakeups=7675732 diski=11010048 disko=158113792 rx=164959 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1212626709
+-------
+timestamp=1418106305410
+iterations=13147
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4781869089
+rapl_psys_sum_uj=0
+pid=0 energy=13274922965065 alive=1 kernel=1 cpu_ns=831158000000 mem=262553600 instructions=1823826593013 wakeups=7675935 diski=11010048 disko=158113792 rx=164959 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1217817139
+-------
+timestamp=1418252346402
+iterations=13148
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4783323739
+rapl_psys_sum_uj=0
+pid=0 energy=13282023748185 alive=1 kernel=1 cpu_ns=831521000000 mem=262549504 instructions=1824883749637 wakeups=7676124 diski=11010048 disko=158113792 rx=164959 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1221627197
+-------
+timestamp=1418394803574
+iterations=13149
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4784778572
+rapl_psys_sum_uj=0
+pid=0 energy=13289116953970 alive=1 kernel=1 cpu_ns=831881000000 mem=262557696 instructions=1825942390794 wakeups=7676322 diski=11010048 disko=158113792 rx=164959 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1226842041
+-------
+timestamp=1418542541299
+iterations=13151
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4787646186
+rapl_psys_sum_uj=0
+pid=0 energy=13303166557785 alive=1 kernel=1 cpu_ns=832589000000 mem=262565888 instructions=1828044311557 wakeups=7676522 diski=11010048 disko=158113792 rx=164959 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1232029663
+-------
+timestamp=1418688730425
+iterations=13152
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4789103644
+rapl_psys_sum_uj=0
+pid=0 energy=13310271030850 alive=1 kernel=1 cpu_ns=832951000000 mem=262557696 instructions=1829103206170 wakeups=7676711 diski=11010048 disko=158113792 rx=164959 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1235844849
+-------
+timestamp=1418831239160
+iterations=13153
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4790558539
+rapl_psys_sum_uj=0
+pid=0 energy=13317385948940 alive=1 kernel=1 cpu_ns=833315000000 mem=262561792 instructions=1830162189788 wakeups=7676900 diski=11010048 disko=158113792 rx=164961 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1241053833
+-------
+timestamp=1418984457103
+iterations=13155
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4793438359
+rapl_psys_sum_uj=0
+pid=0 energy=13331448554640 alive=1 kernel=1 cpu_ns=834028000000 mem=263213056 instructions=1832261710928 wakeups=7677119 diski=11010048 disko=158113792 rx=164961 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1246219482
+-------
+timestamp=1419130564327
+iterations=13156
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4794852360
+rapl_psys_sum_uj=0
+pid=0 energy=13338328627495 alive=1 kernel=1 cpu_ns=834376000000 mem=262623232 instructions=1833289725499 wakeups=7677306 diski=11010048 disko=158113792 rx=164961 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1250059204
+-------
+timestamp=1419273133666
+iterations=13157
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4796310367
+rapl_psys_sum_uj=0
+pid=0 energy=13345431630485 alive=1 kernel=1 cpu_ns=834738000000 mem=262623232 instructions=1834348326097 wakeups=7677501 diski=11010048 disko=158113792 rx=164961 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1255274292
+-------
+timestamp=1419422547016
+iterations=13159
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4799206179
+rapl_psys_sum_uj=0
+pid=0 energy=13359552939805 alive=1 kernel=1 cpu_ns=835455000000 mem=263856128 instructions=1836455587961 wakeups=7677746 diski=11010048 disko=158130176 rx=164961 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1260462280
+-------
+timestamp=1419570919657
+iterations=13160
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4800637209
+rapl_psys_sum_uj=0
+pid=0 energy=13366490777295 alive=1 kernel=1 cpu_ns=835805000000 mem=262627328 instructions=1837493155459 wakeups=7677913 diski=11010048 disko=158130176 rx=164961 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1264301880
+-------
+timestamp=1419713539512
+iterations=13161
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4802099123
+rapl_psys_sum_uj=0
+pid=0 energy=13373607381120 alive=1 kernel=1 cpu_ns=836168000000 mem=262627328 instructions=1838553476224 wakeups=7678103 diski=11010048 disko=158130176 rx=164961 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1269518799
+-------
+timestamp=1419859854751
+iterations=13162
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4803562196
+rapl_psys_sum_uj=0
+pid=0 energy=13380721882770 alive=1 kernel=1 cpu_ns=836530000000 mem=262627328 instructions=1839614376554 wakeups=7678305 diski=11010048 disko=158130176 rx=164961 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1273365967
+-------
+timestamp=1420003540413
+iterations=13164
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4806420776
+rapl_psys_sum_uj=0
+pid=0 energy=13394666227945 alive=1 kernel=1 cpu_ns=837233000000 mem=262541312 instructions=1841700245589 wakeups=7678543 diski=11010048 disko=158130176 rx=164961 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1278580933
+-------
+timestamp=1420146021446
+iterations=13165
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4807882812
+rapl_psys_sum_uj=0
+pid=0 energy=13401782339050 alive=1 kernel=1 cpu_ns=837596000000 mem=262541312 instructions=1842760467810 wakeups=7678737 diski=11010048 disko=158130176 rx=164961 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1283818848
+-------
+timestamp=1420291028765
+iterations=13166
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4809345214
+rapl_psys_sum_uj=0
+pid=0 energy=13408892824520 alive=1 kernel=1 cpu_ns=837958000000 mem=262541312 instructions=1843820564904 wakeups=7678942 diski=11010048 disko=158130176 rx=164961 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1287669556
+-------
+timestamp=1420442151008
+iterations=13168
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4812253172
+rapl_psys_sum_uj=0
+pid=0 energy=13423109918040 alive=1 kernel=1 cpu_ns=838676000000 mem=263069696 instructions=1845945983608 wakeups=7679156 diski=11010048 disko=158130176 rx=164961 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1292891235
+-------
+timestamp=1420585444279
+iterations=13169
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4813653135
+rapl_psys_sum_uj=0
+pid=0 energy=13429953176105 alive=1 kernel=1 cpu_ns=839024000000 mem=262541312 instructions=1846966635221 wakeups=7679346 diski=11010048 disko=158130176 rx=164961 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1298095215
+-------
+timestamp=1420730926895
+iterations=13170
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4815110288
+rapl_psys_sum_uj=0
+pid=0 energy=13437061076840 alive=1 kernel=1 cpu_ns=839386000000 mem=262541312 instructions=1848026215368 wakeups=7679537 diski=11010048 disko=158130176 rx=164961 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1301918945
+-------
+timestamp=1420873970333
+iterations=13171
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4816570920
+rapl_psys_sum_uj=0
+pid=0 energy=13444178028550 alive=1 kernel=1 cpu_ns=839749000000 mem=262541312 instructions=1849086605710 wakeups=7679739 diski=11010048 disko=158130176 rx=164963 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1307139648
+-------
+timestamp=1421022664894
+iterations=13173
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4819417232
+rapl_psys_sum_uj=0
+pid=0 energy=13458062619650 alive=1 kernel=1 cpu_ns=840450000000 mem=262553600 instructions=1851162523930 wakeups=7679948 diski=11010048 disko=158130176 rx=164963 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1311003174
+-------
+timestamp=1421165369080
+iterations=13174
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4820873347
+rapl_psys_sum_uj=0
+pid=0 energy=13465176264740 alive=1 kernel=1 cpu_ns=840812000000 mem=262561792 instructions=1852223252948 wakeups=7680136 diski=11010048 disko=158130176 rx=164963 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1316176025
+-------
+timestamp=1421307753594
+iterations=13175
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4822329645
+rapl_psys_sum_uj=0
+pid=0 energy=13472295071680 alive=1 kernel=1 cpu_ns=841175000000 mem=262561792 instructions=1853284014336 wakeups=7680338 diski=11010048 disko=158130176 rx=164963 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1321405640
+-------
+timestamp=1421455431717
+iterations=13177
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4825186943
+rapl_psys_sum_uj=0
+pid=0 energy=13486245477910 alive=1 kernel=1 cpu_ns=841880000000 mem=262561792 instructions=1855369095582 wakeups=7680566 diski=11010048 disko=158130176 rx=164963 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1325258057
+-------
+timestamp=1421597831894
+iterations=13178
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4826649955
+rapl_psys_sum_uj=0
+pid=0 energy=13493362620995 alive=1 kernel=1 cpu_ns=842243000000 mem=262524928 instructions=1856429524199 wakeups=7680765 diski=11010048 disko=158130176 rx=164963 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1330512451
+-------
+timestamp=1421742665774
+iterations=13179
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4828111197
+rapl_psys_sum_uj=0
+pid=0 energy=13500474368335 alive=1 kernel=1 cpu_ns=842605000000 mem=262529024 instructions=1857489873667 wakeups=7680951 diski=11010048 disko=158130176 rx=164963 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1334383789
+-------
+timestamp=1421887955588
+iterations=13181
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4831013174
+rapl_psys_sum_uj=0
+pid=0 energy=13514655846335 alive=1 kernel=1 cpu_ns=843326000000 mem=263798784 instructions=1859605169267 wakeups=7681185 diski=11010048 disko=158130176 rx=164963 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1339563232
+-------
+timestamp=1422033123904
+iterations=13182
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4832429189
+rapl_psys_sum_uj=0
+pid=0 energy=13521550368610 alive=1 kernel=1 cpu_ns=843675000000 mem=262565888 instructions=1860635073722 wakeups=7681362 diski=11010048 disko=158130176 rx=164963 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1344807251
+-------
+timestamp=1422178177922
+iterations=13183
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4833889638
+rapl_psys_sum_uj=0
+pid=0 energy=13528673193540 alive=1 kernel=1 cpu_ns=844039000000 mem=262565888 instructions=1861695638708 wakeups=7681549 diski=11010048 disko=158130176 rx=164963 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1348665405
+-------
+timestamp=1422320836165
+iterations=13184
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4835348744
+rapl_psys_sum_uj=0
+pid=0 energy=13535779759825 alive=1 kernel=1 cpu_ns=844400000000 mem=262565888 instructions=1862755951965 wakeups=7681753 diski=11010048 disko=158130176 rx=164963 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1353896118
+-------
+timestamp=1422468046305
+iterations=13186
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4838210011
+rapl_psys_sum_uj=0
+pid=0 energy=13549725475910 alive=1 kernel=1 cpu_ns=845103000000 mem=262565888 instructions=1864842095182 wakeups=7681994 diski=11010048 disko=158130176 rx=164963 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1359133545
+-------
+timestamp=1422613406097
+iterations=13187
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4839673206
+rapl_psys_sum_uj=0
+pid=0 energy=13556847676630 alive=1 kernel=1 cpu_ns=845466000000 mem=262565888 instructions=1865903535326 wakeups=7682188 diski=11010048 disko=158130176 rx=164963 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1362973022
+-------
+timestamp=1422755952987
+iterations=13188
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4841133533
+rapl_psys_sum_uj=0
+pid=0 energy=13563965845235 alive=1 kernel=1 cpu_ns=845829000000 mem=262565888 instructions=1866964169047 wakeups=7682380 diski=11010048 disko=158130176 rx=164963 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1368191772
+-------
+timestamp=1422908330169
+iterations=13190
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4844028307
+rapl_psys_sum_uj=0
+pid=0 energy=13578088082330 alive=1 kernel=1 cpu_ns=846543000000 mem=262938624 instructions=1869074616466 wakeups=7682601 diski=11010048 disko=158130176 rx=164965 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1373408203
+-------
+timestamp=1423053258022
+iterations=13191
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4845452989
+rapl_psys_sum_uj=0
+pid=0 energy=13585031766690 alive=1 kernel=1 cpu_ns=846897000000 mem=262582272 instructions=1870109353338 wakeups=7682791 diski=11010048 disko=158130176 rx=164965 tx=74274 comm=*system*
+psu_energy_ac_mcp_machine=1377246826
+-------
+timestamp=1423195849178
+iterations=13192
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4846913865
+rapl_psys_sum_uj=0
+pid=0 energy=13592133738165 alive=1 kernel=1 cpu_ns=847258000000 mem=262549504 instructions=1871168747633 wakeups=7682993 diski=11010048 disko=158130176 rx=164966 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1382482178
+-------
+timestamp=1423340528436
+iterations=13194
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4849807541
+rapl_psys_sum_uj=0
+pid=0 energy=13606254423920 alive=1 kernel=1 cpu_ns=847974000000 mem=263786496 instructions=1873276884784 wakeups=7683215 diski=11010048 disko=158130176 rx=164966 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1386344116
+-------
+timestamp=1423484706946
+iterations=13195
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4851215927
+rapl_psys_sum_uj=0
+pid=0 energy=13613118167975 alive=1 kernel=1 cpu_ns=848322000000 mem=262553600 instructions=1874301633595 wakeups=7683393 diski=11010048 disko=158130176 rx=164966 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1391539673
+-------
+timestamp=1423626514349
+iterations=13196
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4852670150
+rapl_psys_sum_uj=0
+pid=0 energy=13620208677435 alive=1 kernel=1 cpu_ns=848682000000 mem=262553600 instructions=1875359735487 wakeups=7683582 diski=11010048 disko=158130176 rx=164966 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1396743774
+-------
+timestamp=1423771543185
+iterations=13197
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4854121260
+rapl_psys_sum_uj=0
+pid=0 energy=13627291883020 alive=1 kernel=1 cpu_ns=849041000000 mem=262553600 instructions=1876417376604 wakeups=7683777 diski=11010048 disko=158130176 rx=164966 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1400586548
+-------
+timestamp=1423918196661
+iterations=13199
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4856963667
+rapl_psys_sum_uj=0
+pid=0 energy=13641204262855 alive=1 kernel=1 cpu_ns=849741000000 mem=262594560 instructions=1878499852571 wakeups=7683968 diski=11010048 disko=158130176 rx=164966 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1405800659
+-------
+timestamp=1424062488417
+iterations=13200
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4858419965
+rapl_psys_sum_uj=0
+pid=0 energy=13648295762890 alive=1 kernel=1 cpu_ns=850102000000 mem=262594560 instructions=1879557152578 wakeups=7684162 diski=11010048 disko=158130176 rx=164966 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1409659546
+-------
+timestamp=1424204454268
+iterations=13201
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4859876630
+rapl_psys_sum_uj=0
+pid=0 energy=13655381596610 alive=1 kernel=1 cpu_ns=850461000000 mem=262598656 instructions=1880615319322 wakeups=7684350 diski=11010048 disko=158130176 rx=164966 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1414841064
+-------
+timestamp=1424346918536
+iterations=13202
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4861331158
+rapl_psys_sum_uj=0
+pid=0 energy=13662489083545 alive=1 kernel=1 cpu_ns=850824000000 mem=262574080 instructions=1881673816709 wakeups=7684549 diski=11010048 disko=158130176 rx=164967 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1420041870
+-------
+timestamp=1424498292630
+iterations=13204
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4864171489
+rapl_psys_sum_uj=0
+pid=0 energy=13676421165375 alive=1 kernel=1 cpu_ns=851526000000 mem=262602752 instructions=1883758233075 wakeups=7684760 diski=11010048 disko=158130176 rx=164967 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1423869995
+-------
+timestamp=1424640810140
+iterations=13205
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4865622111
+rapl_psys_sum_uj=0
+pid=0 energy=13683531249555 alive=1 kernel=1 cpu_ns=851888000000 mem=262602752 instructions=1884818249911 wakeups=7684956 diski=11010048 disko=158146560 rx=164967 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1429086426
+-------
+timestamp=1424785948243
+iterations=13206
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4867072550
+rapl_psys_sum_uj=0
+pid=0 energy=13690636356150 alive=1 kernel=1 cpu_ns=852250000000 mem=262606848 instructions=1885877271230 wakeups=7685150 diski=11010048 disko=158146560 rx=164969 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1434309692
+-------
+timestamp=1424932387386
+iterations=13208
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4869913370
+rapl_psys_sum_uj=0
+pid=0 energy=13704560972900 alive=1 kernel=1 cpu_ns=852951000000 mem=262606848 instructions=1887961194580 wakeups=7685360 diski=11010048 disko=158146560 rx=164969 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1438151367
+-------
+timestamp=1425074842308
+iterations=13209
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4871372171
+rapl_psys_sum_uj=0
+pid=0 energy=13711664428045 alive=1 kernel=1 cpu_ns=853313000000 mem=262606848 instructions=1889019885609 wakeups=7685551 diski=11010048 disko=158146560 rx=164969 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1443355347
+-------
+timestamp=1425221216338
+iterations=13210
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4872827798
+rapl_psys_sum_uj=0
+pid=0 energy=13718763163295 alive=1 kernel=1 cpu_ns=853675000000 mem=262606848 instructions=1890077632659 wakeups=7685753 diski=11010048 disko=158146560 rx=164969 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1447213135
+-------
+timestamp=1425370241521
+iterations=13212
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4875703286
+rapl_psys_sum_uj=0
+pid=0 energy=13732840927785 alive=1 kernel=1 cpu_ns=854388000000 mem=262959104 instructions=1892180185557 wakeups=7685944 diski=11010048 disko=158146560 rx=164969 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1452385132
+-------
+timestamp=1425512534087
+iterations=13213
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4877134865
+rapl_psys_sum_uj=0
+pid=0 energy=13739812466130 alive=1 kernel=1 cpu_ns=854741000000 mem=262606848 instructions=1893221493226 wakeups=7686139 diski=11010048 disko=158146560 rx=164969 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1457600586
+-------
+timestamp=1425658070607
+iterations=13214
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4878592262
+rapl_psys_sum_uj=0
+pid=0 energy=13746933852960 alive=1 kernel=1 cpu_ns=855105000000 mem=262606848 instructions=1894281770592 wakeups=7686314 diski=11010048 disko=158146560 rx=164969 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1461439453
+-------
+timestamp=1425800969139
+iterations=13215
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4880047828
+rapl_psys_sum_uj=0
+pid=0 energy=13754040320740 alive=1 kernel=1 cpu_ns=855468000000 mem=262606848 instructions=1895340064148 wakeups=7686511 diski=11010048 disko=158146560 rx=164969 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1466628662
+-------
+timestamp=1425948849443
+iterations=13217
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4882910254
+rapl_psys_sum_uj=0
+pid=0 energy=13767994105575 alive=1 kernel=1 cpu_ns=856174000000 mem=262623232 instructions=1897424821115 wakeups=7686713 diski=11010048 disko=158146560 rx=164969 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1471844116
+-------
+timestamp=1426094432261
+iterations=13218
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4884369299
+rapl_psys_sum_uj=0
+pid=0 energy=13775092565140 alive=1 kernel=1 cpu_ns=856535000000 mem=262619136 instructions=1898483513028 wakeups=7686900 diski=11010048 disko=158146560 rx=164969 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1475683716
+-------
+timestamp=1426236523309
+iterations=13219
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4885830358
+rapl_psys_sum_uj=0
+pid=0 energy=13782197987285 alive=1 kernel=1 cpu_ns=856897000000 mem=262627328 instructions=1899542597457 wakeups=7687098 diski=11010048 disko=158146560 rx=164969 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1480936890
+-------
+timestamp=1426382693764
+iterations=13221
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4888687473
+rapl_psys_sum_uj=0
+pid=0 energy=13796141404360 alive=1 kernel=1 cpu_ns=857601000000 mem=262627328 instructions=1901627280872 wakeups=7687302 diski=11010048 disko=158146560 rx=164969 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1484787109
+-------
+timestamp=1426525274853
+iterations=13222
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4890145419
+rapl_psys_sum_uj=0
+pid=0 energy=13803237247430 alive=1 kernel=1 cpu_ns=857962000000 mem=262590464 instructions=1902685449486 wakeups=7687500 diski=11010048 disko=158146560 rx=164969 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1489972290
+-------
+timestamp=1426667870518
+iterations=13223
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4891605440
+rapl_psys_sum_uj=0
+pid=0 energy=13810336130700 alive=1 kernel=1 cpu_ns=858322000000 mem=262594560 instructions=1903745226140 wakeups=7687687 diski=11010048 disko=158146560 rx=164969 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1495182983
+-------
+timestamp=1426817801961
+iterations=13225
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4894491608
+rapl_psys_sum_uj=0
+pid=0 energy=13824428970365 alive=1 kernel=1 cpu_ns=859036000000 mem=263651328 instructions=1905849794073 wakeups=7687910 diski=11010048 disko=158146560 rx=164971 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1498999146
+-------
+timestamp=1426960572921
+iterations=13226
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4895921051
+rapl_psys_sum_uj=0
+pid=0 energy=13831367918180 alive=1 kernel=1 cpu_ns=859385000000 mem=262631424 instructions=1906888583636 wakeups=7688094 diski=11010048 disko=158146560 rx=164971 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1504223511
+-------
+timestamp=1427105582671
+iterations=13227
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4897378387
+rapl_psys_sum_uj=0
+pid=0 energy=13838482307950 alive=1 kernel=1 cpu_ns=859748000000 mem=262631424 instructions=1907948461590 wakeups=7688283 diski=11010048 disko=158146560 rx=164971 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1509424927
+-------
+timestamp=1427251070809
+iterations=13228
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4898836944
+rapl_psys_sum_uj=0
+pid=0 energy=13845588450530 alive=1 kernel=1 cpu_ns=860111000000 mem=262610944 instructions=1909006690106 wakeups=7688480 diski=11010048 disko=158146560 rx=164971 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1513252441
+-------
+timestamp=1427396241472
+iterations=13230
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4901689360
+rapl_psys_sum_uj=0
+pid=0 energy=13859523956580 alive=1 kernel=1 cpu_ns=860814000000 mem=262639616 instructions=1911090791316 wakeups=7688680 diski=11010048 disko=158146560 rx=164971 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1518484009
+-------
+timestamp=1427541772504
+iterations=13231
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4903147184
+rapl_psys_sum_uj=0
+pid=0 energy=13866602589765 alive=1 kernel=1 cpu_ns=861172000000 mem=262606848 instructions=1912148517953 wakeups=7688868 diski=11010048 disko=158146560 rx=164971 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1522327515
+-------
+timestamp=1427684556659
+iterations=13232
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4904607328
+rapl_psys_sum_uj=0
+pid=0 energy=13873699744520 alive=1 kernel=1 cpu_ns=861531000000 mem=262619136 instructions=1913208948904 wakeups=7689066 diski=11010048 disko=158146560 rx=164971 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1527519897
+-------
+timestamp=1427834815247
+iterations=13234
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4907480252
+rapl_psys_sum_uj=0
+pid=0 energy=13887758475630 alive=1 kernel=1 cpu_ns=862241000000 mem=262963200 instructions=1915310695126 wakeups=7689245 diski=11010048 disko=158146560 rx=164971 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1532730957
+-------
+timestamp=1427979512121
+iterations=13235
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4908906094
+rapl_psys_sum_uj=0
+pid=0 energy=13894737679520 alive=1 kernel=1 cpu_ns=862595000000 mem=262651904 instructions=1916352535904 wakeups=7689445 diski=11010048 disko=158146560 rx=164971 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1536575562
+-------
+timestamp=1428122459487
+iterations=13236
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4910354885
+rapl_psys_sum_uj=0
+pid=0 energy=13901855611900 alive=1 kernel=1 cpu_ns=862960000000 mem=262651904 instructions=1917411122380 wakeups=7689630 diski=11010048 disko=158146560 rx=164971 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1541795654
+-------
+timestamp=1428270449295
+iterations=13238
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4913234706
+rapl_psys_sum_uj=0
+pid=0 energy=13915976595515 alive=1 kernel=1 cpu_ns=863678000000 mem=263884800 instructions=1919517319103 wakeups=7689858 diski=11010048 disko=158146560 rx=164971 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1547015259
+-------
+timestamp=1428418564535
+iterations=13239
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4914655848
+rapl_psys_sum_uj=0
+pid=0 energy=13922904311320 alive=1 kernel=1 cpu_ns=864027000000 mem=262664192 instructions=1920553862264 wakeups=7690037 diski=11010048 disko=158146560 rx=164971 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1550846680
+-------
+timestamp=1428561087680
+iterations=13240
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4916112452
+rapl_psys_sum_uj=0
+pid=0 energy=13930037342665 alive=1 kernel=1 cpu_ns=864394000000 mem=262660096 instructions=1921613468533 wakeups=7690222 diski=11010048 disko=158146560 rx=164971 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1556053833
+-------
+timestamp=1428707083516
+iterations=13241
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4917570826
+rapl_psys_sum_uj=0
+pid=0 energy=13937143851620 alive=1 kernel=1 cpu_ns=864757000000 mem=262631424 instructions=1922671770324 wakeups=7690419 diski=11010048 disko=158146560 rx=164971 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1561270996
+-------
+timestamp=1428855327070
+iterations=13243
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4920424036
+rapl_psys_sum_uj=0
+pid=0 energy=13951083057405 alive=1 kernel=1 cpu_ns=865460000000 mem=262656000 instructions=1924756611481 wakeups=7690600 diski=11010048 disko=158146560 rx=164973 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1565114868
+-------
+timestamp=1428998175631
+iterations=13244
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4921882165
+rapl_psys_sum_uj=0
+pid=0 energy=13958189468155 alive=1 kernel=1 cpu_ns=865822000000 mem=262660096 instructions=1925815893631 wakeups=7690793 diski=11010048 disko=158146560 rx=164973 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1570327393
+-------
+timestamp=1429144524594
+iterations=13245
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4923339928
+rapl_psys_sum_uj=0
+pid=0 energy=13965297014795 alive=1 kernel=1 cpu_ns=866185000000 mem=262660096 instructions=1926874402959 wakeups=7690983 diski=11010048 disko=158146560 rx=164973 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1574186768
+-------
+timestamp=1429292055470
+iterations=13247
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4926232261
+rapl_psys_sum_uj=0
+pid=0 energy=13979409070465 alive=1 kernel=1 cpu_ns=866897000000 mem=263028736 instructions=1928984814093 wakeups=7691182 diski=11010048 disko=158146560 rx=164973 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1579358154
+-------
+timestamp=1429434465714
+iterations=13248
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4927656577
+rapl_psys_sum_uj=0
+pid=0 energy=13986335296745 alive=1 kernel=1 cpu_ns=867249000000 mem=262668288 instructions=1930018059349 wakeups=7691378 diski=11010048 disko=158146560 rx=164973 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1584581665
+-------
+timestamp=1429580473599
+iterations=13249
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4929116049
+rapl_psys_sum_uj=0
+pid=0 energy=13993430874830 alive=1 kernel=1 cpu_ns=867610000000 mem=262643712 instructions=1931076174966 wakeups=7691564 diski=11010048 disko=158146560 rx=164973 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1588422119
+-------
+timestamp=1429726224903
+iterations=13251
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4932009603
+rapl_psys_sum_uj=0
+pid=0 energy=14007559208640 alive=1 kernel=1 cpu_ns=868327000000 mem=263880704 instructions=1933184841728 wakeups=7691796 diski=11010048 disko=158162944 rx=164973 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1593610474
+-------
+timestamp=1429871101499
+iterations=13252
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4933436849
+rapl_psys_sum_uj=0
+pid=0 energy=14014476833160 alive=1 kernel=1 cpu_ns=868674000000 mem=262688768 instructions=1934221366632 wakeups=7691968 diski=11010048 disko=158162944 rx=164973 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1598854736
+-------
+timestamp=1430016342701
+iterations=13253
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4934896138
+rapl_psys_sum_uj=0
+pid=0 energy=14021576014160 alive=1 kernel=1 cpu_ns=869035000000 mem=262688768 instructions=1935280202832 wakeups=7692156 diski=11010048 disko=158162944 rx=164973 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1602681030
+-------
+timestamp=1430158948566
+iterations=13254
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4936354512
+rapl_psys_sum_uj=0
+pid=0 energy=14028690930945 alive=1 kernel=1 cpu_ns=869399000000 mem=262688768 instructions=1936339186189 wakeups=7692350 diski=11010048 disko=158162944 rx=164973 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1607947632
+-------
+timestamp=1430306643235
+iterations=13256
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4939224445
+rapl_psys_sum_uj=0
+pid=0 energy=14042658307140 alive=1 kernel=1 cpu_ns=870101000000 mem=262688768 instructions=1938430661428 wakeups=7692655 diski=11010048 disko=161095680 rx=164973 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1613163208
+-------
+timestamp=1430451612229
+iterations=13257
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4940685199
+rapl_psys_sum_uj=0
+pid=0 energy=14049758086295 alive=1 kernel=1 cpu_ns=870462000000 mem=262688768 instructions=1939489617259 wakeups=7692854 diski=11010048 disko=161095680 rx=164973 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1616999634
+-------
+timestamp=1430594286725
+iterations=13258
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4942141009
+rapl_psys_sum_uj=0
+pid=0 energy=14056872620060 alive=1 kernel=1 cpu_ns=870826000000 mem=262688768 instructions=1940548524012 wakeups=7693038 diski=11010048 disko=161095680 rx=164973 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1622201538
+-------
+timestamp=1430746908423
+iterations=13260
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4945021013
+rapl_psys_sum_uj=0
+pid=0 energy=14070948985355 alive=1 kernel=1 cpu_ns=871538000000 mem=263041024 instructions=1942651797071 wakeups=7693259 diski=11010048 disko=161095680 rx=164975 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1627392090
+-------
+timestamp=1430891790570
+iterations=13261
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4946454057
+rapl_psys_sum_uj=0
+pid=0 energy=14077934020655 alive=1 kernel=1 cpu_ns=871893000000 mem=262688768 instructions=1943693804131 wakeups=7693452 diski=11010048 disko=161095680 rx=164975 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1631215454
+-------
+timestamp=1431034540074
+iterations=13262
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4947913346
+rapl_psys_sum_uj=0
+pid=0 energy=14085029614455 alive=1 kernel=1 cpu_ns=872254000000 mem=262688768 instructions=1944751922891 wakeups=7693644 diski=11010048 disko=161095680 rx=164975 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1636415771
+-------
+timestamp=1431185683516
+iterations=13264
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4950811477
+rapl_psys_sum_uj=0
+pid=0 energy=14099177976330 alive=1 kernel=1 cpu_ns=872973000000 mem=263933952 instructions=1946862595266 wakeups=7693871 diski=11010048 disko=161095680 rx=164975 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1641601563
+-------
+timestamp=1431332089409
+iterations=13265
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4952235793
+rapl_psys_sum_uj=0
+pid=0 energy=14106101662045 alive=1 kernel=1 cpu_ns=873324000000 mem=262705152 instructions=1947896332409 wakeups=7694048 diski=11010048 disko=161095680 rx=164975 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1645436157
+-------
+timestamp=1431474466139
+iterations=13266
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4953697096
+rapl_psys_sum_uj=0
+pid=0 energy=14113204622280 alive=1 kernel=1 cpu_ns=873685000000 mem=262692864 instructions=1948955924456 wakeups=7694242 diski=11010048 disko=161095680 rx=164975 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1650645264
+-------
+timestamp=1431620509629
+iterations=13267
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4955155531
+rapl_psys_sum_uj=0
+pid=0 energy=14120310395650 alive=1 kernel=1 cpu_ns=874048000000 mem=262696960 instructions=1950014079130 wakeups=7694433 diski=11010048 disko=161095680 rx=164975 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1654473145
+-------
+timestamp=1431763107405
+iterations=13269
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4958010572
+rapl_psys_sum_uj=0
+pid=0 energy=14134249293825 alive=1 kernel=1 cpu_ns=874750000000 mem=262696960 instructions=1952099858765 wakeups=7694631 diski=11010048 disko=161095680 rx=164975 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1659675659
+-------
+timestamp=1431908528549
+iterations=13270
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4959467420
+rapl_psys_sum_uj=0
+pid=0 energy=14141347376980 alive=1 kernel=1 cpu_ns=875111000000 mem=262701056 instructions=1953158475396 wakeups=7694836 diski=11010048 disko=161095680 rx=164975 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1664876221
+-------
+timestamp=1432054157831
+iterations=13271
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4960924024
+rapl_psys_sum_uj=0
+pid=0 energy=14148446724845 alive=1 kernel=1 cpu_ns=875472000000 mem=262701056 instructions=1954217344969 wakeups=7695018 diski=11010048 disko=161095680 rx=164975 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1668684326
+-------
+timestamp=1432203812284
+iterations=13273
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4963811230
+rapl_psys_sum_uj=0
+pid=0 energy=14162559589160 alive=1 kernel=1 cpu_ns=876184000000 mem=263053312 instructions=1956327917832 wakeups=7695204 diski=11010048 disko=161095680 rx=164975 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1673902344
+-------
+timestamp=1432347967641
+iterations=13274
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4965232860
+rapl_psys_sum_uj=0
+pid=0 energy=14169462472760 alive=1 kernel=1 cpu_ns=876533000000 mem=262701056 instructions=1957359494552 wakeups=7695396 diski=11010048 disko=161095680 rx=164975 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1679102417
+-------
+timestamp=1432493988311
+iterations=13275
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4966689891
+rapl_psys_sum_uj=0
+pid=0 energy=14176562171385 alive=1 kernel=1 cpu_ns=876894000000 mem=262701056 instructions=1958418434277 wakeups=7695585 diski=11010048 disko=161095680 rx=164975 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1682925415
+-------
+timestamp=1432640577807
+iterations=13277
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4969569651
+rapl_psys_sum_uj=0
+pid=0 energy=14190669565130 alive=1 kernel=1 cpu_ns=877610000000 mem=263757824 instructions=1960523913026 wakeups=7695804 diski=11010048 disko=161095680 rx=164975 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1688132324
+-------
+timestamp=1432788582308
+iterations=13278
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4971005442
+rapl_psys_sum_uj=0
+pid=0 energy=14197644166045 alive=1 kernel=1 cpu_ns=877962000000 mem=262524928 instructions=1961566833209 wakeups=7695987 diski=11010048 disko=161095680 rx=164977 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1693311035
+-------
+timestamp=1432935693505
+iterations=13279
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4972441110
+rapl_psys_sum_uj=0
+pid=0 energy=14204634919860 alive=1 kernel=1 cpu_ns=878319000000 mem=262725632 instructions=1962607983972 wakeups=7696176 diski=11010048 disko=161095680 rx=164977 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1697137695
+-------
+timestamp=1433078297106
+iterations=13280
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4973899728
+rapl_psys_sum_uj=0
+pid=0 energy=14211707104060 alive=1 kernel=1 cpu_ns=878677000000 mem=262688768 instructions=1963664420812 wakeups=7696364 diski=11010048 disko=161095680 rx=164977 tx=74275 comm=*system*
+psu_energy_ac_mcp_machine=1702348267
+-------
+timestamp=1433225626638
+iterations=13282
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4976759041
+rapl_psys_sum_uj=0
+pid=0 energy=14225647899720 alive=1 kernel=1 cpu_ns=879380000000 mem=262713344 instructions=1965749579944 wakeups=7696579 diski=11010048 disko=161095680 rx=164979 tx=74277 comm=*system*
+psu_energy_ac_mcp_machine=1706226685
+-------
+timestamp=1433367518769
+iterations=13283
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4978217231
+rapl_psys_sum_uj=0
+pid=0 energy=14232751504155 alive=1 kernel=1 cpu_ns=879742000000 mem=262717440 instructions=1966808300831 wakeups=7696782 diski=11010048 disko=161095680 rx=164979 tx=74277 comm=*system*
+psu_energy_ac_mcp_machine=1711392578
+-------
+timestamp=1433510153973
+iterations=13284
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4979674872
+rapl_psys_sum_uj=0
+pid=0 energy=14239853071175 alive=1 kernel=1 cpu_ns=880104000000 mem=262729728 instructions=1967866614235 wakeups=7696972 diski=11010048 disko=161095680 rx=164979 tx=74277 comm=*system*
+psu_energy_ac_mcp_machine=1716593018
+-------
+timestamp=1433662633950
+iterations=13286
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4982557378
+rapl_psys_sum_uj=0
+pid=0 energy=14253898003285 alive=1 kernel=1 cpu_ns=880811000000 mem=262721536 instructions=1969968600657 wakeups=7697167 diski=11010048 disko=161095680 rx=164979 tx=74277 comm=*system*
+psu_energy_ac_mcp_machine=1720415039
+-------
+timestamp=1433824534828
+iterations=13287
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4983859624
+rapl_psys_sum_uj=0
+pid=0 energy=14260001526080 alive=1 kernel=1 cpu_ns=881132000000 mem=263401472 instructions=1970868305216 wakeups=7697405 diski=11010048 disko=161095680 rx=164983 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1726995850
+-------
+timestamp=1433990534109
+iterations=13289
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4987262577
+rapl_psys_sum_uj=0
+pid=0 energy=14277398239890 alive=1 kernel=1 cpu_ns=882024000000 mem=264228864 instructions=1973455647978 wakeups=7697636 diski=11010048 disko=161095680 rx=164983 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1732634277
+-------
+timestamp=1434159045034
+iterations=13290
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4988969364
+rapl_psys_sum_uj=0
+pid=0 energy=14286122373140 alive=1 kernel=1 cpu_ns=882472000000 mem=263700480 instructions=1974752474628 wakeups=7697824 diski=11010048 disko=161095680 rx=164983 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1738247314
+-------
+timestamp=1434324549038
+iterations=13292
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4992383974
+rapl_psys_sum_uj=0
+pid=0 energy=14303566458700 alive=1 kernel=1 cpu_ns=883367000000 mem=264404992 instructions=1977346291740 wakeups=7698065 diski=11010048 disko=161095680 rx=164983 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1743884766
+-------
+timestamp=1434488532910
+iterations=13293
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4994095460
+rapl_psys_sum_uj=0
+pid=0 energy=14312280384685 alive=1 kernel=1 cpu_ns=883813000000 mem=263700480 instructions=1978643076937 wakeups=7698255 diski=11010048 disko=161095680 rx=164983 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1749514038
+-------
+timestamp=1434649528982
+iterations=13294
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4995815186
+rapl_psys_sum_uj=0
+pid=0 energy=14320998604340 alive=1 kernel=1 cpu_ns=884261000000 mem=263700480 instructions=1979938720868 wakeups=7698470 diski=11010048 disko=161095680 rx=164983 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1755138550
+-------
+timestamp=1434811521401
+iterations=13296
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=4999225342
+rapl_psys_sum_uj=0
+pid=0 energy=14338433250350 alive=1 kernel=1 cpu_ns=885152000000 mem=263876608 instructions=1982534650070 wakeups=7698678 diski=11010048 disko=161095680 rx=164985 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1760770020
+-------
+timestamp=1434972014963
+iterations=13297
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5000931823
+rapl_psys_sum_uj=0
+pid=0 energy=14347091023230 alive=1 kernel=1 cpu_ns=885598000000 mem=263684096 instructions=1983820204646 wakeups=7698867 diski=11010048 disko=161095680 rx=164985 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1766390381
+-------
+timestamp=1435135523267
+iterations=13299
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5004361937
+rapl_psys_sum_uj=0
+pid=0 energy=14364616834860 alive=1 kernel=1 cpu_ns=886494000000 mem=263684096 instructions=1986429366972 wakeups=7699071 diski=11010048 disko=161120256 rx=164985 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1772039307
+-------
+timestamp=1435301527333
+iterations=13300
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5006069273
+rapl_psys_sum_uj=0
+pid=0 energy=14373276419855 alive=1 kernel=1 cpu_ns=886941000000 mem=263684096 instructions=1987714283971 wakeups=7699291 diski=11010048 disko=161120256 rx=164985 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1777655884
+-------
+timestamp=1435465524321
+iterations=13302
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5009523007
+rapl_psys_sum_uj=0
+pid=0 energy=14390870013220 alive=1 kernel=1 cpu_ns=887840000000 mem=263684096 instructions=1990334002644 wakeups=7699496 diski=11010048 disko=161120256 rx=164985 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1784702637
+-------
+timestamp=1435639850615
+iterations=13303
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5011214718
+rapl_psys_sum_uj=0
+pid=0 energy=14399451566355 alive=1 kernel=1 cpu_ns=888283000000 mem=263684096 instructions=1991607313271 wakeups=7699699 diski=11010048 disko=161120256 rx=164985 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1790313843
+-------
+timestamp=1435807547092
+iterations=13305
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5014644588
+rapl_psys_sum_uj=0
+pid=0 energy=14416973848920 alive=1 kernel=1 cpu_ns=889179000000 mem=263860224 instructions=1994215769784 wakeups=7699920 diski=11010048 disko=161120256 rx=164985 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1795960205
+-------
+timestamp=1435970836449
+iterations=13306
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5016355830
+rapl_psys_sum_uj=0
+pid=0 energy=14425626497790 alive=1 kernel=1 cpu_ns=889626000000 mem=263720960 instructions=1995499299558 wakeups=7700124 diski=11010048 disko=161120256 rx=164985 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1801599854
+-------
+timestamp=1436134994889
+iterations=13308
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5019773371
+rapl_psys_sum_uj=0
+pid=0 energy=14443138786620 alive=1 kernel=1 cpu_ns=890522000000 mem=263720960 instructions=1998105757324 wakeups=7700336 diski=11010048 disko=161120256 rx=164985 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1807232056
+-------
+timestamp=1436302012731
+iterations=13309
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5021477472
+rapl_psys_sum_uj=0
+pid=0 energy=14451806335440 alive=1 kernel=1 cpu_ns=890970000000 mem=263720960 instructions=1999391267088 wakeups=7700547 diski=11010048 disko=161120256 rx=164985 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1814297729
+-------
+timestamp=1436472516650
+iterations=13311
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5024899102
+rapl_psys_sum_uj=0
+pid=0 energy=14469324429250 alive=1 kernel=1 cpu_ns=891865000000 mem=263720960 instructions=2001999885850 wakeups=7700761 diski=11010048 disko=161120256 rx=164985 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1819938477
+-------
+timestamp=1436641537021
+iterations=13312
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5026607598
+rapl_psys_sum_uj=0
+pid=0 energy=14477979242690 alive=1 kernel=1 cpu_ns=892311000000 mem=263544832 instructions=2003284848538 wakeups=7700954 diski=11010048 disko=161120256 rx=164985 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1825565796
+-------
+timestamp=1436811531538
+iterations=13314
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5030034111
+rapl_psys_sum_uj=0
+pid=0 energy=14495505144530 alive=1 kernel=1 cpu_ns=893207000000 mem=263544832 instructions=2005894028906 wakeups=7701154 diski=11010048 disko=161120256 rx=164987 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1831186157
+-------
+timestamp=1436976524786
+iterations=13315
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5031740165
+rapl_psys_sum_uj=0
+pid=0 energy=14504153460310 alive=1 kernel=1 cpu_ns=893654000000 mem=263806976 instructions=2007176692062 wakeups=7701367 diski=11010048 disko=161120256 rx=164987 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1836825562
+-------
+timestamp=1437142522937
+iterations=13317
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5035169119
+rapl_psys_sum_uj=0
+pid=0 energy=14521661194295 alive=1 kernel=1 cpu_ns=894549000000 mem=263630848 instructions=2009783238859 wakeups=7701587 diski=11010048 disko=161120256 rx=164987 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1843866699
+-------
+timestamp=1437316808210
+iterations=13318
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5036873830
+rapl_psys_sum_uj=0
+pid=0 energy=14530336766585 alive=1 kernel=1 cpu_ns=894997000000 mem=263806976 instructions=2011070353317 wakeups=7701791 diski=11010048 disko=161120256 rx=164987 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1849492798
+-------
+timestamp=1437487546201
+iterations=13320
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5040291310
+rapl_psys_sum_uj=0
+pid=0 energy=14547852542785 alive=1 kernel=1 cpu_ns=895893000000 mem=263630848 instructions=2013677508557 wakeups=7701999 diski=11010048 disko=161120256 rx=164987 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1855105835
+-------
+timestamp=1437652532402
+iterations=13321
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5041989918
+rapl_psys_sum_uj=0
+pid=0 energy=14556513423780 alive=1 kernel=1 cpu_ns=896340000000 mem=263630848 instructions=2014962684756 wakeups=7702195 diski=11010048 disko=161120256 rx=164987 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1860723145
+-------
+timestamp=1437817993971
+iterations=13323
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5045409350
+rapl_psys_sum_uj=0
+pid=0 energy=14574034650040 alive=1 kernel=1 cpu_ns=897236000000 mem=263806976 instructions=2017570930008 wakeups=7702398 diski=11010048 disko=161120256 rx=164987 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1866352661
+-------
+timestamp=1437985519003
+iterations=13324
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5047112658
+rapl_psys_sum_uj=0
+pid=0 energy=14582697960835 alive=1 kernel=1 cpu_ns=897684000000 mem=263708672 instructions=2018855592167 wakeups=7702594 diski=11010048 disko=161120256 rx=164987 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1873389404
+-------
+timestamp=1438154540356
+iterations=13326
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5050549852
+rapl_psys_sum_uj=0
+pid=0 energy=14600296977715 alive=1 kernel=1 cpu_ns=898584000000 mem=263884800 instructions=2021475395543 wakeups=7702800 diski=11010048 disko=161120256 rx=164987 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1879038574
+-------
+timestamp=1438321520159
+iterations=13327
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5052236924
+rapl_psys_sum_uj=0
+pid=0 energy=14608879395505 alive=1 kernel=1 cpu_ns=899027000000 mem=263708672 instructions=2022748879101 wakeups=7702998 diski=11010048 disko=161120256 rx=164987 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1884694458
+-------
+timestamp=1438488535797
+iterations=13329
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5055655441
+rapl_psys_sum_uj=0
+pid=0 energy=14626390303785 alive=1 kernel=1 cpu_ns=899923000000 mem=263532544 instructions=2025355060757 wakeups=7703192 diski=11010048 disko=161120256 rx=164987 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1890330444
+-------
+timestamp=1438654575510
+iterations=13330
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5057358077
+rapl_psys_sum_uj=0
+pid=0 energy=14635066691205 alive=1 kernel=1 cpu_ns=900371000000 mem=263708672 instructions=2026642338241 wakeups=7703385 diski=11010048 disko=161120256 rx=164987 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1895965454
+-------
+timestamp=1438822528113
+iterations=13332
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5060777082
+rapl_psys_sum_uj=0
+pid=0 energy=14652567639940 alive=1 kernel=1 cpu_ns=901266000000 mem=263884800 instructions=2029247527988 wakeups=7703581 diski=11010048 disko=161120256 rx=164989 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1903008179
+-------
+timestamp=1438991534102
+iterations=13333
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5062478559
+rapl_psys_sum_uj=0
+pid=0 energy=14661237721160 alive=1 kernel=1 cpu_ns=901714000000 mem=263720960 instructions=2030533544232 wakeups=7703792 diski=11010048 disko=161120256 rx=164989 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1908638916
+-------
+timestamp=1439158512766
+iterations=13335
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5065903241
+rapl_psys_sum_uj=0
+pid=0 energy=14678737959740 alive=1 kernel=1 cpu_ns=902609000000 mem=263720960 instructions=2033138591948 wakeups=7704006 diski=11010048 disko=161120256 rx=164989 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1914305054
+-------
+timestamp=1439322531459
+iterations=13336
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5067602459
+rapl_psys_sum_uj=0
+pid=0 energy=14687418626730 alive=1 kernel=1 cpu_ns=903057000000 mem=263897088 instructions=2034426725346 wakeups=7704205 diski=11010048 disko=161120256 rx=164989 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1919949097
+-------
+timestamp=1439488526664
+iterations=13338
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5071020915
+rapl_psys_sum_uj=0
+pid=0 energy=14704889620220 alive=1 kernel=1 cpu_ns=903951000000 mem=264249344 instructions=2037026924044 wakeups=7704438 diski=11010048 disko=161120256 rx=164989 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1925586304
+-------
+timestamp=1439647984608
+iterations=13339
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5072745890
+rapl_psys_sum_uj=0
+pid=0 energy=14713656110770 alive=1 kernel=1 cpu_ns=904401000000 mem=263897088 instructions=2038330222154 wakeups=7704629 diski=11010048 disko=161120256 rx=164989 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1931228638
+-------
+timestamp=1439812584134
+iterations=13341
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5076156900
+rapl_psys_sum_uj=0
+pid=0 energy=14731090229025 alive=1 kernel=1 cpu_ns=905297000000 mem=264953856 instructions=2040921045805 wakeups=7704861 diski=11010048 disko=161120256 rx=164989 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1936854126
+-------
+timestamp=1439977528110
+iterations=13342
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5077852395
+rapl_psys_sum_uj=0
+pid=0 energy=14739758094465 alive=1 kernel=1 cpu_ns=905740000000 mem=263847936 instructions=2042211618893 wakeups=7705041 diski=11010048 disko=161120256 rx=164989 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1942500244
+-------
+timestamp=1440143058713
+iterations=13344
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5081264564
+rapl_psys_sum_uj=0
+pid=0 energy=14757194260595 alive=1 kernel=1 cpu_ns=906635000000 mem=264552448 instructions=2044803852119 wakeups=7705279 diski=11010048 disko=161136640 rx=164989 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1949588867
+-------
+timestamp=1440310536386
+iterations=13345
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5082988685
+rapl_psys_sum_uj=0
+pid=0 energy=14766014566995 alive=1 kernel=1 cpu_ns=907087000000 mem=263847936 instructions=2046115913399 wakeups=7705454 diski=11010048 disko=161136640 rx=164989 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1955229248
+-------
+timestamp=1440476050223
+iterations=13347
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5086378943
+rapl_psys_sum_uj=0
+pid=0 energy=14783355297690 alive=1 kernel=1 cpu_ns=907979000000 mem=264904704 instructions=2048692059538 wakeups=7705698 diski=11010048 disko=161144832 rx=164989 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1960894043
+-------
+timestamp=1440645523854
+iterations=13348
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5088087744
+rapl_psys_sum_uj=0
+pid=0 energy=14792114562920 alive=1 kernel=1 cpu_ns=908427000000 mem=263847936 instructions=2049995912584 wakeups=7705874 diski=11010048 disko=161144832 rx=164989 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1966530151
+-------
+timestamp=1440809524872
+iterations=13349
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5089785925
+rapl_psys_sum_uj=0
+pid=0 energy=14800767605865 alive=1 kernel=1 cpu_ns=908874000000 mem=263671808 instructions=2051279521173 wakeups=7706080 diski=11010048 disko=161144832 rx=164991 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1972148804
+-------
+timestamp=1440974531737
+iterations=13351
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5093198766
+rapl_psys_sum_uj=0
+pid=0 energy=14818276957805 alive=1 kernel=1 cpu_ns=909769000000 mem=263745536 instructions=2053886391561 wakeups=7706301 diski=11010048 disko=161144832 rx=164991 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1977774536
+-------
+timestamp=1441135972388
+iterations=13352
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5094918675
+rapl_psys_sum_uj=0
+pid=0 energy=14827022550310 alive=1 kernel=1 cpu_ns=910221000000 mem=263745536 instructions=2055183510062 wakeups=7706501 diski=11010048 disko=161144832 rx=164991 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1983392578
+-------
+timestamp=1441298992207
+iterations=13354
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5098344456
+rapl_psys_sum_uj=0
+pid=0 energy=14844532829000 alive=1 kernel=1 cpu_ns=911115000000 mem=263921664 instructions=2057791565800 wakeups=7706709 diski=11010048 disko=161144832 rx=164991 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1990452148
+-------
+timestamp=1441466991568
+iterations=13355
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5100031284
+rapl_psys_sum_uj=0
+pid=0 energy=14853108454705 alive=1 kernel=1 cpu_ns=911558000000 mem=263921664 instructions=2059063690941 wakeups=7706917 diski=11010048 disko=161144832 rx=164991 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=1996095459
+-------
+timestamp=1441637527830
+iterations=13357
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5103446688
+rapl_psys_sum_uj=0
+pid=0 energy=14870634204610 alive=1 kernel=1 cpu_ns=912454000000 mem=263745536 instructions=2061672840922 wakeups=7707128 diski=11010048 disko=161144832 rx=164991 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=2001758911
+-------
+timestamp=1441803386118
+iterations=13358
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5105148775
+rapl_psys_sum_uj=0
+pid=0 energy=14879295399685 alive=1 kernel=1 cpu_ns=912902000000 mem=263921664 instructions=2062957079937 wakeups=7707336 diski=11010048 disko=161144832 rx=164991 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=2007390137
+-------
+timestamp=1441970525249
+iterations=13360
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5108579438
+rapl_psys_sum_uj=0
+pid=0 energy=14896889298205 alive=1 kernel=1 cpu_ns=913802000000 mem=263950336 instructions=2065575859641 wakeups=7707550 diski=11010048 disko=161144832 rx=164991 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=2013038208
+-------
+timestamp=1442136537549
+iterations=13361
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5110263153
+rapl_psys_sum_uj=0
+pid=0 energy=14905472708780 alive=1 kernel=1 cpu_ns=914245000000 mem=263774208 instructions=2066849541756 wakeups=7707749 diski=11010048 disko=161144832 rx=164991 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=2018683228
+-------
+timestamp=1442302528869
+iterations=13363
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5113689604
+rapl_psys_sum_uj=0
+pid=0 energy=14922994100025 alive=1 kernel=1 cpu_ns=915141000000 mem=263950336 instructions=2069457820005 wakeups=7707963 diski=11010048 disko=161144832 rx=164991 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=2025729858
+-------
+timestamp=1442468996841
+iterations=13364
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5115391447
+rapl_psys_sum_uj=0
+pid=0 energy=14931655415600 alive=1 kernel=1 cpu_ns=915589000000 mem=263774208 instructions=2070742083120 wakeups=7708166 diski=11010048 disko=161144832 rx=164991 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=2031368774
+-------
+timestamp=1442635995768
+iterations=13366
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5118810880
+rapl_psys_sum_uj=0
+pid=0 energy=14949178256965 alive=1 kernel=1 cpu_ns=916485000000 mem=263774208 instructions=2073350651393 wakeups=7708371 diski=11010048 disko=161144832 rx=164991 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=2037017334
+-------
+timestamp=1442810538203
+iterations=13367
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5120513821
+rapl_psys_sum_uj=0
+pid=0 energy=14957838759505 alive=1 kernel=1 cpu_ns=916932000000 mem=263774208 instructions=2074635751901 wakeups=7708579 diski=11010048 disko=161144832 rx=164993 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=2042659546
+-------
+timestamp=1442977519558
+iterations=13369
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5123930507
+rapl_psys_sum_uj=0
+pid=0 energy=14975350410875 alive=1 kernel=1 cpu_ns=917827000000 mem=263766016 instructions=2077243082175 wakeups=7708786 diski=11010048 disko=161144832 rx=164993 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=2048292969
+-------
+timestamp=1443140999009
+iterations=13370
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5125628016
+rapl_psys_sum_uj=0
+pid=0 energy=14984013480150 alive=1 kernel=1 cpu_ns=918275000000 mem=263766016 instructions=2078527696030 wakeups=7709001 diski=11010048 disko=161144832 rx=164993 tx=74281 comm=*system*
+psu_energy_ac_mcp_machine=2055338989
+-------
+timestamp=1443311522478
+iterations=13372
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5129041406
+rapl_psys_sum_uj=0
+pid=0 energy=15001518386140 alive=1 kernel=1 cpu_ns=919169000000 mem=263942144 instructions=2081134677228 wakeups=7709203 diski=11010048 disko=161144832 rx=164994 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2060995850
+-------
+timestamp=1443478524190
+iterations=13373
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5130739037
+rapl_psys_sum_uj=0
+pid=0 energy=15010179328240 alive=1 kernel=1 cpu_ns=919617000000 mem=263766016 instructions=2082418865648 wakeups=7709416 diski=11010048 disko=161144832 rx=164994 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2066653564
+-------
+timestamp=1443644528606
+iterations=13375
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5134152610
+rapl_psys_sum_uj=0
+pid=0 energy=15027699212005 alive=1 kernel=1 cpu_ns=920512000000 mem=263766016 instructions=2085027842401 wakeups=7709605 diski=11010048 disko=161144832 rx=164994 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2072291260
+-------
+timestamp=1443810825404
+iterations=13376
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5135849936
+rapl_psys_sum_uj=0
+pid=0 energy=15036357989370 alive=1 kernel=1 cpu_ns=920959000000 mem=263766016 instructions=2086312597874 wakeups=7709808 diski=11010048 disko=161144832 rx=164994 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2077917114
+-------
+timestamp=1443979506708
+iterations=13378
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5139266011
+rapl_psys_sum_uj=0
+pid=0 energy=15053872707455 alive=1 kernel=1 cpu_ns=921854000000 mem=263663616 instructions=2088920541491 wakeups=7710010 diski=11010048 disko=161144832 rx=164994 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2083564941
+-------
+timestamp=1444144536477
+iterations=13379
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5140968586
+rapl_psys_sum_uj=0
+pid=0 energy=15062530490040 alive=1 kernel=1 cpu_ns=922302000000 mem=263663616 instructions=2090204098008 wakeups=7710221 diski=11010048 disko=161144832 rx=164994 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2090625122
+-------
+timestamp=1444309995855
+iterations=13381
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5144383258
+rapl_psys_sum_uj=0
+pid=0 energy=15080039240390 alive=1 kernel=1 cpu_ns=923198000000 mem=263839744 instructions=2092809848078 wakeups=7710450 diski=11010048 disko=161144832 rx=164994 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2096277100
+-------
+timestamp=1444477986838
+iterations=13382
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5146078997
+rapl_psys_sum_uj=0
+pid=0 energy=15088692780900 alive=1 kernel=1 cpu_ns=923644000000 mem=263663616 instructions=2094094556180 wakeups=7710661 diski=11010048 disko=161144832 rx=164994 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2101910278
+-------
+timestamp=1444647534064
+iterations=13384
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5149489030
+rapl_psys_sum_uj=0
+pid=0 energy=15106191646215 alive=1 kernel=1 cpu_ns=924539000000 mem=263487488 instructions=2096699329243 wakeups=7710886 diski=11010048 disko=161144832 rx=164994 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2107529419
+-------
+timestamp=1444815528816
+iterations=13385
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5151190446
+rapl_psys_sum_uj=0
+pid=0 energy=15114863345975 alive=1 kernel=1 cpu_ns=924986000000 mem=263663616 instructions=2097986669195 wakeups=7711087 diski=11010048 disko=161144832 rx=164996 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2113151245
+-------
+timestamp=1444984522405
+iterations=13387
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5154614944
+rapl_psys_sum_uj=0
+pid=0 energy=15132371444835 alive=1 kernel=1 cpu_ns=925880000000 mem=263712768 instructions=2100594288967 wakeups=7711315 diski=11010048 disko=161144832 rx=164996 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2120193848
+-------
+timestamp=1445154510734
+iterations=13388
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5156314345
+rapl_psys_sum_uj=0
+pid=0 energy=15141076577820 alive=1 kernel=1 cpu_ns=926327000000 mem=263712768 instructions=2101888315564 wakeups=7711547 diski=11010048 disko=161161216 rx=164996 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2125862061
+-------
+timestamp=1445327529605
+iterations=13390
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5159732801
+rapl_psys_sum_uj=0
+pid=0 energy=15158592501235 alive=1 kernel=1 cpu_ns=927223000000 mem=263888896 instructions=2104495500247 wakeups=7711778 diski=11010048 disko=161161216 rx=164996 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2131516846
+-------
+timestamp=1445491015749
+iterations=13391
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5161437696
+rapl_psys_sum_uj=0
+pid=0 energy=15167251945360 alive=1 kernel=1 cpu_ns=927670000000 mem=263712768 instructions=2105780389072 wakeups=7711987 diski=11010048 disko=161161216 rx=164996 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2137160400
+-------
+timestamp=1445653518043
+iterations=13393
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5164860425
+rapl_psys_sum_uj=0
+pid=0 energy=15184769534590 alive=1 kernel=1 cpu_ns=928566000000 mem=263888896 instructions=2108387906918 wakeups=7712197 diski=11010048 disko=161161216 rx=164996 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2142809082
+-------
+timestamp=1445818520010
+iterations=13394
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5166555981
+rapl_psys_sum_uj=0
+pid=0 energy=15193434727405 alive=1 kernel=1 cpu_ns=929014000000 mem=263888896 instructions=2109672945481 wakeups=7712397 diski=11010048 disko=161161216 rx=164996 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2148438477
+-------
+timestamp=1445982560167
+iterations=13396
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5169966441
+rapl_psys_sum_uj=0
+pid=0 energy=15210944495325 alive=1 kernel=1 cpu_ns=929908000000 mem=264323072 instructions=2112280899065 wakeups=7712628 diski=11010048 disko=161161216 rx=164996 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2155485596
+-------
+timestamp=1446154546042
+iterations=13397
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5171672373
+rapl_psys_sum_uj=0
+pid=0 energy=15219644911390 alive=1 kernel=1 cpu_ns=930356000000 mem=263970816 instructions=2113572982278 wakeups=7712830 diski=11010048 disko=161161216 rx=164996 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2161106323
+-------
+timestamp=1446323539446
+iterations=13399
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5175104928
+rapl_psys_sum_uj=0
+pid=0 energy=15237220068400 alive=1 kernel=1 cpu_ns=931256000000 mem=263794688 instructions=2116188013680 wakeups=7713064 diski=11010048 disko=161161216 rx=164996 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2166776611
+-------
+timestamp=1446487525838
+iterations=13400
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5176791329
+rapl_psys_sum_uj=0
+pid=0 energy=15245813082740 alive=1 kernel=1 cpu_ns=931698000000 mem=263794688 instructions=2117464616548 wakeups=7713260 diski=11010048 disko=161161216 rx=164996 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2172414185
+-------
+timestamp=1446651151463
+iterations=13402
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5180214851
+rapl_psys_sum_uj=0
+pid=0 energy=15263294104900 alive=1 kernel=1 cpu_ns=932593000000 mem=264146944 instructions=2120065820980 wakeups=7713482 diski=11010048 disko=161161216 rx=164996 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2178030640
+-------
+timestamp=1446819532986
+iterations=13403
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5181922675
+rapl_psys_sum_uj=0
+pid=0 energy=15271995937520 alive=1 kernel=1 cpu_ns=933041000000 mem=263794688 instructions=2121358187504 wakeups=7713673 diski=11010048 disko=161161216 rx=164998 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2183655640
+-------
+timestamp=1446986851301
+iterations=13405
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5185340582
+rapl_psys_sum_uj=0
+pid=0 energy=15289551416135 alive=1 kernel=1 cpu_ns=933938000000 mem=264531968 instructions=2123972283227 wakeups=7713935 diski=11010048 disko=161161216 rx=164998 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2190687012
+-------
+timestamp=1447156525285
+iterations=13406
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5187031499
+rapl_psys_sum_uj=0
+pid=0 energy=15298195484525 alive=1 kernel=1 cpu_ns=934381000000 mem=263827456 instructions=2125258096905 wakeups=7714134 diski=11010048 disko=161161216 rx=164998 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2196325806
+-------
+timestamp=1447323537135
+iterations=13408
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5190450139
+rapl_psys_sum_uj=0
+pid=0 energy=15315645019290 alive=1 kernel=1 cpu_ns=935275000000 mem=264355840 instructions=2127854003858 wakeups=7714374 diski=11010048 disko=161161216 rx=164998 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2201940552
+-------
+timestamp=1447489524264
+iterations=13409
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5192158757
+rapl_psys_sum_uj=0
+pid=0 energy=15324357909330 alive=1 kernel=1 cpu_ns=935721000000 mem=263827456 instructions=2129150581866 wakeups=7714561 diski=11010048 disko=161161216 rx=164998 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2207581299
+-------
+timestamp=1447653027058
+iterations=13411
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5195578189
+rapl_psys_sum_uj=0
+pid=0 energy=15341807340665 alive=1 kernel=1 cpu_ns=936616000000 mem=264531968 instructions=2131745468133 wakeups=7714800 diski=11010048 disko=161161216 rx=164998 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2213217773
+-------
+timestamp=1447819515940
+iterations=13412
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5197285708
+rapl_psys_sum_uj=0
+pid=0 energy=15350522430760 alive=1 kernel=1 cpu_ns=937063000000 mem=263827456 instructions=2133041486152 wakeups=7714992 diski=11010048 disko=161161216 rx=164998 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2218852661
+-------
+timestamp=1447979878034
+iterations=13414
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5200689333
+rapl_psys_sum_uj=0
+pid=0 energy=15367932581925 alive=1 kernel=1 cpu_ns=937958000000 mem=264888320 instructions=2135628516385 wakeups=7715241 diski=11010048 disko=161161216 rx=164998 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2224477051
+-------
+timestamp=1448144804350
+iterations=13415
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5202399721
+rapl_psys_sum_uj=0
+pid=0 energy=15376687520750 alive=1 kernel=1 cpu_ns=938405000000 mem=264007680 instructions=2136932504150 wakeups=7715415 diski=11010048 disko=161161216 rx=164998 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2231535278
+-------
+timestamp=1448316875591
+iterations=13417
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5205800172
+rapl_psys_sum_uj=0
+pid=0 energy=15394097829665 alive=1 kernel=1 cpu_ns=939301000000 mem=265064448 instructions=2139518565933 wakeups=7715672 diski=11010048 disko=161161216 rx=164998 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2237211060
+-------
+timestamp=1448483532209
+iterations=13418
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5207506592
+rapl_psys_sum_uj=0
+pid=0 energy=15402856662915 alive=1 kernel=1 cpu_ns=939748000000 mem=263655424 instructions=2140823332583 wakeups=7715845 diski=11010048 disko=161161216 rx=164998 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2242844849
+-------
+timestamp=1448647068566
+iterations=13419
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5209206299
+rapl_psys_sum_uj=0
+pid=0 energy=15411510304895 alive=1 kernel=1 cpu_ns=940194000000 mem=263655424 instructions=2142108060979 wakeups=7716055 diski=11010048 disko=161161216 rx=164998 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2248456421
+-------
+timestamp=1448813525187
+iterations=13421
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5212623656
+rapl_psys_sum_uj=0
+pid=0 energy=15429024839510 alive=1 kernel=1 cpu_ns=941090000000 mem=263655424 instructions=2144714967902 wakeups=7716272 diski=11010048 disko=161161216 rx=165000 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2254095947
+-------
+timestamp=1448978524005
+iterations=13422
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5214327208
+rapl_psys_sum_uj=0
+pid=0 energy=15437685720890 alive=1 kernel=1 cpu_ns=941537000000 mem=263827456 instructions=2146000144178 wakeups=7716473 diski=11010048 disko=161161216 rx=165000 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2259740845
+-------
+timestamp=1449140995306
+iterations=13424
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5217741574
+rapl_psys_sum_uj=0
+pid=0 energy=15455187854480 alive=1 kernel=1 cpu_ns=942431000000 mem=264003584 instructions=2148606570896 wakeups=7716687 diski=11010048 disko=161161216 rx=165000 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2266772705
+-------
+timestamp=1449312525601
+iterations=13425
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5219441281
+rapl_psys_sum_uj=0
+pid=0 energy=15463842250940 alive=1 kernel=1 cpu_ns=942877000000 mem=264003584 instructions=2149891450188 wakeups=7716899 diski=11010048 disko=161161216 rx=165000 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2272407593
+-------
+timestamp=1449476016499
+iterations=13427
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5222865902
+rapl_psys_sum_uj=0
+pid=0 energy=15481434163100 alive=1 kernel=1 cpu_ns=943776000000 mem=263827456 instructions=2152510832620 wakeups=7717115 diski=11010048 disko=161161216 rx=165000 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2278046509
+-------
+timestamp=1449644529068
+iterations=13428
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5224549800
+rapl_psys_sum_uj=0
+pid=0 energy=15490002183980 alive=1 kernel=1 cpu_ns=944217000000 mem=263827456 instructions=2153783436796 wakeups=7717327 diski=11010048 disko=161161216 rx=165000 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2283675537
+-------
+timestamp=1449811995493
+iterations=13430
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5227976924
+rapl_psys_sum_uj=0
+pid=0 energy=15507504857590 alive=1 kernel=1 cpu_ns=945111000000 mem=263827456 instructions=2156389971518 wakeups=7717541 diski=11010048 disko=161161216 rx=165000 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2289323242
+-------
+timestamp=1449979982407
+iterations=13431
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5229679926
+rapl_psys_sum_uj=0
+pid=0 energy=15516161482035 alive=1 kernel=1 cpu_ns=945558000000 mem=263774208 instructions=2157674296407 wakeups=7717742 diski=11010048 disko=161161216 rx=165000 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2296377319
+-------
+timestamp=1450153533565
+iterations=13433
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5233100579
+rapl_psys_sum_uj=0
+pid=0 energy=15533663775290 alive=1 kernel=1 cpu_ns=946451000000 mem=263774208 instructions=2160281755058 wakeups=7717948 diski=11010048 disko=161177600 rx=165000 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2302037231
+-------
+timestamp=1450320517462
+iterations=13434
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5234805046
+rapl_psys_sum_uj=0
+pid=0 energy=15542322960930 alive=1 kernel=1 cpu_ns=946899000000 mem=263950336 instructions=2161565592186 wakeups=7718161 diski=11010048 disko=161177600 rx=165000 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2307670776
+-------
+timestamp=1450487529109
+iterations=13436
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5238225943
+rapl_psys_sum_uj=0
+pid=0 energy=15559839796000 alive=1 kernel=1 cpu_ns=947795000000 mem=263774208 instructions=2164172959200 wakeups=7718378 diski=11010048 disko=161177600 rx=165000 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2313325684
+-------
+timestamp=1450648739473
+iterations=13437
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5239930349
+rapl_psys_sum_uj=0
+pid=0 energy=15568500422950 alive=1 kernel=1 cpu_ns=948243000000 mem=263774208 instructions=2165457084590 wakeups=7718580 diski=11010048 disko=161177600 rx=165000 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2318959106
+-------
+timestamp=1450811533647
+iterations=13439
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5243352528
+rapl_psys_sum_uj=0
+pid=0 energy=15586018229095 alive=1 kernel=1 cpu_ns=949139000000 mem=263774208 instructions=2168064645819 wakeups=7718792 diski=11010048 disko=161177600 rx=165002 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2324580688
+-------
+timestamp=1450977543567
+iterations=13440
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5245058338
+rapl_psys_sum_uj=0
+pid=0 energy=15594679310955 alive=1 kernel=1 cpu_ns=949587000000 mem=263798784 instructions=2169348862191 wakeups=7718988 diski=11010048 disko=161177600 rx=165002 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2330218384
+-------
+timestamp=1451140548943
+iterations=13442
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5248485217
+rapl_psys_sum_uj=0
+pid=0 energy=15612335632280 alive=1 kernel=1 cpu_ns=950491000000 mem=263974912 instructions=2171976126456 wakeups=7719215 diski=11010048 disko=161177600 rx=165002 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2337268799
+-------
+timestamp=1451305989850
+iterations=13443
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5250190050
+rapl_psys_sum_uj=0
+pid=0 energy=15620845836500 alive=1 kernel=1 cpu_ns=950931000000 mem=263974912 instructions=2173238167300 wakeups=7719416 diski=11010048 disko=161177600 rx=165002 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2342920532
+-------
+timestamp=1451478523985
+iterations=13445
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5253620163
+rapl_psys_sum_uj=0
+pid=0 energy=15638420792630 alive=1 kernel=1 cpu_ns=951831000000 mem=263974912 instructions=2175853158526 wakeups=7719639 diski=11010048 disko=161177600 rx=165002 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2348560669
+-------
+timestamp=1451642533366
+iterations=13446
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5255305343
+rapl_psys_sum_uj=0
+pid=0 energy=15647024636010 alive=1 kernel=1 cpu_ns=952275000000 mem=263974912 instructions=2177129927202 wakeups=7719830 diski=11010048 disko=161177600 rx=165002 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2354214355
+-------
+timestamp=1451810520293
+iterations=13448
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5258721419
+rapl_psys_sum_uj=0
+pid=0 energy=15664512538445 alive=1 kernel=1 cpu_ns=953171000000 mem=263974912 instructions=2179731507689 wakeups=7720058 diski=11010048 disko=161177600 rx=165002 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2359870972
+-------
+timestamp=1451974557525
+iterations=13449
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5260423323
+rapl_psys_sum_uj=0
+pid=0 energy=15673197343035 alive=1 kernel=1 cpu_ns=953619000000 mem=263880704 instructions=2181020468607 wakeups=7720258 diski=11010048 disko=161177600 rx=165002 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2365500122
+-------
+timestamp=1452140559146
+iterations=13451
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5263844892
+rapl_psys_sum_uj=0
+pid=0 energy=15690735967750 alive=1 kernel=1 cpu_ns=954519000000 mem=264409088 instructions=2183628193550 wakeups=7720480 diski=11010048 disko=161177600 rx=165002 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2372543457
+-------
+timestamp=1452310527649
+iterations=13452
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5265527265
+rapl_psys_sum_uj=0
+pid=0 energy=15699355806230 alive=1 kernel=1 cpu_ns=954961000000 mem=263880704 instructions=2184910161246 wakeups=7720663 diski=11010048 disko=161177600 rx=165002 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2378190552
+-------
+timestamp=1452477539899
+iterations=13454
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5268959820
+rapl_psys_sum_uj=0
+pid=0 energy=15716901551895 alive=1 kernel=1 cpu_ns=955860000000 mem=264409088 instructions=2187520310379 wakeups=7720892 diski=11010048 disko=161177600 rx=165002 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2383846069
+-------
+timestamp=1452644526689
+iterations=13455
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5270647197
+rapl_psys_sum_uj=0
+pid=0 energy=15725532629730 alive=1 kernel=1 cpu_ns=956304000000 mem=263704576 instructions=2188802525946 wakeups=7721073 diski=11010048 disko=161177600 rx=165002 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2389472900
+-------
+timestamp=1452810853101
+iterations=13457
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5274054849
+rapl_psys_sum_uj=0
+pid=0 energy=15742986586850 alive=1 kernel=1 cpu_ns=957199000000 mem=264409088 instructions=2191398317370 wakeups=7721293 diski=11010048 disko=161177600 rx=165004 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2395087524
+-------
+timestamp=1452971996961
+iterations=13458
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5275760354
+rapl_psys_sum_uj=0
+pid=0 energy=15751694773525 alive=1 kernel=1 cpu_ns=957646000000 mem=263884800 instructions=2192692954705 wakeups=7721496 diski=11010048 disko=161177600 rx=165004 tx=74282 comm=*system*
+psu_energy_ac_mcp_machine=2400706665
+-------
+timestamp=1453136568332
+iterations=13460
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5279181862
+rapl_psys_sum_uj=0
+pid=0 energy=15769191072780 alive=1 kernel=1 cpu_ns=958546000000 mem=264941568 instructions=2195292214556 wakeups=7721740 diski=11010048 disko=161177600 rx=165005 tx=74283 comm=*system*
+psu_energy_ac_mcp_machine=2406347046
+-------
+timestamp=1453297521480
+iterations=13461
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5280873268
+rapl_psys_sum_uj=0
+pid=0 energy=15777859595835 alive=1 kernel=1 cpu_ns=958989000000 mem=263884800 instructions=2196582919167 wakeups=7721915 diski=11010048 disko=161177600 rx=165005 tx=74283 comm=*system*
+psu_energy_ac_mcp_machine=2411983765
+-------
+timestamp=1453465512608
+iterations=13462
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5282591895
+rapl_psys_sum_uj=0
+pid=0 energy=15786605227835 alive=1 kernel=1 cpu_ns=959441000000 mem=263884800 instructions=2197880045567 wakeups=7722109 diski=11010048 disko=161177600 rx=165005 tx=74283 comm=*system*
+psu_energy_ac_mcp_machine=2419065308
+-------
+timestamp=1453634534839
+iterations=13464
+sample_ns=100000000
+window_ns=1000000000
+rapl_core_sum_uj=5285985021
+rapl_psys_sum_uj=0
+pid=0 energy=15804044115620 alive=1 kernel=1 cpu_ns=960333000000 mem=264060928 instructions=2200475823124 wakeups=7722319 diski=11010048 disko=161177600 rx=165005 tx=74283 comm=*system*
+psu_energy_ac_mcp_machine=2424726318
+-------
